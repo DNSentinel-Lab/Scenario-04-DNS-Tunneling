@@ -1,3 +1,12 @@
+<a id="top"></a>
+
+> 🧭 [Scenario 04](README.md) › **Scenario 04 Runbook — DNS Tunneling**
+
+![Scenario](https://img.shields.io/badge/Scenario_04-Planned-6E7781?style=flat-square)
+![DNSentinel](https://img.shields.io/badge/DNSentinel-Technical_Record-20E3B2?style=flat-square)
+
+---
+
 # Scenario 04 Runbook — DNS Tunneling
 
 **Status:** Planned — reuses Scenario 02 defender-DNS platform  
@@ -250,3 +259,13 @@ This section should be updated with the actual fields/ports seen during executio
 ## Completion gate
 
 Detection is tuned against benign long/encoded DNS patterns, the SOC validates AI assistance against raw events, containment is approved by a human, and the final before/after evidence proves the controlled behavior no longer follows its original path.
+
+---
+
+<div align="center">
+
+[🏠 Scenario Home](README.md) · [🏗️ Infrastructure](https://github.com/DNSentinel-Lab/DNS-Lab-Infrastructure) · [⬆ Back to top](#top)
+
+<sub>DNSentinel Lab · Evidence-first DNS security engineering</sub>
+
+</div>
