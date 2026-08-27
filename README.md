@@ -51,98 +51,99 @@ The goal is to detect tunneling-like DNS behavior without over-mapping or treati
 ## 🏗️ Scenario Architecture
 
 ```mermaid
-%%{init: {"themeVariables": {"fontSize": "22px"}}}%%
+%%{init: {
+  "themeVariables": {
+    "fontSize": "22px"
+  },
+  "flowchart": {
+    "nodeSpacing": 35,
+    "rankSpacing": 45
+  }
+}}%%
 
 flowchart LR
 
     %% =====================================================
-    %% 1 — DETECTION SETUP
+    %% 1 — SOURCE + DNS
     %% =====================================================
     subgraph S1[" "]
         direction TB
 
-        H1["🛠️ 1 · DETECTION SETUP"]
+        H1["💻 1 · SOURCE + DNS"]
 
-        DE["🧠 Detection Engineering<br/>Sonia"]
+        V["🧑 Victim"]
+        L["🏷️ Synthetic<br/>DNS Labels"]
+        R["🛡️ Defender DNS<br/>Resolver"]
+        D["🌍 tunnel.soclab..."]
 
-        F["🧊 Detection v1.0<br/>Frozen"]
-
-        H1 --> DE --> F
+        H1 --> V --> L --> R --> D
     end
 
 
     %% =====================================================
-    %% 2 — EXERCISE + TELEMETRY
+    %% 2 — TELEMETRY + ANALYSIS
     %% =====================================================
     subgraph S2[" "]
         direction TB
 
-        H2["🎭 2 · EXERCISE + TELEMETRY"]
+        H2["📡 2 · TELEMETRY + ANALYSIS"]
 
-        subgraph CASES[" "]
+        SPL["🟢 Splunk Enterprise"]
+
+        PAT["🧬 Pattern Analysis<br/>Length · Structure<br/>Frequency · Query Type"]
+
+        subgraph ANALYSIS[" "]
             direction LR
 
-            C1["✅ CASE 01<br/>Authorized DNS<br/>Validation"]
+            AI["🤖 AI<br/>Assistance"]
 
-            C2["🚨 CASE 02<br/>External DNS<br/>Recon"]
+            SOC["🔎 Human SOC<br/>Investigation"]
         end
 
-        R53["🌍 Route 53<br/>Authoritative Telemetry"]
+        H2 --> SPL --> PAT
 
-        SPL["🟢 Splunk<br/>Detection + Dashboard"]
-
-        AI["🤖 AI-Assisted<br/>Triage"]
-
-        H2 --> C1
-        H2 --> C2
-
-        C1 --> R53
-        C2 --> R53
-
-        R53 --> SPL --> AI
+        PAT --> AI
+        PAT --> SOC
+        AI --> SOC
     end
 
 
     %% =====================================================
-    %% 3 — HUMAN DECISION + OUTCOME
+    %% 3 — HUMAN RESPONSE
     %% =====================================================
     subgraph S3[" "]
         direction TB
 
-        H3["⚖️ 3 · HUMAN DECISION + OUTCOME"]
+        H3["🛡️ 3 · HUMAN RESPONSE"]
 
-        SOC["🔎 SOC Analyst<br/>Musfira"]
+        IR["👤 Human IR<br/>Decision"]
 
-        DEC{"⚖️ Evidence-Backed<br/>Decision"}
+        ACT["🎯 Block / Sinkhole<br/>at Defender Resolver"]
 
-        subgraph OUTCOME[" "]
-            direction LR
+        VERIFY["✅ Post-Response<br/>Verification Evidence"]
 
-            CLOSE["✅ CASE 01 OUTCOME<br/>Authorized TP<br/>SOC Closure"]
-
-            INCIDENT["🛡️ CASE 02 OUTCOME<br/>IR · Lubaba<br/>DNS + Nginx + VPC Review<br/>Preserve + Monitor"]
-        end
-
-        H3 --> SOC --> DEC
-
-        DEC --> CLOSE
-        DEC --> INCIDENT
+        H3 --> IR --> ACT --> VERIFY
     end
 
 
     %% =====================================================
     %% MAIN HORIZONTAL FLOW
     %% =====================================================
-    F --> H2
-    AI --> H3
+    R --> SPL
+    SOC --> IR
+
+    %% Verification returns to Splunk.
+    %% Response target is stated inside ACT,
+    %% avoiding a huge backward arrow to the resolver.
+    VERIFY -.-> SPL
 
 
     %% =====================================================
-    %% HEADER STYLES
+    %% HEADER STYLES — LARGE
     %% =====================================================
-    classDef h1 fill:#172554,stroke:#60a5fa,stroke-width:3px,color:#ffffff,font-size:23px,font-weight:bold;
-    classDef h2 fill:#422006,stroke:#fbbf24,stroke-width:3px,color:#ffffff,font-size:23px,font-weight:bold;
-    classDef h3 fill:#312e81,stroke:#c084fc,stroke-width:3px,color:#ffffff,font-size:23px,font-weight:bold;
+    classDef h1 fill:#172554,stroke:#60a5fa,stroke-width:3px,color:#ffffff,font-size:24px,font-weight:bold;
+    classDef h2 fill:#312e81,stroke:#a78bfa,stroke-width:3px,color:#ffffff,font-size:24px,font-weight:bold;
+    classDef h3 fill:#450a0a,stroke:#f87171,stroke-width:3px,color:#ffffff,font-size:24px,font-weight:bold;
 
     class H1 h1;
     class H2 h2;
@@ -150,58 +151,48 @@ flowchart LR
 
 
     %% =====================================================
-    %% NODE STYLES
+    %% NODE STYLES — LARGE
     %% =====================================================
-    classDef engineering fill:#172554,stroke:#60a5fa,stroke-width:2px,color:#ffffff,font-size:22px;
-    classDef frozen fill:#1f2937,stroke:#94a3b8,stroke-width:2px,color:#ffffff,font-size:22px;
+    classDef source fill:#172554,stroke:#60a5fa,stroke-width:2px,color:#ffffff,font-size:22px;
+    classDef labels fill:#1f2937,stroke:#94a3b8,stroke-width:2px,color:#ffffff,font-size:22px;
+    classDef resolver fill:#083344,stroke:#22d3ee,stroke-width:3px,color:#ffffff,font-size:22px;
+    classDef domain fill:#3b0764,stroke:#c084fc,stroke-width:2px,color:#ffffff,font-size:22px;
 
-    classDef authorized fill:#052e16,stroke:#4ade80,stroke-width:2px,color:#ffffff,font-size:22px;
-    classDef attack fill:#450a0a,stroke:#f87171,stroke-width:2px,color:#ffffff,font-size:22px;
-
-    classDef dns fill:#083344,stroke:#22d3ee,stroke-width:2px,color:#ffffff,font-size:22px;
     classDef splunk fill:#052e16,stroke:#4ade80,stroke-width:3px,color:#ffffff,font-size:22px;
+    classDef pattern fill:#422006,stroke:#fbbf24,stroke-width:2px,color:#ffffff,font-size:22px;
     classDef ai fill:#581c87,stroke:#e879f9,stroke-width:2px,color:#ffffff,font-size:22px;
-
     classDef soc fill:#164e63,stroke:#38bdf8,stroke-width:3px,color:#ffffff,font-size:22px;
-    classDef decision fill:#1f2937,stroke:#f8fafc,stroke-width:3px,color:#ffffff,font-size:22px;
 
-    classDef closure fill:#14532d,stroke:#22c55e,stroke-width:3px,color:#ffffff,font-size:22px;
-    classDef incident fill:#450a0a,stroke:#fb7185,stroke-width:3px,color:#ffffff,font-size:22px;
+    classDef ir fill:#7f1d1d,stroke:#fb7185,stroke-width:3px,color:#ffffff,font-size:22px;
+    classDef action fill:#713f12,stroke:#fb923c,stroke-width:3px,color:#ffffff,font-size:22px;
+    classDef verify fill:#052e16,stroke:#4ade80,stroke-width:3px,color:#ffffff,font-size:22px;
 
+    class V source;
+    class L labels;
+    class R resolver;
+    class D domain;
 
-    %% =====================================================
-    %% APPLY STYLES
-    %% =====================================================
-    class DE engineering;
-    class F frozen;
-
-    class C1 authorized;
-    class C2 attack;
-
-    class R53 dns;
     class SPL splunk;
+    class PAT pattern;
     class AI ai;
-
     class SOC soc;
-    class DEC decision;
 
-    class CLOSE closure;
-    class INCIDENT incident;
+    class IR ir;
+    class ACT action;
+    class VERIFY verify;
 
 
     %% =====================================================
-    %% CONTAINER STYLES
+    %% CONTAINERS
     %% =====================================================
     style S1 fill:#0d1117,stroke:#60a5fa,stroke-width:1px
-    style S2 fill:#0d1117,stroke:#fbbf24,stroke-width:1px
-    style S3 fill:#0d1117,stroke:#c084fc,stroke-width:1px
-
-    style CASES fill:#111827,stroke:#30363d,stroke-width:1px
-    style OUTCOME fill:#111827,stroke:#30363d,stroke-width:1px
+    style S2 fill:#0d1117,stroke:#a78bfa,stroke-width:1px
+    style S3 fill:#0d1117,stroke:#f87171,stroke-width:1px
+    style ANALYSIS fill:#111827,stroke:#30363d,stroke-width:1px
 
 
     %% =====================================================
-    %% EDGE STYLE
+    %% EDGES
     %% =====================================================
     linkStyle default stroke:#b6c2d1,stroke-width:3px
 ```
