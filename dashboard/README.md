@@ -1,45 +1,52 @@
 <a id="top"></a>
-<img src="https://capsule-render.vercel.app/api?type=soft&color=gradient&customColorList=2,7,12,18,24&height=135&section=header&text=%F0%9F%93%8A%20Dashboard%20Workspace&fontSize=28&fontColor=ffffff&animation=fadeIn&desc=Scenario%2004%20%E2%80%94%20DNS%20Tunneling&descSize=14&descAlignY=68&descColor=20E3B2" width="100%" alt="Dashboard Workspace" />
+<img src="https://capsule-render.vercel.app/api?type=soft&color=gradient&customColorList=2,7,12,18,24&height=135&section=header&text=%F0%9F%93%8A%20Dashboard%20Studio&fontSize=28&fontColor=ffffff&animation=fadeIn&desc=Scenario%2004%20%E2%80%94%20DNS%20Tunneling%20Investigation&descSize=14&descAlignY=68&descColor=20E3B2" width="100%" alt="Scenario 04 Dashboard Studio" />
 
 <div align="center">
 
-![Scenario](https://img.shields.io/badge/Scenario_04-Infrastructure_Ready-14B8A6?style=flat-square)
-![Workspace](https://img.shields.io/badge/Workspace-Dashboard_Studio-F59E0B?style=flat-square)
+![Status](https://img.shields.io/badge/Status-Validated-2EA44F?style=flat-square)
+![Panels](https://img.shields.io/badge/Analyst_Views-11-F59E0B?style=flat-square)
 
-[🏠 Scenario Home](../README.md) · [🧠 Detection Plan](../DETECTION-ENGINEERING-PLAN.md) · [🏗️ Shared Infrastructure](https://github.com/DNSentinel-Lab/DNS-Lab-Infrastructure)
+[🏠 Scenario Home](../README.md) · [🛠️ Detection Engineering](../detection-engineering/DETECTION-ENGINEERING.md) · [📄 Panel Searches](PANEL-SEARCHES.md)
 
 </div>
 
-**Status:** Awaiting baseline and stable feature fields.
+## Scenario 04 — DNS Tunneling Investigation
 
-Build the analyst dashboard from real `dns_soc_dns` telemetry after the Detection Engineer validates field names and distributions.
+![Final DNS tunneling dashboard](../screenshots/detection-engineering/05-dns-tunneling-investigation-dashboard.png)
 
-Recommended panels:
+The dashboard was built after the DNS feature fields were stable. It is an **investigation surface**, not a malicious/benign verdict.
 
-- total DNS queries;
-- unique qnames / child labels;
-- long-label count;
-- qname and label-length distributions;
-- query-type mix;
-- response-code mix;
-- active clients;
-- queries-per-minute trend;
-- top parent domains by unique children;
-- sample suspicious qnames;
-- raw-event drilldown.
+### Implemented analyst views
 
-Later, add before/after containment panels only after IR actually performs a response.
+| View | Investigation question |
+|---|---|
+| Total DNS Queries | How much resolver activity occurred? |
+| Unique Qnames | How broad was the activity? |
+| Unique Child Labels | Are many fresh children appearing? |
+| Active Clients | Which clients generated DNS activity? |
+| DNS Queries per Minute | Is activity concentrated in time? |
+| First-Label Length Over Time | Are child labels becoming unusually long? |
+| Query Type Mix | Which DNS record types were used? |
+| Response Code Mix | How did DNS respond? |
+| Top Parent Domains | Where is child-label activity concentrated? |
+| DNS Behavior Window Summary | Which client/parent windows need review? |
+| Raw DNS Investigation | Which exact Unbound events support the summary? |
 
-Do not build visual panels around placeholder fields or pre-labelled “suspicious” values.
+## Exported implementation
 
-<img src="https://user-images.githubusercontent.com/73097560/115834477-dbab4500-a447-11eb-908a-139a6edaec5c.gif" width="100%" alt="section divider" />
+- [`scenario-04-dns-tunneling-investigation-dashboard.json`](scenario-04-dns-tunneling-investigation-dashboard.json) — final Dashboard Studio source.
+- [`PANEL-SEARCHES.md`](PANEL-SEARCHES.md) — panel/data-source search reference.
+
+## QA lesson
+
+The first exported JSON revealed that **Query Type Mix** and **Response Code Mix** were connected to each other's data sources even though the underlying searches were correct. The bindings were corrected before the dashboard was frozen.
+
+That review mattered because a dashboard can display technically valid data beneath the wrong title. The final export was therefore checked as configuration, not only as a screenshot.
+
+> Response-verification panels are intentionally not present yet. They will be added only after the official IR phase actually performs or declines containment.
 
 <div align="center">
 
-**DNSentinel Scenario 04 · DNS Tunneling**
-
-[🏠 Scenario Home](../README.md) · [🏗️ Infrastructure](https://github.com/DNSentinel-Lab/DNS-Lab-Infrastructure) · [⬆ Back to top](#top)
+[🏠 Scenario Home](../README.md) · [⬆ Back to top](#top)
 
 </div>
-
-<img src="https://capsule-render.vercel.app/api?type=waving&color=gradient&customColorList=2,7,12,18,24&height=75&section=footer" width="100%" alt="footer" />

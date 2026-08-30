@@ -1,0 +1,332 @@
+{
+  "visualizations": {
+    "viz_C6eqsBuA": {
+      "type": "splunk.singlevalue",
+      "dataSources": {
+        "primary": "ds_YyEH0Vkk"
+      },
+      "title": "Total DNS Queries"
+    },
+    "viz_cLqgKSaA": {
+      "type": "splunk.singlevalue",
+      "dataSources": {
+        "primary": "ds_LGnlsD6k"
+      },
+      "title": "Unique Qnames"
+    },
+    "viz_jpxkTTDl": {
+      "type": "splunk.singlevalue",
+      "dataSources": {
+        "primary": "ds_E1CNPeqP"
+      },
+      "title": "Unique Child Labels"
+    },
+    "viz_5JsRlkZa": {
+      "type": "splunk.singlevalue",
+      "dataSources": {
+        "primary": "ds_uUFmwGE3"
+      },
+      "title": "Active Clients"
+    },
+    "viz_3AUnsnqb": {
+      "type": "splunk.line",
+      "dataSources": {
+        "primary": "ds_uDrMbhMp"
+      },
+      "title": "DNS Queries per Minute"
+    },
+    "viz_QoYmbFPn": {
+      "type": "splunk.line",
+      "dataSources": {
+        "primary": "ds_bUI5irPa"
+      },
+      "title": "First-Label Length Over Time"
+    },
+    "viz_aDzKTlfB": {
+      "type": "splunk.pie",
+      "dataSources": {
+        "primary": "ds_eS3xmLxq"
+      },
+      "title": "Response Code Mix"
+    },
+    "viz_RnaVnZJr": {
+      "type": "splunk.bar",
+      "dataSources": {
+        "primary": "ds_rFOrl3hy"
+      },
+      "title": "Query Type Mix"
+    },
+    "viz_I7ZHGfDx": {
+      "type": "splunk.bar",
+      "dataSources": {
+        "primary": "ds_kxew4JUt"
+      },
+      "title": "Top Parent Domains"
+    },
+    "viz_9tCUYk9y": {
+      "type": "splunk.table",
+      "dataSources": {
+        "primary": "ds_SRpKkgyA"
+      },
+      "title": "DNS Behavior Window Summary"
+    },
+    "viz_gxBeCTa7": {
+      "type": "splunk.table",
+      "dataSources": {
+        "primary": "ds_vwJGeEnG"
+      },
+      "title": "Raw DNS Investigation"
+    }
+  },
+  "dataSources": {
+    "ds_YyEH0Vkk": {
+      "type": "ds.search",
+      "options": {
+        "query": "index=dns_soc_dns host=dns-soc-resolver01 sourcetype=unbound:dns event_type=\"query\"\r\n| stats count as total_dns_queries"
+      },
+      "name": "Total DNS Queries"
+    },
+    "ds_LGnlsD6k": {
+      "type": "ds.search",
+      "options": {
+        "query": "index=dns_soc_dns host=dns-soc-resolver01 sourcetype=unbound:dns event_type=\"query\"\r\n| stats dc(qname) as unique_qnames"
+      },
+      "name": "Unique Qnames"
+    },
+    "ds_E1CNPeqP": {
+      "type": "ds.search",
+      "options": {
+        "query": "index=dns_soc_dns host=dns-soc-resolver01 sourcetype=unbound:dns event_type=\"query\"\r\n| eval qname=lower(rtrim(qname,\".\"))\r\n| eval first_label=mvindex(split(qname,\".\"),0)\r\n| stats dc(first_label) as unique_child_labels"
+      },
+      "name": "Unique Child Labels"
+    },
+    "ds_uUFmwGE3": {
+      "type": "ds.search",
+      "options": {
+        "query": "index=dns_soc_dns host=dns-soc-resolver01 sourcetype=unbound:dns event_type=\"query\"\r\n| stats dc(client_ip) as active_clients"
+      },
+      "name": "Active Clients"
+    },
+    "ds_uDrMbhMp": {
+      "type": "ds.search",
+      "options": {
+        "query": "index=dns_soc_dns host=dns-soc-resolver01 sourcetype=unbound:dns event_type=\"query\"\r\n| timechart span=1m count as dns_queries"
+      },
+      "name": "DNS Queries per Minute"
+    },
+    "ds_bUI5irPa": {
+      "type": "ds.search",
+      "options": {
+        "query": "index=dns_soc_dns host=dns-soc-resolver01 sourcetype=unbound:dns event_type=\"query\"\r\n| eval qname=lower(rtrim(qname,\".\"))\r\n| eval first_label=mvindex(split(qname,\".\"),0)\r\n| eval first_label_length=len(first_label)\r\n| timechart span=1m\r\n    avg(first_label_length) as avg_first_label_length\r\n    max(first_label_length) as max_first_label_length"
+      },
+      "name": "First-Label Length Over Time"
+    },
+    "ds_eS3xmLxq": {
+      "type": "ds.search",
+      "options": {
+        "query": "index=dns_soc_dns host=dns-soc-resolver01 sourcetype=unbound:dns event_type=\"reply\"\r\n| stats count as responses by rcode\r\n| sort - responses"
+      },
+      "name": "Response Code Mix"
+    },
+    "ds_rFOrl3hy": {
+      "type": "ds.search",
+      "options": {
+        "query": "index=dns_soc_dns host=dns-soc-resolver01 sourcetype=unbound:dns event_type=\"query\"\r\n| stats count as queries by qtype\r\n| sort - queries"
+      },
+      "name": "Query Type Mix"
+    },
+    "ds_kxew4JUt": {
+      "type": "ds.search",
+      "options": {
+        "query": "index=dns_soc_dns host=dns-soc-resolver01 sourcetype=unbound:dns event_type=\"query\"\r\n| eval qname=lower(rtrim(qname,\".\"))\r\n| eval labels=split(qname,\".\")\r\n| eval parent_domain=mvjoin(mvindex(labels,1,-1),\".\")\r\n| stats\r\n    count as query_count\r\n    dc(qname) as unique_qnames\r\n    by parent_domain\r\n| sort - query_count\r\n| head 15"
+      },
+      "name": "Top Parent Domains"
+    },
+    "ds_SRpKkgyA": {
+      "type": "ds.search",
+      "options": {
+        "query": "index=dns_soc_dns host=dns-soc-resolver01 sourcetype=unbound:dns event_type=\"query\"\r\n| eval qname=lower(rtrim(qname,\".\"))\r\n| eval labels=split(qname,\".\")\r\n| eval first_label=mvindex(labels,0)\r\n| eval parent_domain=mvjoin(mvindex(labels,1,-1),\".\")\r\n| eval qname_length=len(qname)\r\n| eval first_label_length=len(first_label)\r\n| bin _time span=1m\r\n| stats\r\n    count as query_count\r\n    dc(qname) as unique_qnames\r\n    dc(first_label) as unique_child_labels\r\n    avg(qname_length) as avg_qname_length\r\n    max(qname_length) as max_qname_length\r\n    avg(first_label_length) as avg_first_label_length\r\n    max(first_label_length) as max_first_label_length\r\n    values(qtype) as qtypes\r\n    values(qname) as qname_samples\r\n    by _time client_ip parent_domain\r\n| sort - unique_child_labels - max_first_label_length - query_count"
+      },
+      "name": "DNS Behavior Window Summary"
+    },
+    "ds_vwJGeEnG": {
+      "type": "ds.search",
+      "options": {
+        "query": "index=dns_soc_dns host=dns-soc-resolver01 sourcetype=unbound:dns event_type=\"query\"\r\n| eval qname=lower(rtrim(qname,\".\"))\r\n| eval labels=split(qname,\".\")\r\n| eval first_label=mvindex(labels,0)\r\n| eval parent_domain=mvjoin(mvindex(labels,1,-1),\".\")\r\n| eval qname_length=len(qname)\r\n| eval first_label_length=len(first_label)\r\n| table _time client_ip qname qtype parent_domain qname_length first_label first_label_length\r\n| sort - _time"
+      },
+      "name": "Raw DNS Investigation"
+    }
+  },
+  "defaults": {
+    "dataSources": {
+      "ds.search": {
+        "options": {
+          "queryParameters": {
+            "latest": "$global_time.latest$",
+            "earliest": "$global_time.earliest$"
+          }
+        }
+      },
+      "ds.spl2": {
+        "options": {
+          "queryParameters": {
+            "latest": "$global_time.latest$",
+            "earliest": "$global_time.earliest$"
+          }
+        }
+      }
+    },
+    "visualizations": {
+      "global": {
+        "showProgressBar": true
+      }
+    }
+  },
+  "inputs": {
+    "input_global_trp": {
+      "type": "input.timerange",
+      "options": {
+        "token": "global_time",
+        "defaultValue": "-24h@h,now"
+      },
+      "title": "Global Time Range"
+    }
+  },
+  "layout": {
+    "options": {},
+    "globalInputs": [
+      "input_global_trp"
+    ],
+    "tabs": {
+      "items": [
+        {
+          "layoutId": "layout_1",
+          "label": "New tab"
+        }
+      ]
+    },
+    "layoutDefinitions": {
+      "layout_1": {
+        "type": "grid",
+        "structure": [
+          {
+            "item": "viz_C6eqsBuA",
+            "type": "block",
+            "position": {
+              "x": 0,
+              "y": 0,
+              "w": 367,
+              "h": 237
+            }
+          },
+          {
+            "item": "viz_cLqgKSaA",
+            "type": "block",
+            "position": {
+              "x": 367,
+              "y": 0,
+              "w": 353,
+              "h": 237
+            }
+          },
+          {
+            "item": "viz_jpxkTTDl",
+            "type": "block",
+            "position": {
+              "x": 720,
+              "y": 0,
+              "w": 357,
+              "h": 237
+            }
+          },
+          {
+            "item": "viz_5JsRlkZa",
+            "type": "block",
+            "position": {
+              "x": 1077,
+              "y": 0,
+              "w": 363,
+              "h": 237
+            }
+          },
+          {
+            "item": "viz_3AUnsnqb",
+            "type": "block",
+            "position": {
+              "x": 0,
+              "y": 237,
+              "w": 720,
+              "h": 441
+            }
+          },
+          {
+            "item": "viz_QoYmbFPn",
+            "type": "block",
+            "position": {
+              "x": 720,
+              "y": 237,
+              "w": 720,
+              "h": 441
+            }
+          },
+          {
+            "item": "viz_RnaVnZJr",
+            "type": "block",
+            "position": {
+              "x": 0,
+              "y": 678,
+              "w": 720,
+              "h": 370
+            }
+          },
+          {
+            "item": "viz_aDzKTlfB",
+            "type": "block",
+            "position": {
+              "x": 720,
+              "y": 678,
+              "w": 720,
+              "h": 370
+            }
+          },
+          {
+            "item": "viz_I7ZHGfDx",
+            "type": "block",
+            "position": {
+              "x": 0,
+              "y": 1048,
+              "w": 1440,
+              "h": 395
+            }
+          },
+          {
+            "item": "viz_9tCUYk9y",
+            "type": "block",
+            "position": {
+              "x": 0,
+              "y": 1443,
+              "w": 1440,
+              "h": 400
+            }
+          },
+          {
+            "item": "viz_gxBeCTa7",
+            "type": "block",
+            "position": {
+              "x": 0,
+              "y": 1843,
+              "w": 1440,
+              "h": 391
+            }
+          }
+        ],
+        "options": {
+          "width": 1440,
+          "height": 960
+        }
+      }
+    }
+  },
+  "description": "",
+  "title": "Scenario 04 — DNS Tunneling Investigation"
+}
