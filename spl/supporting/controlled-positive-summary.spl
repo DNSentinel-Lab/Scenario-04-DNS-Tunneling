@@ -1,0 +1,21 @@
+index=dns_soc_dns host=dns-soc-resolver01 sourcetype=unbound:dns
+client_ip="10.50.30.20" event_type="query"
+| eval qname=lower(rtrim(qname,"."))
+| eval labels=split(qname,".")
+| eval first_label=mvindex(labels,0)
+| eval parent_domain=mvjoin(mvindex(labels,1,-1),".")
+| eval qname_length=len(qname)
+| eval first_label_length=len(first_label)
+| bin _time span=1m
+| stats
+    count as query_count
+    dc(qname) as unique_qnames
+    dc(first_label) as unique_child_labels
+    avg(qname_length) as avg_qname_length
+    max(qname_length) as max_qname_length
+    avg(first_label_length) as avg_first_label_length
+    max(first_label_length) as max_first_label_length
+    values(qtype) as qtypes
+    values(qname) as qname_samples
+    by _time client_ip parent_domain
+| sort - unique_child_labels - max_first_label_length - query_count

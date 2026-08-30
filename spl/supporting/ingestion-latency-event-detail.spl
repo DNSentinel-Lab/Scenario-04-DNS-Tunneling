@@ -1,0 +1,6 @@
+index=dns_soc_dns host=dns-soc-resolver01 sourcetype=unbound:dns
+| eval ingestion_delay_sec=round(_indextime-_time,2)
+| eval indexed_time=strftime(_indextime,"%Y-%m-%d %H:%M:%S")
+| table _time indexed_time ingestion_delay_sec event_type client_ip qname qtype rcode
+| sort - _time
+| head 40

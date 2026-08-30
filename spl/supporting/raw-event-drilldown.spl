@@ -1,0 +1,8 @@
+index=dns_soc_dns host=dns-soc-resolver01 sourcetype=unbound:dns
+client_ip="10.50.30.20"
+| eval qname=lower(rtrim(qname,"."))
+| where match(qname,"\\.tunnel\\.soclab\\.abdul4rehman215\\.tech$")
+| eval first_label=mvindex(split(qname,"."),0)
+| eval first_label_length=len(first_label)
+| table _time event_type client_ip qname qtype rcode response_time cache_flag response_size first_label_length
+| sort _time

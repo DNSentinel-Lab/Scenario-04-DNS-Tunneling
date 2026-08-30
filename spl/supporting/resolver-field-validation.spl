@@ -1,0 +1,2 @@
+index=dns_soc_dns host=dns-soc-resolver01 sourcetype=unbound:dns
+| sort - _time
