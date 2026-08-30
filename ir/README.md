@@ -1,41 +1,42 @@
 <a id="top"></a>
-<img src="https://capsule-render.vercel.app/api?type=soft&color=gradient&customColorList=2,7,12,18,24&height=135&section=header&text=%F0%9F%9B%A1%EF%B8%8F%20Incident%20Response%20Workspace&fontSize=28&fontColor=ffffff&animation=fadeIn&desc=Scenario%2004%20%E2%80%94%20DNS%20Tunneling&descSize=14&descAlignY=68&descColor=20E3B2" width="100%" alt="🛡️ Incident Response Workspace" />
+<img src="https://capsule-render.vercel.app/api?type=soft&color=gradient&customColorList=2,7,12,18,24&height=135&section=header&text=%F0%9F%9B%A1%EF%B8%8F%20Incident%20Response%20Workspace&fontSize=28&fontColor=ffffff&animation=fadeIn&desc=Scenario%2004%20%E2%80%94%20DNS%20Tunneling&descSize=14&descAlignY=68&descColor=20E3B2" width="100%" alt="Incident Response Workspace" />
 
 <div align="center">
 
-![Scenario](https://img.shields.io/badge/Scenario_04-Planned-6E7781?style=flat-square)
-![Workspace](https://img.shields.io/badge/Workspace-Incident_Response_Workspace-E5534B?style=flat-square)
+![Scenario](https://img.shields.io/badge/Scenario_04-Infrastructure_Ready-14B8A6?style=flat-square)
+![Owner](https://img.shields.io/badge/IR_Defender-Musfira-E5534B?style=flat-square)
 
-[🏠 Scenario Home](../README.md) · [🏗️ Shared Infrastructure](https://github.com/DNSentinel-Lab/DNS-Lab-Infrastructure) · [🗂️ All Scenario Repositories](https://github.com/orgs/DNSentinel-Lab/repositories)
+[🏠 Scenario Home](../README.md) · [📋 Runbook](../SCENARIO-RUNBOOK.md) · [🏗️ Shared Infrastructure](https://github.com/DNSentinel-Lab/DNS-Lab-Infrastructure)
 
 </div>
 
-<img src="https://user-images.githubusercontent.com/73097560/115834477-dbab4500-a447-11eb-908a-139a6edaec5c.gif" width="100%" alt="section divider" />
+**Status:** IR execution has not started.
 
-**Status:** Planned.
+The existing resolver/sinkhole infrastructure is ready, but Scenario 04 containment must remain a **human decision after independent validation**.
 
-This folder records the human response decision, approved containment, verification and cleanup/reset actions for the scenario.
-
-## Response rule
-
-Only synthetic non-sensitive data is used. After human confirmation, isolate or restrict the source and/or use the team-controlled DNS containment path. The final evidence should show that the tunneling-like DNS behavior stops or is redirected as intended.
-
-A complete response record should show:
+Potential narrow response if justified:
 
 ```text
-Finding
-→ human decision
-→ approved action
-→ expected technical change
-→ observed post-response evidence
-→ final verification
+Before
+Victim -> Unbound -> public DNS -> tunnel authoritative endpoint
+
+After approved RPZ
+Victim -> Unbound RPZ -> 10.50.30.30 -> sinkhole
 ```
 
-Do not treat a Splunk alert or AI summary as automatic response authorization.
+IR should document:
 
-## Final artifacts later
+- evidence reviewed independently;
+- current activity state;
+- containment/no-containment rationale;
+- exact approved scope;
+- before/after DNS result;
+- whether fresh qnames still reach the original authoritative endpoint;
+- sinkhole evidence where applicable;
+- normal-DNS health after response;
+- safe reset.
 
-The exact files depend on the exercise. A completed scenario may include an incident-response note/playbook, containment commands/configuration and a before/after verification record.
+A Splunk alert or AI summary is never automatic authorization.
 
 <img src="https://user-images.githubusercontent.com/73097560/115834477-dbab4500-a447-11eb-908a-139a6edaec5c.gif" width="100%" alt="section divider" />
 

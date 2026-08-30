@@ -1,44 +1,42 @@
 <a id="top"></a>
-<img src="https://capsule-render.vercel.app/api?type=soft&color=gradient&customColorList=2,7,12,18,24&height=135&section=header&text=%F0%9F%A4%96%20AI%20Integration%20%2F%20Profile&fontSize=28&fontColor=ffffff&animation=fadeIn&desc=Scenario%2004%20%E2%80%94%20DNS%20Tunneling&descSize=14&descAlignY=68&descColor=20E3B2" width="100%" alt="🤖 AI Integration / Profile" />
+<img src="https://capsule-render.vercel.app/api?type=soft&color=gradient&customColorList=2,7,12,18,24&height=135&section=header&text=%F0%9F%A4%96%20AI%20Integration%20%2F%20Profile&fontSize=28&fontColor=ffffff&animation=fadeIn&desc=Scenario%2004%20%E2%80%94%20DNS%20Tunneling&descSize=14&descAlignY=68&descColor=20E3B2" width="100%" alt="AI Integration / Profile" />
 
 <div align="center">
 
-![Scenario](https://img.shields.io/badge/Scenario_04-Planned-6E7781?style=flat-square)
-![Workspace](https://img.shields.io/badge/Workspace-AI_Integration_%2F_Profile-7B2CBF?style=flat-square)
+![Scenario](https://img.shields.io/badge/Scenario_04-Infrastructure_Ready-14B8A6?style=flat-square)
+![Workspace](https://img.shields.io/badge/Workspace-Scenario_AI_Profile-7B2CBF?style=flat-square)
 
-[🏠 Scenario Home](../README.md) · [🏗️ Shared Infrastructure](https://github.com/DNSentinel-Lab/DNS-Lab-Infrastructure) · [🗂️ All Scenario Repositories](https://github.com/orgs/DNSentinel-Lab/repositories)
+[🏠 Scenario Home](../README.md) · [🧠 Detection Plan](../DETECTION-ENGINEERING-PLAN.md) · [🏗️ Shared Infrastructure](https://github.com/DNSentinel-Lab/DNS-Lab-Infrastructure)
 
 </div>
 
-<img src="https://user-images.githubusercontent.com/73097560/115834477-dbab4500-a447-11eb-908a-139a6edaec5c.gif" width="100%" alt="section divider" />
+**Status:** Shared AI bridge exists; Scenario 04 profile is waiting for frozen Detection v1.0 fields.
 
-**Status:** Planned — the shared AI bridge is common infrastructure and is built outside this repository.
-
-This folder will contain only the scenario-specific payload/profile mapping once the final detection has stable fields.
-
-## Expected workflow
+Expected path:
 
 ```text
-Stable Splunk detection
+Frozen Detection v1.0
       ↓
-Structured scenario payload
+Structured Scenario 04 payload
       ↓
-Shared Flask / LLM bridge
+Shared dns-soc-ai-bridge
       ↓
-Structured AI summary
+Structured AI context
       ↓
-Splunk index=dns_soc_ai
+index=dns_soc_ai
       ↓
 Human SOC validation against raw evidence
 ```
 
-## Rules
+The scenario payload should be based on stable alert fields such as client, first/last seen, query count, unique child count, qname/label metrics, qtypes, rcodes, parent domain and sample qnames.
 
-- AI assistance never becomes the source of truth.
-- Do not let the LLM decide whether containment happens.
-- Preserve the input payload and returned summary as evidence.
-- Record where the AI was correct, incomplete or wrong.
-- Add a real scenario profile here only after the detection fields are finalized.
+AI rules:
+
+- AI is supporting context, not ground truth.
+- Do not expose private operator ground truth to the SOC through the AI path.
+- Do not let AI authorize containment.
+- Preserve the payload and returned summary.
+- Record where the AI was useful, incomplete or wrong.
 
 <img src="https://user-images.githubusercontent.com/73097560/115834477-dbab4500-a447-11eb-908a-139a6edaec5c.gif" width="100%" alt="section divider" />
 

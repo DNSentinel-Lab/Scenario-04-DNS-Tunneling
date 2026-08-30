@@ -1,20 +1,18 @@
 <a id="top"></a>
-<img src="https://capsule-render.vercel.app/api?type=soft&color=gradient&customColorList=2,7,12,18,24&height=135&section=header&text=%F0%9F%94%8E%20SPL%20Workspace&fontSize=28&fontColor=ffffff&animation=fadeIn&desc=Scenario%2004%20%E2%80%94%20DNS%20Tunneling&descSize=14&descAlignY=68&descColor=20E3B2" width="100%" alt="🔎 SPL Workspace" />
+<img src="https://capsule-render.vercel.app/api?type=soft&color=gradient&customColorList=2,7,12,18,24&height=135&section=header&text=%F0%9F%94%8E%20SPL%20Workspace&fontSize=28&fontColor=ffffff&animation=fadeIn&desc=Scenario%2004%20%E2%80%94%20Detection%20Engineering%20Next&descSize=14&descAlignY=68&descColor=20E3B2" width="100%" alt="SPL Workspace" />
 
 <div align="center">
 
-![Scenario](https://img.shields.io/badge/Scenario_04-Planned-6E7781?style=flat-square)
-![Workspace](https://img.shields.io/badge/Workspace-SPL_Workspace-00B8D9?style=flat-square)
+![Scenario](https://img.shields.io/badge/Scenario_04-Infrastructure_Ready-14B8A6?style=flat-square)
+![Owner](https://img.shields.io/badge/Detection_Engineer-Abdul--Rehman-00B8D9?style=flat-square)
 
-[🏠 Scenario Home](../README.md) · [🏗️ Shared Infrastructure](https://github.com/DNSentinel-Lab/DNS-Lab-Infrastructure) · [🗂️ All Scenario Repositories](https://github.com/orgs/DNSentinel-Lab/repositories)
+[🏠 Scenario Home](../README.md) · [🧠 Detection Plan](../DETECTION-ENGINEERING-PLAN.md) · [🏗️ Shared Infrastructure](https://github.com/DNSentinel-Lab/DNS-Lab-Infrastructure)
 
 </div>
 
-<img src="https://user-images.githubusercontent.com/73097560/115834477-dbab4500-a447-11eb-908a-139a6edaec5c.gif" width="100%" alt="section divider" />
+**Status:** Detection Engineering has not started. Infrastructure and DNS-path validation are complete.
 
-**Status:** Planned — no detection logic is considered final before baseline and controlled testing.
-
-When real searches exist, preserve them as:
+Create real files only after the searches are tested:
 
 ```text
 spl/
@@ -24,20 +22,23 @@ spl/
 └── validation.spl
 ```
 
-## Purpose
+- `baseline.spl` — normal resolver behavior and feature distributions.
+- `hunting.spl` — raw-evidence pivots and threshold-free analysis.
+- `detection.spl` — final frozen Detection v1.0.
+- `validation.spl` — baseline vs controlled positive vs benign lookalikes.
 
-- **baseline.spl** — measure ordinary activity before the simulation;
-- **hunting.spl** — analyst pivots that explain the raw behavior;
-- **detection.spl** — final tuned scenario detection;
-- **validation.spl** — normal-vs-scenario tests and final acceptance checks.
+## Rule discipline
 
-## Rules
+- Use actual `dns_soc_dns` fields observed in the lab.
+- Derive qname/label/frequency features transparently.
+- Combine multiple signals; do not equate one long hostname with tunneling.
+- Record why every threshold exists.
+- Test benign lookalikes deliberately.
+- Map `T1071.004` to what the search actually detects.
+- Do not add `T1572` unless the later implementation genuinely supports it.
+- Freeze the official detection before the information-separated run.
 
-- Use the real telemetry fields observed in this lab.
-- Keep thresholds evidence-based and record tuning reasons.
-- Test false positives deliberately.
-- Keep detection logic readable enough for another team member to reproduce.
-- Do not copy arbitrary thresholds from a public example or generate a rule around what the AI model prefers.
+See [`../DETECTION-ENGINEERING-PLAN.md`](../DETECTION-ENGINEERING-PLAN.md) for the full engineering sequence.
 
 <img src="https://user-images.githubusercontent.com/73097560/115834477-dbab4500-a447-11eb-908a-139a6edaec5c.gif" width="100%" alt="section divider" />
 
