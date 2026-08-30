@@ -1,0 +1,33 @@
+index=dns_soc_dns host=dns-soc-resolver01 sourcetype=unbound:dns event_type="query"
+| eval qname=lower(rtrim(qname,"."))
+| eval labels=split(qname,".")
+| eval first_label=mvindex(labels,0)
+| eval parent_domain=mvjoin(mvindex(labels,1,-1),".")
+| eval qname_length=len(qname)
+| eval first_label_length=len(first_label)
+| bin _time span=1m
+| stats
+    min(_time) as first_event
+    max(_time) as last_event
+    count as query_count
+    dc(qname) as unique_qnames
+    dc(first_label) as unique_child_labels
+    avg(qname_length) as avg_qname_length
+    max(qname_length) as max_qname_length
+    avg(first_label_length) as avg_first_label_length
+    max(first_label_length) as max_first_label_length
+    count(eval(first_label_length>16)) as long_label_count
+    values(qtype) as qtypes
+    values(qname) as qname_samples
+    by _time client_ip parent_domain
+| where unique_child_labels>=5
+    AND long_label_count>=5
+    AND max_first_label_length>16
+| eval detection_name="Possible DNS Tunneling Behavior"
+| eval detection_version="candidate-0.1"
+| eval severity="medium"
+| eval mitre_technique="T1071.004"
+| eval rationale="Multiple fresh long child labels concentrated beneath the same parent domain in a short time window."
+| convert ctime(first_event) ctime(last_event)
+| table detection_name detection_version first_event last_event client_ip parent_domain query_count unique_qnames unique_child_labels avg_qname_length max_qname_length avg_first_label_length max_first_label_length long_label_count qtypes qname_samples severity rationale mitre_technique
+| sort - unique_child_labels - max_first_label_length

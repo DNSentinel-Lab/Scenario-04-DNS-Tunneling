@@ -1,0 +1,12 @@
+index=dns_soc_dns host=dns-soc-resolver01 sourcetype=unbound:dns
+client_ip="10.50.30.20" event_type="query"
+| eval qname=lower(rtrim(qname,"."))
+| where NOT match(qname,"(^|\\.)tunnel\\.soclab\\.abdul4rehman215\\.tech$")
+| eval labels=split(qname,".")
+| eval first_label=mvindex(labels,0)
+| eval first_label_length=len(first_label)
+| eval qname_length=len(qname)
+| eval label_count=mvcount(labels)
+| stats count as query_count values(qtype) as qtypes by qname first_label first_label_length qname_length label_count
+| sort - first_label_length - qname_length
+| head 25

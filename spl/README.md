@@ -1,53 +1,67 @@
 <a id="top"></a>
-<img src="https://capsule-render.vercel.app/api?type=soft&color=gradient&customColorList=2,7,12,18,24&height=135&section=header&text=%F0%9F%94%8E%20SPL%20Workspace&fontSize=28&fontColor=ffffff&animation=fadeIn&desc=Scenario%2004%20%E2%80%94%20Detection%20Engineering%20Next&descSize=14&descAlignY=68&descColor=20E3B2" width="100%" alt="SPL Workspace" />
+<img src="https://capsule-render.vercel.app/api?type=soft&color=gradient&customColorList=2,7,12,18,24&height=135&section=header&text=%F0%9F%94%8E%20SPL%20Engineering%20Workspace&fontSize=28&fontColor=ffffff&animation=fadeIn&desc=Scenario%2004%20%E2%80%94%20DNS%20Tunneling%20%7C%20Detection%20v1.0&descSize=14&descAlignY=68&descColor=20E3B2" width="100%" alt="SPL Engineering Workspace" />
 
 <div align="center">
 
-![Scenario](https://img.shields.io/badge/Scenario_04-Infrastructure_Ready-14B8A6?style=flat-square)
-![Owner](https://img.shields.io/badge/Detection_Engineer-Abdul--Rehman-00B8D9?style=flat-square)
+![Status](https://img.shields.io/badge/Status-Complete-2EA44F?style=flat-square)
+![Detection](https://img.shields.io/badge/Detection-v1.0_Frozen-14B8A6?style=flat-square)
 
-[🏠 Scenario Home](../README.md) · [🧠 Detection Plan](../DETECTION-ENGINEERING-PLAN.md) · [🏗️ Shared Infrastructure](https://github.com/DNSentinel-Lab/DNS-Lab-Infrastructure)
+[🏠 Scenario Home](../README.md) · [🛠️ Detection Engineering](../detection-engineering/DETECTION-ENGINEERING.md) · [✅ Validation](../detection-engineering/detection-engineering-validation.md)
 
 </div>
 
-**Status:** Detection Engineering has not started. Infrastructure and DNS-path validation are complete.
+## Production SPL lifecycle
 
-Create real files only after the searches are tested:
+Scenario 04 preserves the four categories required by the project standard:
 
 ```text
-spl/
-├── baseline.spl
-├── hunting.spl
-├── detection.spl
-└── validation.spl
+baseline.spl
+hunting.spl
+detection.spl
+validation.spl
 ```
 
-- `baseline.spl` — normal resolver behavior and feature distributions.
-- `hunting.spl` — raw-evidence pivots and threshold-free analysis.
-- `detection.spl` — final frozen Detection v1.0.
-- `validation.spl` — baseline vs controlled positive vs benign lookalikes.
+| File | Purpose |
+|---|---|
+| [`baseline.spl`](baseline.spl) | Clean victim DNS profile with the controlled tunnel namespace excluded |
+| [`hunting.spl`](hunting.spl) | Threshold-free parent/child and first-label behavior hunt |
+| [`detection.spl`](detection.spl) | Frozen Detection v1.0 + analyst/AI evidence contract |
+| [`validation.spl`](validation.spl) | Same frozen v1.0 logic retained for reusable validation |
+| [`scheduled-alert.md`](scheduled-alert.md) | Exact scheduled-alert configuration and timing rationale |
 
-## Rule discipline
+## Detection v1.0
 
-- Use actual `dns_soc_dns` fields observed in the lab.
-- Derive qname/label/frequency features transparently.
-- Combine multiple signals; do not equate one long hostname with tunneling.
-- Record why every threshold exists.
-- Test benign lookalikes deliberately.
-- Map `T1071.004` to what the search actually detects.
-- Do not add `T1572` unless the later implementation genuinely supports it.
-- Freeze the official detection before the information-separated run.
+```text
+unique_child_labels >= 5
+AND long_label_count >= 5
+AND max_first_label_length > 16
+```
 
-See [`../DETECTION-ENGINEERING-PLAN.md`](../DETECTION-ENGINEERING-PLAN.md) for the full engineering sequence.
+These values came from the current Scenario 04 baseline and controlled testing. They were not copied from another scenario.
 
-<img src="https://user-images.githubusercontent.com/73097560/115834477-dbab4500-a447-11eb-908a-139a6edaec5c.gif" width="100%" alt="section divider" />
+## Engineering history and supporting searches
+
+[`history/candidate-0.1.spl`](history/candidate-0.1.spl) is retained as a clearly marked development artifact. It is not the production rule.
+
+[`supporting/`](supporting/) contains the useful searches that explain how the final rule was reached:
+
+- live resolver field discovery/validation;
+- ingestion timing and event-detail timing;
+- longest normal qnames;
+- busiest normal minute;
+- first-label and parent-domain hunts;
+- character-mix exploration;
+- controlled-positive summary;
+- raw-event drilldown;
+- AI return validation.
+
+These searches document method without turning every intermediate SPL version into a production artifact.
+
+> [!IMPORTANT]
+> `detection.spl` and `validation.spl` must retain the same frozen behavior during the official exercise.
 
 <div align="center">
 
-**DNSentinel Scenario 04 · DNS Tunneling**
-
-[🏠 Scenario Home](../README.md) · [🏗️ Infrastructure](https://github.com/DNSentinel-Lab/DNS-Lab-Infrastructure) · [⬆ Back to top](#top)
+[🏠 Scenario Home](../README.md) · [⬆ Back to top](#top)
 
 </div>
-
-<img src="https://capsule-render.vercel.app/api?type=waving&color=gradient&customColorList=2,7,12,18,24&height=75&section=footer" width="100%" alt="footer" />

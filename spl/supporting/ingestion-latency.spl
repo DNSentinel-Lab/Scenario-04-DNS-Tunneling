@@ -1,0 +1,9 @@
+index=dns_soc_dns host=dns-soc-resolver01 sourcetype=unbound:dns
+| eval ingestion_delay_sec=_indextime-_time
+| stats
+    count as events
+    min(ingestion_delay_sec) as min_delay_sec
+    avg(ingestion_delay_sec) as avg_delay_sec
+    median(ingestion_delay_sec) as median_delay_sec
+    perc95(ingestion_delay_sec) as p95_delay_sec
+    max(ingestion_delay_sec) as max_delay_sec

@@ -1,0 +1,13 @@
+index=dns_soc_dns host=dns-soc-resolver01 sourcetype=unbound:dns
+client_ip="10.50.30.20" event_type="query"
+| eval qname=lower(rtrim(qname,"."))
+| where NOT match(qname,"(^|\\.)tunnel\\.soclab\\.abdul4rehman215\\.tech$")
+| eval labels=split(qname,".")
+| eval first_label=mvindex(labels,0)
+| eval first_label_length=len(first_label)
+| eval digit_chars=len(replace(first_label,"[^0-9]",""))
+| eval alpha_chars=len(replace(first_label,"[^a-z]",""))
+| eval digit_ratio=round(if(first_label_length>0,digit_chars/first_label_length,0),3)
+| stats count as query_count values(qtype) as qtypes by qname first_label first_label_length digit_chars alpha_chars digit_ratio
+| sort - digit_ratio - first_label_length
+| head 25

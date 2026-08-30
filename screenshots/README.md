@@ -1,51 +1,57 @@
 <a id="top"></a>
-<img src="https://capsule-render.vercel.app/api?type=soft&color=gradient&customColorList=2,7,12,18,24&height=135&section=header&text=%F0%9F%96%BC%EF%B8%8F%20Screenshot%20Evidence&fontSize=28&fontColor=ffffff&animation=fadeIn&desc=Scenario%2004%20%E2%80%94%20DNS%20Tunneling&descSize=14&descAlignY=68&descColor=20E3B2" width="100%" alt="Screenshot Evidence" />
+<img src="https://capsule-render.vercel.app/api?type=soft&color=gradient&customColorList=2,7,12,18,24&height=135&section=header&text=%F0%9F%93%B8%20Curated%20Evidence&fontSize=28&fontColor=ffffff&animation=fadeIn&desc=Scenario%2004%20%E2%80%94%20Detection%20Engineering&descSize=14&descAlignY=68&descColor=20E3B2" width="100%" alt="Scenario 04 Curated Evidence" />
 
 <div align="center">
 
-![Scenario](https://img.shields.io/badge/Scenario_04-Infrastructure_Ready-14B8A6?style=flat-square)
-![Workspace](https://img.shields.io/badge/Workspace-Execution_Screenshots-6F42C1?style=flat-square)
+![Screenshots](https://img.shields.io/badge/Curated_Set-14_Images-14B8A6?style=flat-square)
+![Secrets](https://img.shields.io/badge/Secret_Redaction-Not_Required-2EA44F?style=flat-square)
 
-[🏠 Scenario Home](../README.md) · [📋 Runbook](../SCENARIO-RUNBOOK.md) · [🏗️ Shared Infrastructure](https://github.com/DNSentinel-Lab/DNS-Lab-Infrastructure)
+[🏠 Scenario Home](../README.md) · [🧾 Evidence](../evidence/README.md) · [🛠️ Detection Engineering](../detection-engineering/DETECTION-ENGINEERING.md)
 
 </div>
 
-**Infrastructure screenshots are intentionally not duplicated here.** They are curated in:
+## Curation policy
 
-`DNS-Lab-Infrastructure/02-aws-build/screenshots/scenario-04-dns-tunneling/`
+The final set keeps evidence that proves an engineering decision or acceptance gate. Construction-only screens, minor navigation mistakes, copy/paste errors, repeated empty results and the later throttle adjustment are not part of the public story.
 
-Reserve this folder for the scenario case file itself.
+No event values were altered. The preserved files were checked for API keys, HEC tokens, passwords, private keys and AWS/OpenAI secrets; none were found in the selected evidence.
 
-Suggested later evidence sequence:
+## Detection Engineering evidence set
 
-```text
-01-detection-baseline.png
-02-positive-engineering-validation.png
-03-benign-lookalike-validation.png
-04-detection-v1-freeze.png
-05-official-alert.png
-06-ai-assistance.png
-07-soc-investigation.png
-08-soc-ir-handoff.png
-09-ir-validation.png
-10-response-decision.png
-11-containment-verification.png
-12-safe-reset.png
-13-ground-truth-comparison.png
-```
+| File | What it proves |
+|---|---|
+| [`01-resolver-field-validation.png`](detection-engineering/01-resolver-field-validation.png) | Live Unbound source, victim attribution and extracted DNS fields |
+| [`02-dns-ingestion-latency.png`](detection-engineering/02-dns-ingestion-latency.png) | Measured ingest-delay distribution used for alert engineering |
+| [`03-normal-dns-baseline.png`](detection-engineering/03-normal-dns-baseline.png) | Real normal DNS behavior before tunneling-like validation |
+| [`04-tunneling-feature-hunt.png`](detection-engineering/04-tunneling-feature-hunt.png) | First-label/qname behavior used to select explainable features |
+| [`05-dns-tunneling-investigation-dashboard.png`](detection-engineering/05-dns-tunneling-investigation-dashboard.png) | Final Dashboard Studio analyst surface |
+| [`06-controlled-positive-test-traffic.png`](detection-engineering/06-controlled-positive-test-traffic.png) | Authorized synthetic positive traffic from the victim path |
+| [`07-controlled-positive-detection.png`](detection-engineering/07-controlled-positive-detection.png) | Positive behavior separated from normal parent activity |
+| [`08-benign-lookalike-no-detection.png`](detection-engineering/08-benign-lookalike-no-detection.png) | Repeated-long-label challenge did not create a new result |
+| [`09-final-detection-v1-validation.png`](detection-engineering/09-final-detection-v1-validation.png) | Frozen Detection v1.0 output/metadata |
+| [`10-scheduled-alert-triggered.png`](detection-engineering/10-scheduled-alert-triggered.png) | Automatic scheduled execution |
+| [`11-analyst-evidence-row.png`](detection-engineering/11-analyst-evidence-row.png) | Analyst-ready scheduled result and Scenario/AI identifiers |
+| [`12-raw-event-drilldown.png`](detection-engineering/12-raw-event-drilldown.png) | Raw Unbound query/reply evidence behind one summary window |
+| [`13-ai-triage-indexed.png`](detection-engineering/13-ai-triage-indexed.png) | Scenario 04 AI event returned through HEC |
+| [`13b-ai-vs-raw-evidence-validation.png`](detection-engineering/13b-ai-vs-raw-evidence-validation.png) | AI numerical/context claims compared with source evidence |
 
-Names should reflect what actually happens. If IR chooses no containment, do not create a fake `containment-verification` screenshot just to complete a numbered template.
+## What is intentionally absent
 
-For each published screenshot: explain the event first, show the image, then write one short caption stating what the evidence proves.
+- every Dashboard Studio construction step;
+- Save As dialogs;
+- minor SPL syntax corrections;
+- repeated zero-result screens without a new root cause;
+- small navigation issues;
+- a fabricated “readiness screenshot.”
 
-<img src="https://user-images.githubusercontent.com/73097560/115834477-dbab4500-a447-11eb-908a-139a6edaec5c.gif" width="100%" alt="section divider" />
+Readiness is documented in the validation and freeze records instead of inventing an image merely to complete a numbering template.
+
+## Later official evidence
+
+Future official simulation/SOC/IR screenshots should be added as a separate exercise evidence sequence. Do not rename these Detection Engineering images to make them look like official incident evidence.
 
 <div align="center">
 
-**DNSentinel Scenario 04 · DNS Tunneling**
-
-[🏠 Scenario Home](../README.md) · [🏗️ Infrastructure](https://github.com/DNSentinel-Lab/DNS-Lab-Infrastructure) · [⬆ Back to top](#top)
+[🏠 Scenario Home](../README.md) · [⬆ Back to top](#top)
 
 </div>
-
-<img src="https://capsule-render.vercel.app/api?type=waving&color=gradient&customColorList=2,7,12,18,24&height=75&section=footer" width="100%" alt="footer" />
