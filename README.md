@@ -1,16 +1,17 @@
 <a id="top"></a>
-<img src="https://capsule-render.vercel.app/api?type=waving&color=gradient&customColorList=2,7,12,18,24&height=225&section=header&text=Scenario%2004%20%E2%80%94%20DNS%20Tunneling&fontSize=38&fontColor=ffffff&animation=fadeIn&fontAlignY=36&desc=DNSentinel%20Lab%20%7C%20Planned%20DNS%20C2%20Case%20File&descSize=16&descAlignY=58&descColor=20E3B2" width="100%" alt="Scenario 04 — DNS Tunneling" />
+<img src="https://capsule-render.vercel.app/api?type=waving&color=gradient&customColorList=2,7,12,18,24&height=225&section=header&text=Scenario%2004%20%E2%80%94%20DNS%20Tunneling&fontSize=38&fontColor=ffffff&animation=fadeIn&fontAlignY=36&desc=DNSentinel%20Lab%20%7C%20Infrastructure%20Ready%20%E2%80%A2%20Detection%20Engineering%20Next&descSize=16&descAlignY=58&descColor=20E3B2" width="100%" alt="Scenario 04 — DNS Tunneling" />
 
 <div align="center">
 
-<img src="https://readme-typing-svg.demolab.com?font=Fira+Code&weight=700&size=21&duration=2900&pause=900&color=20E3B2&center=true&vCenter=true&repeat=true&width=960&height=72&lines=Synthetic+DNS+Labels+%E2%86%92+Pattern+Detection+%E2%86%92+Investigation;Human-Approved+Containment+%7C+T1572+Only+Where+Evidence+Fits" alt="Scenario workflow animation" />
+<img src="https://readme-typing-svg.demolab.com?font=Fira+Code&weight=700&size=21&duration=2900&pause=900&color=20E3B2&center=true&vCenter=true&repeat=true&width=1050&height=72&lines=Victim+%E2%86%92+Unbound+%E2%86%92+Public+DNS+%E2%86%92+Controlled+BIND+Authority;Baseline+%E2%86%92+Detect+%E2%86%92+AI+Assist+%E2%86%92+SOC+%E2%86%92+IR+%E2%86%92+Verify" alt="Scenario workflow animation" />
 
-![Scenario](https://img.shields.io/badge/Scenario_04-Planned-6E7781?style=for-the-badge)
+![Scenario](https://img.shields.io/badge/Scenario_04-Infrastructure_Ready-14B8A6?style=for-the-badge)
 ![AWS](https://img.shields.io/badge/AWS-Security_Lab-FF9900?style=for-the-badge&logo=amazonwebservices&logoColor=white)
 ![Splunk](https://img.shields.io/badge/Splunk-Enterprise-000000?style=for-the-badge&logo=splunk&logoColor=white)
 ![DNS](https://img.shields.io/badge/DNS-Security-00B8D9?style=for-the-badge)
 ![MITRE](https://img.shields.io/badge/MITRE-T1071.004-E34F26?style=for-the-badge)
 ![Unbound](https://img.shields.io/badge/Unbound-Defender_DNS-4C8BF5?style=for-the-badge)
+![BIND](https://img.shields.io/badge/BIND-Authoritative_DNS-6A5ACD?style=for-the-badge)
 ![AI](https://img.shields.io/badge/AI-Shared_Foundation-7B2CBF?style=for-the-badge)
 
 <br/>
@@ -19,10 +20,9 @@
 ![Forks](https://img.shields.io/github/forks/DNSentinel-Lab/Scenario-04-DNS-Tunneling?style=flat-square)
 ![Last Commit](https://img.shields.io/github/last-commit/DNSentinel-Lab/Scenario-04-DNS-Tunneling?style=flat-square)
 ![Repo Size](https://img.shields.io/github/repo-size/DNSentinel-Lab/Scenario-04-DNS-Tunneling?style=flat-square)
-![License](https://img.shields.io/github/license/DNSentinel-Lab/Scenario-04-DNS-Tunneling?style=flat-square)
 ![Issues](https://img.shields.io/github/issues/DNSentinel-Lab/Scenario-04-DNS-Tunneling?style=flat-square)
 
-**A planned, controlled DNS C2-pattern investigation using harmless synthetic data, structure/frequency analytics, raw-evidence validation and human-approved response.**
+**A controlled DNS tunneling-pattern case file using synthetic, non-sensitive data over a real defender resolver and a team-controlled public authoritative DNS path.**
 
 [🏗️ Infrastructure](https://github.com/DNSentinel-Lab/DNS-Lab-Infrastructure) · [🔎 Scenario 01](https://github.com/DNSentinel-Lab/Scenario-01-DNS-Recon) · [🧬 Scenario 02](https://github.com/DNSentinel-Lab/Scenario-02-DGA) · [🔄 Scenario 03](https://github.com/DNSentinel-Lab/Scenario-03-Fast-Flux) · [**🛰️ Scenario 04**](https://github.com/DNSentinel-Lab/Scenario-04-DNS-Tunneling)
 
@@ -34,315 +34,264 @@
 
 | Field | Scenario record |
 |---|---|
-| **Mission** | Generate harmless synthetic tunneling-like DNS labels/queries and determine whether the SOC can detect the structure and frequency using DNS plus client/network context |
-| **Status** | ⚪ Planned — design ready; execution has not started |
-| **MITRE ATT&CK** | `T1071.004 — Application Layer Protocol: DNS`; `T1572` only where implemented behavior actually fits |
-| **Cyber Kill Chain** | Command & Control |
-| **Core DNS evidence** | Label structure, query length, query type, parent domain, unique subdomains and frequency |
-| **Safety boundary** | Synthetic, non-sensitive data only |
-| **Response** | Human-approved isolation/restriction or resolver sinkhole, with before/after verification |
+| **Mission** | Generate harmless synthetic tunneling-like DNS labels/queries and determine whether the SOC can detect structure, uniqueness and timing using real resolver telemetry |
+| **Current status** | 🟢 Infrastructure Ready — Detection Engineering next; official exercise not started |
+| **Primary MITRE ATT&CK** | `T1071.004 — Application Layer Protocol: DNS` |
+| **Conditional mapping** | `T1572` is not claimed unless a later implementation genuinely encapsulates another protocol |
+| **Cyber Kill Chain** | Command & Control context |
+| **Core DNS evidence** | Label/qname length, unique children, parent concentration, frequency/inter-arrival, query type, client and rcode |
+| **Safety boundary** | Synthetic, non-sensitive test data only; project-owned/authorized infrastructure |
+| **Response path** | Human-approved Unbound RPZ / sinkhole only after SOC → IR validation |
 
-### What this scenario is designed to prove
-
-The goal is to detect tunneling-like DNS behavior without over-mapping or treating every long/encoded-looking label as malicious. The final conclusion must come from raw DNS evidence and available endpoint/network context, not from an AI verdict.
-
-<img src="https://user-images.githubusercontent.com/73097560/115834477-dbab4500-a447-11eb-908a-139a6edaec5c.gif" width="100%" alt="section divider" />
-
-## 🏗️ Scenario Architecture
-
-```mermaid
-%%{init: {
-  "themeVariables": {
-    "fontSize": "22px"
-  },
-  "flowchart": {
-    "nodeSpacing": 35,
-    "rankSpacing": 45
-  }
-}}%%
-
-flowchart LR
-
-    %% =====================================================
-    %% 1 — SOURCE + DNS
-    %% =====================================================
-    subgraph S1[" "]
-        direction TB
-
-        H1["💻 1 · SOURCE + DNS"]
-
-        V["🧑 Victim"]
-        L["🏷️ Synthetic<br/>DNS Labels"]
-        R["🛡️ Defender DNS<br/>Resolver"]
-        D["🌍 tunnel.soclab..."]
-
-        H1 --> V --> L --> R --> D
-    end
-
-
-    %% =====================================================
-    %% 2 — TELEMETRY + ANALYSIS
-    %% =====================================================
-    subgraph S2[" "]
-        direction TB
-
-        H2["📡 2 · TELEMETRY + ANALYSIS"]
-
-        SPL["🟢 Splunk Enterprise"]
-
-        PAT["🧬 Pattern Analysis<br/>Length · Structure<br/>Frequency · Query Type"]
-
-        subgraph ANALYSIS[" "]
-            direction LR
-
-            AI["🤖 AI<br/>Assistance"]
-
-            SOC["🔎 Human SOC<br/>Investigation"]
-        end
-
-        H2 --> SPL --> PAT
-
-        PAT --> AI
-        PAT --> SOC
-        AI --> SOC
-    end
-
-
-    %% =====================================================
-    %% 3 — HUMAN RESPONSE
-    %% =====================================================
-    subgraph S3[" "]
-        direction TB
-
-        H3["🛡️ 3 · HUMAN RESPONSE"]
-
-        IR["👤 Human IR<br/>Decision"]
-
-        ACT["🎯 Block / Sinkhole<br/>at Defender Resolver"]
-
-        VERIFY["✅ Post-Response<br/>Verification Evidence"]
-
-        H3 --> IR --> ACT --> VERIFY
-    end
-
-
-    %% =====================================================
-    %% MAIN HORIZONTAL FLOW
-    %% =====================================================
-    R --> SPL
-    SOC --> IR
-
-    %% Verification returns to Splunk.
-    %% Response target is stated inside ACT,
-    %% avoiding a huge backward arrow to the resolver.
-    VERIFY -.-> SPL
-
-
-    %% =====================================================
-    %% HEADER STYLES — LARGE
-    %% =====================================================
-    classDef h1 fill:#172554,stroke:#60a5fa,stroke-width:3px,color:#ffffff,font-size:24px,font-weight:bold;
-    classDef h2 fill:#312e81,stroke:#a78bfa,stroke-width:3px,color:#ffffff,font-size:24px,font-weight:bold;
-    classDef h3 fill:#450a0a,stroke:#f87171,stroke-width:3px,color:#ffffff,font-size:24px,font-weight:bold;
-
-    class H1 h1;
-    class H2 h2;
-    class H3 h3;
-
-
-    %% =====================================================
-    %% NODE STYLES — LARGE
-    %% =====================================================
-    classDef source fill:#172554,stroke:#60a5fa,stroke-width:2px,color:#ffffff,font-size:22px;
-    classDef labels fill:#1f2937,stroke:#94a3b8,stroke-width:2px,color:#ffffff,font-size:22px;
-    classDef resolver fill:#083344,stroke:#22d3ee,stroke-width:3px,color:#ffffff,font-size:22px;
-    classDef domain fill:#3b0764,stroke:#c084fc,stroke-width:2px,color:#ffffff,font-size:22px;
-
-    classDef splunk fill:#052e16,stroke:#4ade80,stroke-width:3px,color:#ffffff,font-size:22px;
-    classDef pattern fill:#422006,stroke:#fbbf24,stroke-width:2px,color:#ffffff,font-size:22px;
-    classDef ai fill:#581c87,stroke:#e879f9,stroke-width:2px,color:#ffffff,font-size:22px;
-    classDef soc fill:#164e63,stroke:#38bdf8,stroke-width:3px,color:#ffffff,font-size:22px;
-
-    classDef ir fill:#7f1d1d,stroke:#fb7185,stroke-width:3px,color:#ffffff,font-size:22px;
-    classDef action fill:#713f12,stroke:#fb923c,stroke-width:3px,color:#ffffff,font-size:22px;
-    classDef verify fill:#052e16,stroke:#4ade80,stroke-width:3px,color:#ffffff,font-size:22px;
-
-    class V source;
-    class L labels;
-    class R resolver;
-    class D domain;
-
-    class SPL splunk;
-    class PAT pattern;
-    class AI ai;
-    class SOC soc;
-
-    class IR ir;
-    class ACT action;
-    class VERIFY verify;
-
-
-    %% =====================================================
-    %% CONTAINERS
-    %% =====================================================
-    style S1 fill:#0d1117,stroke:#60a5fa,stroke-width:1px
-    style S2 fill:#0d1117,stroke:#a78bfa,stroke-width:1px
-    style S3 fill:#0d1117,stroke:#f87171,stroke-width:1px
-    style ANALYSIS fill:#111827,stroke:#30363d,stroke-width:1px
-
-
-    %% =====================================================
-    %% EDGES
-    %% =====================================================
-    linkStyle default stroke:#b6c2d1,stroke-width:3px
-```
-
-> The scenario stays inside the controlled namespace and uses only harmless synthetic data. T1572 is not claimed unless the implemented behavior supports it.
+> **Core question:** can the team distinguish tunneling-like DNS structure from ordinary DNS noise, investigate it without inventing attribution, and prove a proportionate response changed the observed network outcome?
 
 <img src="https://user-images.githubusercontent.com/73097560/115834477-dbab4500-a447-11eb-908a-139a6edaec5c.gif" width="100%" alt="section divider" />
 
-## 🔄 SOC Lifecycle & Implementation Reality
+## 🚦 Current Workstream State
 
-| Stage | State |
-|---|---|
-| **Design** | ✅ |
-| **Infrastructure Reuse** | 🟡 |
-| **Baseline** | ⚪ |
-| **Simulate** | ⚪ |
-| **Detect** | ⚪ |
-| **SOC/IR** | ⚪ |
-| **Verify** | ⚪ |
-| **Document** | 🟡 |
+| Workstream | Status | Owner |
+|---|---|---|
+| Scenario 04 infrastructure engineering | ✅ Complete | **Lubaba** |
+| Detection Engineering / Dashboard / Alert / Scenario AI | ⏳ Next | **Abdul-Rehman** |
+| Official simulation / operator ground truth | ⏳ Pending | **Sonia** |
+| SOC investigation / threat hunt | ⏳ Pending | **Lubaba** |
+| IR validation / response decision | ⏳ Pending | **Musfira** |
+| RPZ/sinkhole verification | ⏳ Pending — only if justified by IR | Musfira + shared defender infrastructure |
+| Final ground-truth comparison / closeout | ⏳ Pending | Team |
 
-> [!IMPORTANT]
-> ✅ means supported by implemented project evidence. 🟡 means design/infrastructure/documentation exists but the scenario stage is not complete. ⚪ means planned and is **not presented as implemented**.
-
+The infrastructure implementation credit is separate from the rotating official exercise role. **Lubaba built the Scenario 04 infrastructure extension; Sonia remains the current canonical Project Lead / Simulation owner for the later official run.**
 
 <img src="https://user-images.githubusercontent.com/73097560/115834477-dbab4500-a447-11eb-908a-139a6edaec5c.gif" width="100%" alt="section divider" />
 
-## 🎯 Objective
+## 🏗️ What Is Actually Built
 
-Generate only harmless synthetic data inside DNS labels/queries and determine whether the SOC can identify tunneling-like structure and frequency using DNS, endpoint/client and network context.
-
-## 🏗️ Infrastructure Dependency
-
-Reuse the Scenario 02 resolver, victim and sinkhole. Use the controlled `tunnel.soclab.abdul4rehman215.tech` namespace. Add a separate team-controlled authoritative DNS endpoint only if the final scenario requires genuine authoritative request/response behavior that cannot be demonstrated through the existing controlled path.
-
-The shared AWS/Splunk platform is not rebuilt inside this repository. Any new AWS resource is designed in the infrastructure project and documented there after it exists.
-
-## 🔎 Detection Focus
-
-- long or encoded-looking DNS labels;
-- query length/label structure and frequency;
-- TXT/A or other query-type behavior actually generated;
-- unique subdomains beneath the controlled parent;
-- repeated client/process behavior;
-- pre- and post-containment network/DNS evidence;
-
-## 🌐 Network & Protocol View
-
-- Layer 7 DNS: label structure, query type, parent domain and response behavior;
-- Layer 4: UDP/TCP 53 and any controlled follow-up path;
-- Layer 3: client/resolver/destination context where useful;
-- Endpoint: victim/process context if collected;
-- Containment: defender resolver block/sinkhole and verification;
-
-DNS is Layer 7 evidence, but the scenario should correlate it with the Layer 3/4, endpoint, cloud or application evidence that actually helps prove the behavior.
-
-## 📊 Planned Dashboard
-
-The dashboard should follow one shared time range and lead the analyst from summary → behavior → correlation → raw evidence.
-
-- Shared time range plus client, parent-domain, query-type and response filters;
-- KPIs: total queries, unique subdomains, long-label count, query-type mix, active clients;
-- Query frequency and label-length distribution over time;
-- Top parent/subdomain patterns and TXT/A behavior;
-- Client/process and network correlation where available;
-- Clear pre-containment versus post-containment result;
-
-See [`dashboard/README.md`](dashboard/README.md) for the planned layout.
-
-## 👥 Team
-
-| Role | Member |
-|---|---|
-| Project Lead / Attack Simulation | Lubaba |
-| SOC Analyst | Abdul-Rehman |
-| Detection Engineer | Musfira |
-| IR / Defender | Sonia |
-
-## 🔄 Scenario Workflow
-
-This repository follows the common 20-part standard:
-
-**Objective → Architecture → Prerequisites → Simulation → Telemetry → Detection → SPL → Alert → AI Triage → SOC Analysis → IR → Evidence → Containment → Verification → Results → MITRE → False Positives → Lessons → Reproduction → Screenshots.**
-
-The working checklist is [`SCENARIO-RUNBOOK.md`](SCENARIO-RUNBOOK.md).
-
-## 🗂️ Repository Navigation
+Scenario 04 reuses the Scenario 02 defender platform:
 
 ```text
-.
-├── README.md                 # scenario overview and locked design
-├── SCENARIO-RUNBOOK.md       # 20-part execution/documentation checklist
-├── dashboard/                # dashboard plan, later final XML/export
-├── spl/                      # baseline, hunting, detection and validation SPL
-├── ai/                       # scenario profile/payload mapping for shared AI bridge
-├── ir/                       # response/containment/verification record
-├── evidence/                 # structured ground truth and evidence notes
-└── screenshots/              # curated visual evidence
+dns-soc-victim01     10.50.30.20   controlled client
+dns-soc-resolver01   10.50.30.10   Unbound defender resolver
+dns-soc-sinkhole01   10.50.30.30   reusable private sinkhole
+dns-soc-splunk01     10.50.20.10   Splunk Enterprise + shared AI bridge
 ```
 
-The folders are prepared now, but fake implementation artifacts are not. Real `.spl`, dashboard XML, AI profiles and evidence are added only when they have been built and tested.
+One scenario-specific host was added:
 
-## 🔗 Shared Project References
+```text
+dns-tunnel-auth01    10.60.10.30
+Ubuntu 24.04 / BIND 9 authoritative-only
+Zone: tunnel.soclab.abdul4rehman215.tech
+```
 
-- [DNS Lab Infrastructure](https://github.com/DNSentinel-Lab/DNS-Lab-Infrastructure) — shared AWS, DNS, Splunk and AI foundation
-- [Scenario infrastructure roadmap](https://github.com/DNSentinel-Lab/DNS-Lab-Infrastructure/blob/main/00-project-design/scenario-infrastructure-roadmap.md) — future EC2/DNS/network changes owned by the infrastructure repository
-- [Scenario documentation standard](https://github.com/DNSentinel-Lab/DNS-Lab-Infrastructure/blob/main/00-project-design/scenario-documentation-standard.md) — common 20-part SOC workflow, dashboard and evidence rules
+The shared infrastructure repository contains the full implementation, commands, configuration and curated screenshots:
 
-## ✅ Completion Condition
+**[Scenario 04 DNS Tunneling Infrastructure →](https://github.com/DNSentinel-Lab/DNS-Lab-Infrastructure/blob/main/02-aws-build/10-scenario-04-dns-tunneling.md)**
 
-Detection is tuned against benign long/encoded DNS patterns, the SOC validates AI assistance against raw events, containment is approved by a human, and the final before/after evidence proves the controlled behavior no longer follows its original path.
+This scenario repository intentionally does **not duplicate the infrastructure screenshot set**.
+
+## 🌐 Proven DNS Path
+
+```mermaid
+flowchart LR
+    V["💻 Victim<br/>10.50.30.20"] -->|System DNS| R["🛡️ Unbound<br/>10.50.30.10"]
+    R --> U["☁️ AWS / Public<br/>Recursive DNS"]
+    U --> D["🌍 Route 53<br/>tunnel NS delegation"]
+    D --> A["🛰️ BIND Authority<br/>dns-tunnel-auth01<br/>10.60.10.30"]
+    A --> G["🧾 Query Ground Truth"]
+    R --> S["🟢 Splunk<br/>Existing resolver telemetry"]
+    RPZ["📋 Human-Approved RPZ<br/>later only"] -.-> R
+    R -.-> H["🎯 Sinkhole<br/>10.50.30.30"]
+
+    classDef endpoint fill:#172554,stroke:#60a5fa,stroke-width:2px,color:#fff;
+    classDef resolver fill:#083344,stroke:#22d3ee,stroke-width:2px,color:#fff;
+    classDef cloud fill:#312e81,stroke:#a78bfa,stroke-width:2px,color:#fff;
+    classDef auth fill:#134e4a,stroke:#2dd4bf,stroke-width:2px,color:#fff;
+    classDef evidence fill:#422006,stroke:#f59e0b,stroke-width:2px,color:#fff;
+    classDef splunk fill:#052e16,stroke:#4ade80,stroke-width:2px,color:#fff;
+    classDef response fill:#450a0a,stroke:#f87171,stroke-width:2px,color:#fff;
+
+    class V endpoint;
+    class R resolver;
+    class U,D cloud;
+    class A auth;
+    class G evidence;
+    class S splunk;
+    class RPZ,H response;
+```
+
+Infrastructure validation proved:
+
+- BIND is authoritative-only and recursion is disabled;
+- wildcard child labels receive authoritative answers;
+- BIND query logging records the received qname;
+- Route 53 delegates `tunnel.soclab...` to the controlled authority;
+- the victim still uses `10.50.30.10` as its normal DNS server;
+- Unbound records the original victim `10.50.30.20`;
+- the authoritative server receives the same fresh qname;
+- three fresh unique subdomains crossed the complete path.
+
+### Attribution boundary
+
+The two DNS views answer different questions:
+
+```text
+Unbound log  -> Which lab client made the query?
+BIND log     -> Did the delegated authoritative endpoint receive the qname?
+```
+
+The public BIND server sees upstream recursive-resolver addresses, not the private victim address. That distinction must be preserved during the SOC investigation.
 
 <img src="https://user-images.githubusercontent.com/73097560/115834477-dbab4500-a447-11eb-908a-139a6edaec5c.gif" width="100%" alt="section divider" />
 
-## 🧠 Security Engineering Skills in Scope
+## ⚠️ Operational Constraint Before Execution
 
-| Skill area | Scenario evidence / design focus |
+`dns-tunnel-auth01` used public IPv4 `98.93.89.38` during infrastructure validation, but that address is **not an Elastic IP**. The account had already reached its regional Elastic-IP quota.
+
+Before any official run:
+
+1. confirm the EC2 public IPv4 has not changed;
+2. if it changed, update Route 53 `ns1.tunnel`;
+3. update the BIND zone A records and SOA serial;
+4. validate/restart BIND;
+5. repeat public and victim smoke tests.
+
+This is a deployment constraint, not a detection result.
+
+<img src="https://user-images.githubusercontent.com/73097560/115834477-dbab4500-a447-11eb-908a-139a6edaec5c.gif" width="100%" alt="section divider" />
+
+## 🧠 Detection Engineering — Next Phase
+
+The next owner is **Abdul-Rehman**. Detection work begins with real data, not with a copied threshold.
+
+The planned order is:
+
+```text
+Telemetry pre-flight
+    ↓
+Normal DNS baseline
+    ↓
+Feature extraction
+    ↓
+Threshold-free hunting
+    ↓
+Small controlled engineering positive
+    ↓
+Benign lookalike tests
+    ↓
+Detection v1.0
+    ↓
+Dashboard + scheduled alert
+    ↓
+Scenario AI profile
+    ↓
+Validation / freeze
+    ↓
+Official exercise
+```
+
+The detailed engineering checklist is in [`DETECTION-ENGINEERING-PLAN.md`](DETECTION-ENGINEERING-PLAN.md).
+
+### Detection dimensions
+
+The final search should combine several signals rather than treating one long hostname as malicious:
+
+- full qname length;
+- longest/first-label length;
+- label count and character mix;
+- optional entropy/randomness feature;
+- query count and queries/minute;
+- unique qnames / unique child labels;
+- concentration under the same parent domain;
+- inter-arrival timing;
+- qtype diversity or unusual query types actually generated;
+- client identity and response code.
+
+Final thresholds are **not frozen yet**. They must come from the baseline, controlled positive and benign lookalike tests.
+
+<img src="https://user-images.githubusercontent.com/73097560/115834477-dbab4500-a447-11eb-908a-139a6edaec5c.gif" width="100%" alt="section divider" />
+
+## 🎬 Official Execution — Still Pending
+
+Once Detection v1.0 is frozen, the information-separated exercise follows:
+
+```text
+Sonia — controlled simulation + private ground truth
+        ↓
+Frozen Detection v1.0
+        ↓
+Shared AI assistance
+        ↓
+Lubaba — independent SOC investigation
+        ↓
+Evidence-backed SOC → IR handoff
+        ↓
+Musfira — independent IR validation
+        ↓
+Human response decision
+        ↓
+RPZ/sinkhole only if justified
+        ↓
+Before/after verification
+        ↓
+Safe reset
+        ↓
+Ground-truth reveal + final comparison
+```
+
+The full operating checklist is maintained in [`SCENARIO-RUNBOOK.md`](SCENARIO-RUNBOOK.md).
+
+<img src="https://user-images.githubusercontent.com/73097560/115834477-dbab4500-a447-11eb-908a-139a6edaec5c.gif" width="100%" alt="section divider" />
+
+## 🧪 What We Will — and Will Not — Claim
+
+**We will document:** controlled tunneling-like DNS behavior using synthetic, non-sensitive data over a real resolver/authoritative path.
+
+**We will not claim:**
+
+- malware exfiltration;
+- endpoint compromise;
+- malicious C2 attribution without evidence;
+- `T1572` without an implementation that genuinely supports it;
+- successful containment before the IR phase actually performs and verifies it;
+- a completed Scenario 04 while only infrastructure/detection work exists.
+
+If a tiny decoder/reassembly utility is later built to reconstruct the synthetic test message from received labels, it will be documented as **simulation tooling**. It does not exist yet.
+
+<img src="https://user-images.githubusercontent.com/73097560/115834477-dbab4500-a447-11eb-908a-139a6edaec5c.gif" width="100%" alt="section divider" />
+
+## 🗂️ Repository Guide
+
+| Area | Purpose | Current state |
+|---|---|---|
+| [`SCENARIO-RUNBOOK.md`](SCENARIO-RUNBOOK.md) | Full scenario operating sequence | Infrastructure gate updated; execution pending |
+| [`DETECTION-ENGINEERING-PLAN.md`](DETECTION-ENGINEERING-PLAN.md) | Next-phase engineering checklist | Ready |
+| [`spl/`](spl/) | Baseline, hunting, detection and validation SPL | Awaiting real engineering work |
+| [`dashboard/`](dashboard/) | Analyst dashboard / exported artifact | Awaiting stable fields |
+| [`ai/`](ai/) | Scenario-specific AI payload/profile | Awaiting frozen detection fields |
+| [`evidence/`](evidence/) | Structured official scenario evidence | Reserved for later phases |
+| [`screenshots/`](screenshots/) | Scenario-execution screenshots | Reserved; infrastructure screenshots stay in shared repo |
+| [`ir/`](ir/) | IR decision, containment, verification and reset | Awaiting official exercise |
+
+<img src="https://user-images.githubusercontent.com/73097560/115834477-dbab4500-a447-11eb-908a-139a6edaec5c.gif" width="100%" alt="section divider" />
+
+## 👥 Current Canonical Roles
+
+| Role | Owner |
 |---|---|
-| **DNS Analysis** | Label structure, query length, parent domain, unique subdomains and query types |
-| **Detection Engineering** | Frequency/structure-based behavior with deliberate false-positive testing |
-| **Endpoint / Network Context** | Client/process and L3/L4 context where available |
-| **MITRE Discipline** | T1071.004 primary; T1572 only when implemented behavior supports it |
-| **Incident Response** | Human-approved isolation/restriction or DNS sinkhole with verification |
-| **AI-Assisted SOC** | AI remains advisory and must be validated against raw evidence |
+| 🎯 Project Lead / Simulation | [Sonia](https://github.com/sonia11mansha415) |
+| 🔍 SOC Analyst / Threat Hunter | [Lubaba](https://github.com/lubaba1513-pixel) |
+| 🛠️ Detection Engineer / AI Integrator | [Abdul-Rehman](https://github.com/abdul4rehman215) |
+| 🛡️ Incident Responder / Defender | [Musfira](https://github.com/MUSFIRA-ZAFAR) |
+
+> **Infrastructure implementation credit:** Lubaba prepared the Scenario 04 AWS/BIND/Route 53 infrastructure before the rotating official exercise begins.
 
 <img src="https://user-images.githubusercontent.com/73097560/115834477-dbab4500-a447-11eb-908a-139a6edaec5c.gif" width="100%" alt="section divider" />
-
-## 📚 Documentation Model
-
-This scenario repository is a **case/execution layer** built on the shared [DNS Lab Infrastructure](https://github.com/DNSentinel-Lab/DNS-Lab-Infrastructure). It intentionally separates:
-
-- **Design / prerequisites** — what must exist before the exercise;
-- **Simulation / ground truth** — what the authorized operator actually generated;
-- **Detection Engineering** — baseline, hunting, tuned detection and validation;
-- **SOC investigation** — defender-visible evidence and human disposition;
-- **IR / containment** — independently justified response and verification;
-- **Evidence** — screenshots and structured artifacts that prove the final claims.
-
-> [!NOTE]
-> Planned work stays labelled as planned. This repository does not create fake screenshots, fake SPL results, fake ML metrics or fake incident outcomes to make a scenario look complete.
 
 <div align="center">
 
-### DNSentinel Lab
-**Build the telemetry. Prove the detection. Investigate the evidence. Verify the response.**
+### **Infrastructure is ready. Detection comes next. Evidence still owns the verdict.**
 
-[🏗️ Infrastructure](https://github.com/DNSentinel-Lab/DNS-Lab-Infrastructure) · [🔎 Scenario 01](https://github.com/DNSentinel-Lab/Scenario-01-DNS-Recon) · [🧬 Scenario 02](https://github.com/DNSentinel-Lab/Scenario-02-DGA) · [🔄 Scenario 03](https://github.com/DNSentinel-Lab/Scenario-03-Fast-Flux) · [**🛰️ Scenario 04**](https://github.com/DNSentinel-Lab/Scenario-04-DNS-Tunneling)
-
-[⬆ Back to top](#top)
+[🏗️ Infrastructure](https://github.com/DNSentinel-Lab/DNS-Lab-Infrastructure) · [🔎 Scenario 01](https://github.com/DNSentinel-Lab/Scenario-01-DNS-Recon) · [🧬 Scenario 02](https://github.com/DNSentinel-Lab/Scenario-02-DGA) · [🔄 Scenario 03](https://github.com/DNSentinel-Lab/Scenario-03-Fast-Flux) · [⬆ Back to top](#top)
 
 </div>
 
-<img src="https://capsule-render.vercel.app/api?type=waving&color=gradient&customColorList=2,7,12,18,24&height=120&section=footer" width="100%" alt="footer" />
+<img src="https://capsule-render.vercel.app/api?type=waving&color=gradient&customColorList=2,7,12,18,24&height=90&section=footer" width="100%" alt="footer" />

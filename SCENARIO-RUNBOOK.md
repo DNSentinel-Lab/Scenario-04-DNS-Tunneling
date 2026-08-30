@@ -1,271 +1,232 @@
 <a id="top"></a>
+# Scenario 04 — DNS Tunneling Runbook
 
-> 🧭 [Scenario 04](README.md) › **Scenario 04 Runbook — DNS Tunneling**
+**Scenario state:** Infrastructure Ready / Detection Engineering next  
+**Primary MITRE ATT&CK:** `T1071.004 — Application Layer Protocol: DNS`  
+**Safety boundary:** synthetic, non-sensitive data only  
+**Official roles:** Sonia — Simulation · Lubaba — SOC · Abdul-Rehman — Detection · Musfira — IR
 
-![Scenario](https://img.shields.io/badge/Scenario_04-Planned-6E7781?style=flat-square)
-![DNSentinel](https://img.shields.io/badge/DNSentinel-Technical_Record-20E3B2?style=flat-square)
+This runbook separates what is already implemented from what must happen later during Detection Engineering and the official information-separated exercise.
 
----
+## 1. Infrastructure gate — ✅ complete
 
-# Scenario 04 Runbook — DNS Tunneling
-
-**Status:** Planned — reuses Scenario 02 defender-DNS platform  
-**Primary MITRE ATT&CK:** T1071.004 — Application Layer Protocol: DNS; T1572 only where the implemented tunnel behavior fits
-
-This is the working checklist for the scenario. Sections remain marked **Planned** until real implementation or evidence exists. Do not fill gaps with invented values.
-
-## 1. Objective
-
-Generate only harmless synthetic data inside DNS labels/queries and determine whether the SOC can identify tunneling-like structure and frequency using DNS, endpoint/client and network context.
-
-**Status:** Planned.
-
-## 2. Architecture
-
-Describe only the systems and paths actually used when the scenario is prepared.
+Shared defender platform:
 
 ```text
-Shared infrastructure
-      ↓
-Scenario-specific infrastructure (if any)
-      ↓
-Controlled simulation
-      ↓
-Telemetry
-      ↓
-Splunk / AI / Human SOC / IR
+dns-soc-victim01     10.50.30.20
+dns-soc-resolver01   10.50.30.10
+dns-soc-sinkhole01   10.50.30.30
+dns-soc-splunk01     10.50.20.10
 ```
 
-**Scenario infrastructure dependency:** Reuse the Scenario 02 resolver, victim and sinkhole. Use the controlled `tunnel.soclab.abdul4rehman215.tech` namespace. Add a separate team-controlled authoritative DNS endpoint only if the final scenario requires genuine authoritative request/response behavior that cannot be demonstrated through the existing controlled path.
-
-**Status:** Planned.
-
-## 3. Prerequisites
-
-Before execution, confirm:
-
-- required shared infrastructure is healthy;
-- scenario-specific infrastructure, if any, has been built and validated;
-- telemetry is arriving with usable timestamps/fields;
-- the shared AI bridge is available;
-- the Project Lead has the approved simulation plan and ground-truth clock;
-- Detection Engineer has captured the normal baseline before attack activity;
-- SOC Analyst and IR/Defender know the expected exercise window but do not receive the final detection answer in advance.
-
-**Status:** Planned.
-
-## 4. Attack / Simulation
-
-Record the final controlled commands/tools, safety limits and start/end timestamps only when the exercise is executed.
-
-The simulation must stay inside owned/authorized lab infrastructure and match the scenario objective.
-
-**Status:** Planned.
-
-## 5. Telemetry
-
-List the real sources that capture this scenario. Candidate shared sources include:
-
-- Route 53 public authoritative query logs;
-- AWS VPC Resolver Query Logs;
-- team-controlled resolver logs from Scenario 02 onward;
-- VPC Flow Logs;
-- Nginx access telemetry when Web follow-up is relevant;
-- CloudTrail when control-plane changes are part of the evidence;
-- endpoint/client telemetry only where it is actually collected.
-
-Do not force unused telemetry into the scenario.
-
-**Status:** Planned.
-
-## 6. Detection
-
-Detection focus:
-
-- long or encoded-looking DNS labels;
-- query length/label structure and frequency;
-- TXT/A or other query-type behavior actually generated;
-- unique subdomains beneath the controlled parent;
-- repeated client/process behavior;
-- pre- and post-containment network/DNS evidence;
-
-Write the final behavioral hypothesis after observing baseline data.
-
-**Status:** Planned.
-
-## 7. SPL / Detection Logic
-
-Use files under [`spl/`](spl/) after real searches exist:
+Scenario-specific extension:
 
 ```text
-baseline.spl
-hunting.spl
-detection.spl
-validation.spl
+dns-tunnel-auth01    10.60.10.30
+BIND authoritative-only
+tunnel.soclab.abdul4rehman215.tech
 ```
 
-Thresholds must be tuned from real baseline and controlled testing rather than copied from an example.
+The infrastructure record is maintained in the shared repository:
 
-**Status:** Planned.
+`DNS-Lab-Infrastructure/02-aws-build/10-scenario-04-dns-tunneling.md`
 
-## 8. Alert
+## 2. Mandatory pre-run public-IP check — ⏳ every execution day
 
-The final alert should contain enough evidence for a human analyst to start investigation without guessing field meanings.
+The authoritative EC2 does not currently have an Elastic IP.
 
-Recommended common fields:
+Before Detection Engineering tests or the official run:
 
-- detection name/version;
-- first/last event time;
-- observed client/source identity;
-- query count / unique-name count / scenario-specific metric;
-- relevant query names/types/results;
-- supporting Web/network context;
-- severity and rationale;
-- raw-event or drilldown search.
+1. confirm the public IPv4 of `dns-tunnel-auth01`;
+2. compare it with Route 53 `ns1.tunnel` and the BIND zone;
+3. if different, update both DNS locations and increment the SOA serial;
+4. run BIND validation/restart;
+5. prove a fresh public child lookup;
+6. prove a fresh victim lookup through Unbound.
 
-**Status:** Planned.
+Do not start the scenario with stale delegation data.
 
-## 9. AI Triage
+## 3. Detection Engineering — ⏳ next
 
-The shared AI bridge is reused. This repository adds only the scenario profile/payload mapping after the detection fields are stable.
+Owner: **Abdul-Rehman**.
 
-Record:
+Follow [`DETECTION-ENGINEERING-PLAN.md`](DETECTION-ENGINEERING-PLAN.md):
+
+```text
+Data quality
+→ baseline
+→ feature engineering
+→ hunting
+→ positive engineering test
+→ benign lookalikes
+→ Detection v1.0
+→ dashboard
+→ alert
+→ AI profile
+→ validation
+→ freeze
+```
+
+## 4. Information separation — ⏳ official run
+
+Before execution:
+
+- Sonia keeps exact generator inputs, payload content, expected count/timing and operator ground truth private from Lubaba and Musfira.
+- Abdul-Rehman freezes Detection v1.0 before receiving official ground truth.
+- Lubaba investigates from defender evidence only.
+- Musfira validates independently from the SOC handoff and available telemetry.
+- AI may summarize the frozen detection context but cannot disclose private operator ground truth or authorize response.
+
+## 5. Official simulation — ⏳ pending
+
+Owner: **Sonia**.
+
+The official simulation must:
+
+- use only project-owned/authorized infrastructure;
+- use synthetic, non-sensitive data;
+- use the normal victim DNS path rather than bypassing Unbound;
+- stay inside the controlled `tunnel.soclab...` namespace;
+- record UTC start/end and exact tool/script hash where practical;
+- stop cleanly after the planned window.
+
+The preferred initial behavior is controlled A-query traffic using fresh child labels. TXT or other qtypes should be included only if the actual scenario plan needs them and the Detection Engineer has baseline context for them.
+
+A decoder/reassembly utility is optional simulation tooling. It is **not currently implemented** and is not required merely to demonstrate suspicious DNS structure.
+
+## 6. Detection / alert — ⏳ pending
+
+Detection v1.0 should surface the behavior using frozen logic. Record:
+
+- alert time;
+- search window;
+- client;
+- query count;
+- unique child/qname count;
+- structure/length metrics;
+- qtype/rcode context;
+- sample qnames;
+- raw-event pivots.
+
+Do not tune the rule after seeing the private official ground truth.
+
+## 7. AI assistance — ⏳ pending
+
+The shared bridge may receive the frozen alert payload and return structured context into `dns_soc_ai`.
+
+Preserve:
 
 - payload sent;
-- AI summary returned;
-- useful observations;
-- missing/incorrect claims;
-- what the SOC Analyst verified independently.
-
-**Status:** Planned.
-
-## 10. SOC Analysis
-
-Build the human investigation timeline from raw evidence. Document pivots, competing explanations, disposition and confidence.
-
-The AI output is supporting context only.
-
-**Status:** Planned.
-
-## 11. Incident Response
-
-Only synthetic non-sensitive data is used. After human confirmation, isolate or restrict the source and/or use the team-controlled DNS containment path. The final evidence should show that the tunneling-like DNS behavior stops or is redirected as intended.
-
-Record the approved decision and who performed it.
-
-**Status:** Planned.
-
-## 12. Evidence
-
-Store structured evidence notes under [`evidence/`](evidence/) and screenshots under [`screenshots/`](screenshots/).
-
-Evidence should cover:
-
-- pre-scenario health/baseline;
-- ground-truth timing;
-- telemetry;
-- detection/alert;
 - AI output;
-- SOC analysis;
-- containment;
-- verification.
+- UTC time;
+- what the analyst accepted/rejected after raw-evidence review.
 
-**Status:** Planned.
+AI output is not the disposition.
 
-## 13. Containment
+## 8. SOC investigation — ⏳ pending
 
-Containment is performed only after the human investigation reaches the scenario's approved response condition.
+Owner: **Lubaba**.
 
-Do not treat detection or AI output as automatic authorization.
+The SOC record should answer 5W1H as far as the defender evidence allows:
 
-**Status:** Planned.
+- **Who:** which client generated the queries?
+- **What:** what structure/frequency/query types were observed?
+- **When:** first/last seen and activity window?
+- **Where:** which resolver, parent domain and authoritative destination were involved?
+- **Why:** what evidence makes the behavior unusual, and what benign explanations remain?
+- **How:** how did the queries move through the resolver/delegation path?
 
-## 14. Verification
+Required discipline:
 
-Prove what changed after response. Use before/after DNS, network, Web or endpoint evidence appropriate to the scenario.
+- attribute the private client from Unbound, not from BIND public-resolver source IPs;
+- distinguish observed tunneling-like structure from proof of malicious exfiltration;
+- record confidence and limits;
+- produce an explicit disposition and SOC → IR handoff.
 
-**Status:** Planned.
+## 9. IR validation — ⏳ pending
 
-## 15. Results
+Owner: **Musfira**.
 
-Summarize the final outcome after the exercise:
+IR independently checks:
 
-- detection result;
-- SOC disposition;
-- response result;
-- verification result;
-- whether the scenario completion condition passed.
+- frozen alert evidence;
+- raw Unbound events;
+- available AWS/network context;
+- public/authoritative evidence where useful;
+- whether the simulation is still active;
+- whether containment is proportionate.
 
-**Status:** Planned.
+The IR record must document the decision even if the decision is **no containment**.
 
-## 16. MITRE ATT&CK Mapping
+## 10. Response — ⏳ pending / human approved only
 
-Primary mapping: **T1071.004 — Application Layer Protocol: DNS; T1572 only where the implemented tunnel behavior fits**.
+If containment is justified, use the existing narrow Unbound RPZ/sinkhole path rather than a broad VPC or host shutdown unless evidence requires otherwise.
 
-Review the mapping against the behavior that was actually generated and detected. Add no extra techniques unless evidence supports them.
-
-If a Cyber Kill Chain view is included, record only the phase that the implemented behavior genuinely demonstrates and cite the scenario evidence for that choice.
-
-**Status:** Planned.
-
-## 17. False Positives
-
-Test plausible benign activity that resembles part of the scenario. Record each threshold or logic change and why it improved separation.
-
-**Status:** Planned.
-
-## 18. Lessons Learned
-
-Capture useful technical, detection, analyst and IR lessons. Write them as reusable engineering knowledge rather than a chat/debugging transcript.
-
-**Status:** Planned.
-
-## 19. Reproduction Instructions
-
-At completion, provide a clean ordered path:
+Expected controlled path:
 
 ```text
-Prerequisites
-→ scenario infrastructure
-→ baseline
-→ controlled simulation
-→ validate telemetry
-→ run detection
-→ investigate
-→ AI comparison
-→ contain
-→ verify
-→ cleanup/reset
+Before
+Victim -> Unbound -> public DNS -> original authoritative path
+
+After approved RPZ
+Victim -> Unbound RPZ -> 10.50.30.30 -> sinkhole
 ```
 
-**Status:** Planned.
+Use fresh qnames or flush relevant cache state so cached results do not confuse verification.
 
-## 20. Screenshots
+## 11. Verification — ⏳ pending
 
-Use descriptive filenames and show screenshots next to the sections they prove. Keep a compact screenshot index in [`screenshots/README.md`](screenshots/README.md).
+A successful response must be proven from telemetry.
 
-**Status:** Planned.
+Minimum proof if RPZ is used:
 
-## Network & protocol view
+- fresh controlled tunnel child name resolves to the approved sinkhole result;
+- original authoritative endpoint no longer receives that fresh qname through the normal path;
+- sinkhole evidence shows the redirected request if HTTP validation is part of the response;
+- normal unrelated DNS still works;
+- resolver remains healthy.
 
-- Layer 7 DNS: label structure, query type, parent domain and response behavior;
-- Layer 4: UDP/TCP 53 and any controlled follow-up path;
-- Layer 3: client/resolver/destination context where useful;
-- Endpoint: victim/process context if collected;
-- Containment: defender resolver block/sinkhole and verification;
+## 12. Safe reset — ⏳ pending
 
-This section should be updated with the actual fields/ports seen during execution.
+After verification:
 
-## Completion gate
+- restore the approved safe RPZ state;
+- revalidate Unbound configuration/service;
+- prove the controlled name returns to the expected normal path/state;
+- confirm normal DNS remains healthy;
+- preserve reset evidence.
 
-Detection is tuned against benign long/encoded DNS patterns, the SOC validates AI assistance against raw events, containment is approved by a human, and the final before/after evidence proves the controlled behavior no longer follows its original path.
+## 13. Ground-truth reveal — ⏳ pending
+
+Only after SOC and IR decisions are locked, Sonia reveals the private operator record.
+
+Compare:
+
+```text
+Operator ground truth
+vs
+Detection v1.0
+vs
+AI assistance
+vs
+SOC findings
+vs
+IR decision
+vs
+response evidence
+```
+
+Record misses, overstatements, false positives and attribution limits.
+
+## 14. Final closeout — ⏳ pending
+
+Scenario 04 is complete only when the repository can reproduce:
+
+**Simulation → Telemetry → Detection → Alert → AI Assistance → Independent SOC Investigation → IR Decision → Response/No-Response Rationale → Verification → Ground-Truth Comparison → Lessons Learned.**
+
+Infrastructure readiness alone does not satisfy this gate.
+
 
 ---
 
-<div align="center">
-
 [🏠 Scenario Home](README.md) · [🏗️ Infrastructure](https://github.com/DNSentinel-Lab/DNS-Lab-Infrastructure) · [⬆ Back to top](#top)
-
-<sub>DNSentinel Lab · Evidence-first DNS security engineering</sub>
-
-</div>
