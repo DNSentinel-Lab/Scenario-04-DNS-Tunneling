@@ -19,15 +19,112 @@
 These are the actual defender-side pivots used during the official SOC case. They remain separate from frozen Detection Engineering SPL so the repository preserves the difference between **building the detector** and **investigating an incident**.
 
 ```mermaid
-flowchart LR
-    A["🩺 Telemetry"] --> B["🔍 Namespace"]
-    B --> C["🧬 Label Structure"]
-    C --> D["🧠 v1.0 Reproduction"]
-    D --> E["📨 Query / Reply"]
-    E --> F["📊 Baseline"]
-    F --> G["🎯 Scope"]
-    G --> H["🤖 AI Validation"]
-    H --> I["📨 IR Handoff"]
+%%{init: {
+  "theme": "base",
+  "themeVariables": {
+    "background": "#030712",
+    "primaryTextColor": "#ffffff",
+    "lineColor": "#f8fafc",
+    "fontSize": "31px"
+  },
+  "flowchart": {
+    "nodeSpacing": 48,
+    "rankSpacing": 58,
+    "curve": "basis",
+    "padding": 20
+  }
+}}%%
+
+flowchart TB
+
+    %% =====================================================
+    %% ROW 1 · EVIDENCE FOUNDATION
+    %% =====================================================
+    subgraph ROW1[" "]
+        direction LR
+
+        A["🩺 01 · TELEMETRY<br/>READINESS"]
+
+        B["🔍 02 · NAMESPACE<br/>NORMALIZATION"]
+
+        C["🧬 03 · LABEL<br/>STRUCTURE"]
+
+        D["🧠 04 · DETECTION<br/>v1.0 REPRODUCTION"]
+
+        A ==> B ==> C ==> D
+    end
+
+
+    %% =====================================================
+    %% ROW 2 · ANALYSIS + ESCALATION
+    %% =====================================================
+    subgraph ROW2[" "]
+        direction LR
+
+        E["📨 05–06 · DNS CONTEXT<br/>Query / Reply<br/>+ Baseline"]
+
+        F["🎯 07 · INVESTIGATION<br/>SCOPE"]
+
+        G["🤖 08 · AI<br/>VALIDATION"]
+
+        H["📨 09 · IR<br/>HANDOFF"]
+
+        E ==> F ==> G ==> H
+    end
+
+
+    %% =====================================================
+    %% ROW HANDOFF
+    %% =====================================================
+    ROW1 ==> ROW2
+
+
+    %% =====================================================
+    %% PREMIUM GLOSSY COLORS
+    %% =====================================================
+    classDef telemetry fill:#075985,stroke:#22d3ee,stroke-width:6px,color:#ffffff,font-size:31px,font-weight:bold;
+
+    classDef namespace fill:#172554,stroke:#60a5fa,stroke-width:6px,color:#ffffff,font-size:31px,font-weight:bold;
+
+    classDef labels fill:#312e81,stroke:#818cf8,stroke-width:6px,color:#ffffff,font-size:31px,font-weight:bold;
+
+    classDef detection fill:#4c1d95,stroke:#e879f9,stroke-width:7px,color:#ffffff,font-size:31px,font-weight:bold;
+
+    classDef context fill:#0f766e,stroke:#5eead4,stroke-width:6px,color:#ffffff,font-size:31px,font-weight:bold;
+
+    classDef scope fill:#713f12,stroke:#fbbf24,stroke-width:6px,color:#ffffff,font-size:31px,font-weight:bold;
+
+    classDef ai fill:#7e22ce,stroke:#f0abfc,stroke-width:6px,color:#ffffff,font-size:31px,font-weight:bold;
+
+    classDef handoff fill:#14532d,stroke:#86efac,stroke-width:7px,color:#ffffff,font-size:33px,font-weight:bold;
+
+
+    %% =====================================================
+    %% APPLY STYLES
+    %% =====================================================
+    class A telemetry;
+    class B namespace;
+    class C labels;
+    class D detection;
+
+    class E context;
+    class F scope;
+    class G ai;
+    class H handoff;
+
+
+    %% =====================================================
+    %% GLOSSY ROW PANELS
+    %% =====================================================
+    style ROW1 fill:#06131d,stroke:#38bdf8,stroke-width:3px
+
+    style ROW2 fill:#0c1018,stroke:#4ade80,stroke-width:3px
+
+
+    %% =====================================================
+    %% HIGH-CONTRAST CONNECTORS
+    %% =====================================================
+    linkStyle default stroke:#f8fafc,stroke-width:6px;
 ```
 
 | Stage | Searches |
