@@ -1,0 +1,12 @@
+index=dns_soc_dns host=dns-soc-resolver01 sourcetype=unbound:dns
+earliest="09/02/2026:16:38:00" latest="09/03/2026:16:38:00"
+"tunnel.soclab.abdul4rehman215.tech"
+| regex _raw="\bquery:"
+| rex field=_raw "query:\s+(?<client_ip>\d+\.\d+\.\d+\.\d+)\s+(?<qname>\S+)\s+(?<qtype>\S+)\s+IN"
+| eval qname=lower(rtrim(qname,"."))
+| eval first_label=mvindex(split(qname,"."),0)
+| eval first_label_length=len(first_label)
+| bin _time span=1m
+| stats count as query_count dc(qname) as unique_qnames dc(first_label) as unique_child_labels count(eval(first_label_length>16)) as long_label_count max(first_label_length) as max_first_label_length values(qtype) as qtypes by _time client_ip
+| where unique_child_labels>=5 AND long_label_count>=5 AND max_first_label_length>16
+| convert ctime(_time)

@@ -14,7 +14,7 @@
 **Scenario:** DNS Tunneling  
 **Primary MITRE ATT&CK:** `T1071.004 — Application Layer Protocol: DNS`  
 **Engineering status:** **Complete / SOC-Ready**  
-**Official scenario status:** **Simulation / SOC / IR still pending**
+**Official scenario status:** **Completed after the freeze; see the end-to-end execution record**
 
 This document records the Detection Engineering work that turned live Unbound resolver telemetry into a tested Splunk detection, analyst investigation dashboard, scheduled alert, raw-event investigation path and Scenario 04 AI evidence flow.
 
@@ -588,7 +588,11 @@ Frozen artifacts include:
 - [`FREEZE-RECORD.md`](FREEZE-RECORD.md) — operational/change-control record;
 - [`detection-engineering-validation.md`](detection-engineering-validation.md) — acceptance matrix.
 
-Official simulation, SOC disposition, IR validation/containment and final scenario closeout remain pending.
+### What happened next
+
+The frozen engineering artifacts were carried unchanged into the official exercise. Sonia generated one finite DNS session; Detection v1.0 fired; Lubaba independently reproduced the behavior, challenged it against baseline and escalated with attribution limits; Musfira independently validated the handoff, proved a scoped RPZ response and restored the resolver safely.
+
+The engineering record remains frozen; official execution evidence is documented in [`../SCENARIO-04-EXECUTION.md`](../SCENARIO-04-EXECUTION.md), [`../soc/`](../soc/) and [`../ir/`](../ir/).
 
 ---
 

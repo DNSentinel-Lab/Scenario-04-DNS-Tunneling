@@ -1,0 +1,6 @@
+index=dns_soc_aws sourcetype=aws:cloudtrail
+earliest="09/02/2026:16:30:00" latest="09/02/2026:16:35:00"
+eventSource="ec2.amazonaws.com" eventName="StartInstances"
+| spath
+| table _time userIdentity.arn sourceIPAddress requestParameters.instancesSet.items{}.instanceId
+| sort _time

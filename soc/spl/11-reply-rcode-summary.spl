@@ -1,0 +1,6 @@
+index=dns_soc_dns host=dns-soc-resolver01 sourcetype=unbound:dns event_type=reply
+| eval qname_normalized=lower(rtrim(qname,"."))
+| where like(qname_normalized, "%.tunnel.soclab.abdul4rehman215.tech")
+| eval first_label=mvindex(split(qname_normalized,"."),0)
+| eval first_label_length=len(first_label)
+| stats count as reply_count dc(qname_normalized) as unique_reply_qnames values(rcode) as rcodes values(qtype) as qtypes min(response_time) as min_response_time avg(response_time) as avg_response_time max(response_time) as max_response_time values(cache_flag) as cache_flags min(response_size) as min_response_size max(response_size) as max_response_size by client_ip

@@ -24,7 +24,7 @@ The acceptance goal was broader than “the search fired.” The same frozen beh
 | AI return | Scenario 04 result returns through HEC | Event indexed in `dns_soc_ai` | [`13`](../screenshots/detection-engineering/13-ai-triage-indexed.png) | ✅ PASS |
 | AI vs evidence | No numerical/context drift | AI matched client/query/label/qtype/MITRE facts and preserved uncertainty | [`13b`](../screenshots/detection-engineering/13b-ai-vs-raw-evidence-validation.png) | ✅ PASS |
 | Human decision boundary | AI remains advisory | `human_validation_required=true` preserved | AI mapping + indexed event | ✅ PASS |
-| Official exercise boundary | Detection frozen before live exercise | Official simulation/SOC/IR still unstarted | [`FREEZE-RECORD.md`](FREEZE-RECORD.md) | ✅ PASS |
+| Official exercise boundary | Detection frozen before live exercise | At freeze time, official operator/SOC/IR had not started | [`FREEZE-RECORD.md`](FREEZE-RECORD.md) | ✅ PASS |
 
 ## Positive validation
 
@@ -63,7 +63,7 @@ The alert produced an analyst evidence row, sent bridge-compatible JSON through 
 
 ## Final acceptance
 
-**PASS — Detection v1.0, dashboard, scheduled alert, raw-event drilldown and Scenario 04 AI evidence mapping are ready for an independent SOC exercise.**
+**PASS — Detection v1.0, dashboard, scheduled alert, raw-event drilldown and Scenario 04 AI evidence mapping were ready before the independent SOC exercise. The official run later used the frozen artifacts unchanged.**
 
 ---
 

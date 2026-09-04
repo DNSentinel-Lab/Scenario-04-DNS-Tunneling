@@ -1,0 +1,7 @@
+index=dns_soc_aws sourcetype=aws:cloudwatchlogs:vpcflow
+earliest="09/02/2026:16:32:00" latest="09/02/2026:16:37:19"
+| rex field=_raw "^\S+\s+\S+\s+\S+\s+(?<srcaddr>\S+)\s+(?<dstaddr>\S+)\s+(?<srcport>\d+)\s+(?<dstport>\d+)"
+| where srcaddr="10.50.30.20"
+| where dstaddr IN ("10.50.10.128","10.50.10.166","98.87.175.51","98.87.174.97")
+| stats count min(_time) as first_seen max(_time) as last_seen by dstaddr dstport
+| convert ctime(first_seen) ctime(last_seen)

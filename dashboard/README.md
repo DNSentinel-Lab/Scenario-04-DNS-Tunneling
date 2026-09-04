@@ -32,6 +32,10 @@ The dashboard was built after the DNS feature fields were stable. It is an **inv
 | DNS Behavior Window Summary | Which client/parent windows need review? |
 | Raw DNS Investigation | Which exact Unbound events support the summary? |
 
+## Official SOC use
+
+Lubaba used this frozen investigation surface during the official information-separated case. The dashboard supported triage and raw-event pivots, but the final disposition still came from the analyst's independent evidence review.
+
 ## Exported implementation
 
 - [`scenario-04-dns-tunneling-investigation-dashboard.json`](scenario-04-dns-tunneling-investigation-dashboard.json) — final Dashboard Studio source.
@@ -43,7 +47,7 @@ The first exported JSON revealed that **Query Type Mix** and **Response Code Mix
 
 That review mattered because a dashboard can display technically valid data beneath the wrong title. The final export was therefore checked as configuration, not only as a screenshot.
 
-> Response-verification panels are intentionally not present yet. They will be added only after the official IR phase actually performs or declines containment.
+> The dashboard remained frozen during the official SOC case. IR response proof is documented in the IR workspace rather than retrofitted into the already-frozen analyst dashboard.
 
 <div align="center">
 

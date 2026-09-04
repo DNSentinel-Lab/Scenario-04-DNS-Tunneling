@@ -1,0 +1,4 @@
+index=dns_soc_dns host=dns-soc-resolver01 sourcetype=unbound:dns earliest=-15m
+"ir-verify-03.tunnel.soclab.abdul4rehman215.tech"
+| table _time _raw
+| sort _time

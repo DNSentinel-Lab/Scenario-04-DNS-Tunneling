@@ -1,0 +1,7 @@
+index=dns_soc_dns host=dns-soc-resolver01 sourcetype=unbound:dns event_type=query
+| eval qname_normalized=lower(rtrim(qname,"."))
+| where like(qname_normalized, "%.tunnel.soclab.abdul4rehman215.tech")
+| eval first_label=mvindex(split(qname_normalized,"."),0)
+| eval first_label_length=len(first_label)
+| table _time client_ip qname first_label first_label_length qtype
+| sort 0 _time

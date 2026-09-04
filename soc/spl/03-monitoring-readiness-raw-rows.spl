@@ -1,0 +1,4 @@
+index=dns_soc_dns host=dns-soc-resolver01 sourcetype=unbound:dns
+| sort - _time
+| head 20
+| table _time event_type client_ip qname qtype rcode response_time cache_flag response_size

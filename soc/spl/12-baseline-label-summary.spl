@@ -1,0 +1,6 @@
+index=dns_soc_dns host=dns-soc-resolver01 sourcetype=unbound:dns event_type=query client_ip=10.50.30.20
+| eval qname_normalized=lower(rtrim(qname,"."))
+| where NOT like(qname_normalized, "%.tunnel.soclab.abdul4rehman215.tech")
+| eval first_label=mvindex(split(qname_normalized,"."),0)
+| eval first_label_length=len(first_label)
+| stats count as normal_queries dc(qname_normalized) as normal_unique_qnames avg(first_label_length) as avg_first_label_length perc95(first_label_length) as p95_first_label_length max(first_label_length) as max_first_label_length count(eval(first_label_length>16)) as normal_long_label_count

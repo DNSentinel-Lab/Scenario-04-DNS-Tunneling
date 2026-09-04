@@ -1,19 +1,19 @@
 <a id="top"></a>
 # Scenario 04 — DNS Tunneling Runbook
 
-**Scenario status:** 🟢 Detection Engineering complete / official exercise next  
+**Scenario status:** 🟢 **Complete / evidence-backed closeout**  
 **Detection Engineer / AI Integrator:** [Abdul-Rehman](https://github.com/abdul4rehman215)  
-**Project Lead / Simulation:** [Sonia](https://github.com/sonia11mansha415)  
-**SOC Analyst / Hunter:** [Lubaba](https://github.com/lubaba1513-pixel)  
+**Project Lead / Private Exercise Operator:** [Sonia](https://github.com/sonia11mansha415)  
+**SOC Analyst / Threat Hunter:** [Lubaba](https://github.com/lubaba1513-pixel)  
 **IR / Defender:** [Musfira](https://github.com/MUSFIRA-ZAFAR)
 
-This runbook separates what has already been engineered from what must still happen during the information-separated Scenario 04 exercise.
+This runbook records the final state after engineering, official execution, SOC investigation, Incident Response, containment verification, safe reset and ground-truth comparison.
 
-## 1. Objective — ✅ Ready
+## 1. Objective — ✅ Complete
 
-Generate controlled, synthetic DNS tunneling-like behavior and determine whether the frozen Detection v1.0, AI assistance, human SOC investigation and IR response can explain and change the observed behavior without overstating attribution.
+Generate one controlled DNS tunneling-like session and determine whether the frozen detection, AI assistance, human SOC investigation and IR response can explain and change the observed behavior without overstating attribution.
 
-## 2. Architecture — ✅ Ready
+## 2. Architecture — ✅ Validated end to end
 
 ```text
 dns-soc-victim01 10.50.30.20
@@ -27,24 +27,38 @@ dns-tunnel-auth01 10.60.10.30 / BIND authoritative-only
 tunnel.soclab.abdul4rehman215.tech
 ```
 
-Shared sinkhole path remains available at `10.50.30.30` for later human-approved RPZ containment.
+Approved response path:
 
-## 3. Prerequisites — ✅ Ready
+```text
+Victim → Unbound RPZ → 10.50.30.30 sinkhole
+```
 
-- Scenario 04 authoritative DNS infrastructure complete.
-- Victim uses `10.50.30.10` as resolver.
-- `dns_soc_dns` Unbound telemetry validated.
+## 3. Prerequisites — ✅ Complete
+
+- Scenario 04 BIND/Route 53 infrastructure complete.
+- Victim resolver path validated.
+- Unbound DNS telemetry validated.
 - Detection v1.0 frozen.
-- Dashboard Studio export validated.
-- Scheduled alert and suppression validated.
-- Scenario AI profile/bridge round trip validated.
-- Public address/delegation for `dns-tunnel-auth01` must still be checked before the official run because the public IPv4 is not an Elastic IP.
+- Dashboard Studio validated.
+- Scheduled alert validated.
+- `dns_tunneling_v1` AI path validated.
+- RPZ/sinkhole started from a safe/non-enforcing state.
 
-## 4. Official Adversary Activity / Simulation — ⏳ Pending
+## 4. Official Operator Activity — ✅ Complete
 
 Owner: **Sonia**.
 
-The official run must use synthetic, non-sensitive data only and preserve private ground truth separately from the defender roles. Detection Engineering validation traffic is not the official exercise.
+The finite lab-only client generated seven Base32-derived DNS-safe child labels and issued ordinary A lookups through `dns-soc-victim01`'s normal resolver. The one-time run was preserved rather than repeated after it occurred during review.
+
+Authoritative BIND receipt:
+
+```text
+first: 2026-09-02 16:37:19.219 UTC
+last:  2026-09-02 16:37:31.375 UTC
+seven distinct qnames
+```
+
+See [`attacker/`](attacker/).
 
 ## 5. Telemetry — ✅ Validated
 
@@ -56,13 +70,20 @@ host=dns-soc-resolver01
 sourcetype=unbound:dns
 ```
 
-Validated fields include `event_type`, `client_ip`, `qname`, `qtype`, `rcode`, `response_time`, `cache_flag`, `response_size`.
+Behavior counting used `event_type="query"`; reply events supplied RCODE/response context.
 
-Behavior counting uses `event_type="query"` so Unbound query/reply pairs do not double-count a single DNS transaction.
+Official suspicious window:
+
+```text
+7 queries
+7 replies
+NOERROR
+A
+10.50.30.20
+~12 seconds
+```
 
 ## 6. Detection — ✅ Complete / v1.0 Frozen
-
-Frozen conditions:
 
 ```text
 unique_child_labels >= 5
@@ -70,9 +91,13 @@ AND long_label_count >= 5
 AND max_first_label_length > 16
 ```
 
-The rule groups the same client + parent domain into one-minute windows and looks for fresh long child labels. Thresholds came from the clean Scenario 04 baseline and controlled testing.
+Official result:
 
-Known limitation: low-and-slow tunneling-like behavior designed to stay inside normal label/uniqueness behavior may evade v1.0.
+```text
+7 / 7 / 27 → PASS
+```
+
+No live tuning was performed during the official exercise.
 
 ## 7. SPL / Detection Logic — ✅ Complete
 
@@ -81,8 +106,10 @@ Known limitation: low-and-slow tunneling-like behavior designed to stay inside n
 - [`spl/detection.spl`](spl/detection.spl)
 - [`spl/validation.spl`](spl/validation.spl)
 - supporting engineering searches under [`spl/supporting/`](spl/supporting/)
+- official SOC searches under [`soc/spl/`](soc/spl/)
+- official IR searches under [`ir/spl/`](ir/spl/)
 
-## 8. Alert — ✅ Complete
+## 8. Alert — ✅ Fired / validated
 
 ```text
 Scenario 04 - Possible DNS Tunneling Behavior
@@ -95,116 +122,130 @@ Severity: Medium
 Actions: Triggered Alerts + shared AI webhook
 ```
 
-The scheduled result exposes one analyst-ready row per client/parent/window and keeps a raw-event investigation path.
+Official trigger: `2026-09-02 16:39:01 UTC`.
 
-## 9. AI Triage — ✅ Engineering Integration Validated
-
-Scenario profile:
+## 9. AI Triage — ✅ Official use validated
 
 ```text
 scenario_id = scenario-04-dns-tunneling
 ai_profile  = dns_tunneling_v1
 ```
 
-The shared bridge returned Scenario 04 analysis to `index=dns_soc_ai`. AI statements were compared with source evidence and `human_validation_required=true` remained preserved.
+Official AI event processed at `2026-09-02 16:39:21.727239 UTC`.
 
-Official SOC disposition is still a human task.
+Lubaba formed her human hypothesis first, then validated the AI claims against raw evidence and rated the result **CORRECT**. `human_validation_required=true` remained preserved.
 
-## 10. SOC Analysis — ⏳ Pending
+## 10. SOC Analysis — ✅ Complete
 
 Owner: **Lubaba**.
 
-The SOC Analyst must investigate independently from the frozen alert, dashboard, raw resolver telemetry and AI context. Do not reveal Sonia's private operator ground truth before disposition is locked.
+SOC independently validated:
 
-## 11. Incident Response — ⏳ Pending
+- 7 unique query qnames / child labels;
+- 7 long labels;
+- max first-label length 27;
+- 7 NOERROR replies;
+- measured baseline including legitimate long AWS labels;
+- zero non-Scenario-04 matches to the full frozen rule;
+- one client / one parent / one one-minute suspicious window;
+- no second matching window in the reviewed period.
+
+Final disposition:
+
+> **INCONCLUSIVE — ESCALATION WARRANTED / High confidence**
+
+See [`soc/SOC-ANALYST-INVESTIGATION.md`](soc/SOC-ANALYST-INVESTIGATION.md).
+
+## 11. Incident Response — ✅ Complete
 
 Owner: **Musfira**.
 
-IR independently validates the SOC handoff and decides whether a narrow RPZ/sinkhole response is justified. AI or alert severity does not authorize containment.
+IR independently reproduced the DNS evidence, found no victim endpoint telemetry suitable for process/user attribution, checked VPC Flow/CloudTrail context, rejected unsupported causal attribution of post-DNS HTTPS flows, and found no recurrence of the frozen pattern.
 
-## 12. Evidence — ✅ Detection Engineering Evidence Complete / Official Evidence Pending
+Final IR context after authorization was established:
 
-Detection Engineering proof is curated under:
+> **AUTHORIZED CONTROLLED EXERCISE ACTIVITY — NO REAL-WORLD COMPROMISE CLAIMED. CONTROLLED CONTAINMENT VALIDATED.**
 
-- [`screenshots/detection-engineering/`](screenshots/detection-engineering/)
-- [`evidence/detection-engineering/`](evidence/detection-engineering/)
-- [`detection-engineering/detection-engineering-validation.md`](detection-engineering/detection-engineering-validation.md)
+See [`ir/INCIDENT-RESPONSE.md`](ir/INCIDENT-RESPONSE.md).
 
-Official simulation/SOC/IR evidence will be added later without rewriting the frozen engineering record.
+## 12. Evidence — ✅ Complete
 
-## 13. Containment — ⏳ Pending
+Cross-role evidence is indexed in [`evidence/README.md`](evidence/README.md).
 
-Potential approved path if evidence justifies it:
+Role-owned proof remains with the role that produced it:
+
+- Detection Engineering — [`screenshots/detection-engineering/`](screenshots/detection-engineering/)
+- Operator — [`screenshots/attacker/`](screenshots/attacker/)
+- SOC — [`soc/evidence/`](soc/evidence/)
+- IR — [`ir/evidence/`](ir/evidence/)
+
+## 13. Containment — ✅ Human-approved / validated
+
+Temporary Scenario 04 RPZ scope:
 
 ```text
-Victim → Unbound RPZ → 10.50.30.30 sinkhole
+*.tunnel.soclab.abdul4rehman215.tech A 10.50.30.30
 ```
 
-Do not activate this as official containment before the IR decision.
+The victim returned `10.50.30.30`, and Splunk recorded `rpz: applied [dns-soc-rpz]`.
 
-## 14. Verification — ⏳ Pending
+## 14. Verification — ✅ Complete
 
-If containment occurs, prove:
+IR proved:
 
-- fresh tunnel names no longer follow the original authoritative path;
-- sinkhole evidence appears where expected;
-- normal DNS still works;
-- the environment is safely reset afterward.
+- victim-side sinkhole answer;
+- resolver-side RPZ runtime evidence;
+- recovery from a failed configuration experiment;
+- safe restoration of the pre-change RPZ state;
+- normal authoritative resolution after reset.
 
-If IR decides not to contain, verify and document that decision instead of fabricating a containment result.
+## 15. Results — ✅ Complete
 
-## 15. Results — Detection Engineering Complete / Full Scenario Pending
+> **SCENARIO 04 — COMPLETE / EVIDENCE-BACKED CLOSEOUT**
 
-Engineering result:
+The final cross-role story is in [`SCENARIO-04-EXECUTION.md`](SCENARIO-04-EXECUTION.md) and [`exercise/final-comparison.md`](exercise/final-comparison.md).
 
-**SCENARIO 04 DETECTION ENGINEERING = COMPLETE / SOC-READY**
-
-Full scenario result remains pending.
-
-## 16. MITRE ATT&CK — ✅ Engineering Mapping Frozen
+## 16. MITRE ATT&CK — ✅ Final mapping
 
 Primary: `T1071.004 — Application Layer Protocol: DNS`.
 
-`T1572` is not claimed in the engineering phase because the implemented validation did not prove a separate encapsulated protocol channel.
+`T1572` is not claimed because the implemented case did not establish a separate encapsulated protocol channel.
 
-## 17. False Positives — ✅ Engineering Challenge Complete
+## 17. False Positives — ✅ Engineering + live investigation validated
 
-A repeated long child label was queried 12 times. It looked long and repetitive but produced only one unique child and did not create a new detection row. This validated that long labels and query volume alone are insufficient.
+Engineering already proved that a repeated long label alone did not satisfy the rule. During the official SOC case, legitimate AWS traffic also demonstrated that long labels can be normal. No non-Scenario-04 parent reproduced the full combined one-minute rule in the reviewed dataset.
 
-## 18. Lessons Learned — ✅ Detection Engineering Lessons Complete
+## 18. Lessons Learned — ✅ Complete
 
-See [`detection-engineering/TROUBLESHOOTING-AND-LESSONS.md`](detection-engineering/TROUBLESHOOTING-AND-LESSONS.md).
+- Detection Engineering: [`detection-engineering/TROUBLESHOOTING-AND-LESSONS.md`](detection-engineering/TROUBLESHOOTING-AND-LESSONS.md)
+- Operator: [`attacker/LEARNING-JOURNEY.md`](attacker/LEARNING-JOURNEY.md)
+- SOC: [`soc/TROUBLESHOOTING-NOTES.md`](soc/TROUBLESHOOTING-NOTES.md)
+- IR: [`ir/LESSONS-LEARNED.md`](ir/LESSONS-LEARNED.md)
 
-## 19. Reproduction — Detection Engineering Path Documented
-
-Use this order:
+## 19. Reproduction — ✅ Documented
 
 ```text
-pre-flight
-→ field validation
-→ timing
-→ clean baseline
-→ feature hunt
-→ dashboard
-→ controlled positive
-→ benign challenge
-→ detection v1.0
-→ scheduled alert
-→ raw drilldown
-→ AI validation
-→ freeze
+infrastructure
+→ frozen detection
+→ finite operator session
+→ production alert
+→ SOC raw-evidence investigation
+→ SOC→IR handoff
+→ independent IR validation
+→ human-approved RPZ
+→ containment proof
+→ safe reset
+→ ground-truth comparison
 ```
 
-Shell helpers are preserved under [`detection-engineering/commands/`](detection-engineering/commands/).
+## 20. Screenshots — ✅ Curated
 
-## 20. Screenshots — ✅ Detection Engineering Set Curated
+Visual evidence is organized by role and indexed in [`screenshots/README.md`](screenshots/README.md) and [`evidence/README.md`](evidence/README.md).
 
-The 14-image engineering evidence set is indexed in [`screenshots/README.md`](screenshots/README.md). Construction-only screens and minor troubleshooting were intentionally excluded.
+## Final change-control note
 
-## Freeze boundary before the official exercise
-
-Do not change the frozen thresholds, rule logic, scheduled timing, AI evidence contract or dashboard semantics during the official exercise unless a genuine operational failure requires an explicitly recorded emergency correction.
+Detection v1.0, its scheduled timing, Dashboard Studio semantics and AI evidence contract were frozen before the official run and were not rewritten to fit the result. The temporary IR RPZ change was separately applied, verified and reset.
 
 ---
 
-[🏠 Scenario Home](README.md) · [🛠️ Detection Engineering](detection-engineering/DETECTION-ENGINEERING.md) · [🔒 Freeze Record](detection-engineering/FREEZE-RECORD.md) · [⬆ Back to top](#top)
+[🏠 Scenario Home](README.md) · [🎬 Execution](SCENARIO-04-EXECUTION.md) · [🧾 Evidence](evidence/README.md) · [⬆ Back to top](#top)
