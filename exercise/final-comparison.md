@@ -111,17 +111,11 @@ The timeline demonstrates that independent defender telemetry and private author
 
 > Scenario 04 achieved its learning objective. Real DNS behavior traversed the intended architecture, the frozen detector surfaced it, the SOC analyst independently distinguished abnormal behavior from legitimate long-label DNS while preserving attribution limits, AI remained advisory, and IR independently validated the case before proving and safely reversing a narrow RPZ response.
 
-The case is complete without claiming a real-world compromise or data theft that the evidence did not establish.
-
----
-
-[🏠 Scenario Home](../README.md) · [🎬 Execution](../SCENARIO-04-EXECUTION.md) · [🧾 Evidence](../evidence/README.md) · [⬆ Back to top](#top)
-
 <img src="https://user-images.githubusercontent.com/73097560/115834477-dbab4500-a447-11eb-908a-139a6edaec5c.gif" width="100%" alt="section divider" />
 
 <div align="center">
 
-[🏠 Scenario Home](../README.md) · [🎭 Workspace](README.md) · 
+[🏠 Scenario Home](../README.md) · [🎭 Workspace](README.md) · [🎬 Execution](../SCENARIO-04-EXECUTION.md) · [🧾 Evidence](../evidence/README.md) · [⬆ Back to top](#top) · 
 
 **Structure before suspicion. Evidence before attribution. Human approval before containment.**
 
