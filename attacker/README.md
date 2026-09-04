@@ -16,7 +16,7 @@
 
 # 🎯 Scenario 04 Operator Workspace
 
-Sonia generated one finite, controlled tunneling-like DNS pattern from `dns-soc-victim01` while exact operator ground truth remained hidden from SOC and IR until their decisions were complete.
+[**Sonia**](https://github.com/sonia11mansha415) generated one finite, controlled tunneling-like DNS pattern from `dns-soc-victim01` while exact operator ground truth remained hidden from SOC and IR until their decisions were complete.
 
 ## 🚦 Execution Snapshot
 
@@ -37,14 +37,114 @@ Sonia generated one finite, controlled tunneling-like DNS pattern from `dns-soc-
 ## 🔁 Operator Flow
 
 ```mermaid
-flowchart LR
-    A["🔐 Preflight"] --> B["🌐 Resolver Path"]
-    B --> C["🎯 Execute Once"]
-    C --> D["🛰️ Authoritative Receipt"]
-    D --> E["🛑 Client Exit"]
-    E --> F["🧾 Preserve Ground Truth"]
-    F --> G["🔒 Keep Hidden"]
-    G --> H["🎭 Final Reveal"]
+%%{init: {
+  "theme": "base",
+  "themeVariables": {
+    "background": "#030712",
+    "primaryTextColor": "#ffffff",
+    "lineColor": "#f8fafc",
+    "fontSize": "30px"
+  },
+  "flowchart": {
+    "nodeSpacing": 52,
+    "rankSpacing": 62,
+    "curve": "basis",
+    "padding": 20
+  }
+}}%%
+
+flowchart TB
+
+    %% =====================================================
+    %% ROW 1 · EXECUTION
+    %% =====================================================
+    subgraph ROW1[" "]
+        direction LR
+
+        A["🔐 01 · PREFLIGHT"]
+
+        B["🌐 02 · RESOLVER<br/>PATH"]
+
+        C["🎯 03 · EXECUTE<br/>ONCE"]
+
+        D["🛰️ 04 · AUTHORITATIVE<br/>RECEIPT"]
+
+        A ==> B ==> C ==> D
+    end
+
+
+    %% =====================================================
+    %% ROW 2 · PRESERVATION + REVEAL
+    %% =====================================================
+    subgraph ROW2[" "]
+        direction LR
+
+        E["🛑 05 · CLIENT<br/>EXIT"]
+
+        F["🧾 06 · PRESERVE<br/>GROUND TRUTH"]
+
+        G["🔒 07 · KEEP<br/>HIDDEN"]
+
+        H["🎭 08 · FINAL<br/>REVEAL"]
+
+        E ==> F ==> G ==> H
+    end
+
+
+    %% =====================================================
+    %% ROW-TO-ROW HANDOFF
+    %% Keeps Mermaid from stretching into one long line
+    %% =====================================================
+    ROW1 ==> ROW2
+
+
+    %% =====================================================
+    %% PREMIUM NODE COLORS
+    %% =====================================================
+
+    classDef preflight fill:#172554,stroke:#60a5fa,stroke-width:6px,color:#ffffff,font-size:30px,font-weight:bold;
+
+    classDef resolver fill:#075985,stroke:#22d3ee,stroke-width:6px,color:#ffffff,font-size:30px,font-weight:bold;
+
+    classDef execute fill:#4c1d95,stroke:#c084fc,stroke-width:6px,color:#ffffff,font-size:30px,font-weight:bold;
+
+    classDef receipt fill:#713f12,stroke:#fbbf24,stroke-width:6px,color:#ffffff,font-size:30px,font-weight:bold;
+
+    classDef exit fill:#7f1d1d,stroke:#fb7185,stroke-width:6px,color:#ffffff,font-size:30px,font-weight:bold;
+
+    classDef preserve fill:#0f766e,stroke:#5eead4,stroke-width:6px,color:#ffffff,font-size:30px,font-weight:bold;
+
+    classDef hidden fill:#450a0a,stroke:#f87171,stroke-width:6px,color:#ffffff,font-size:30px,font-weight:bold;
+
+    classDef reveal fill:#14532d,stroke:#86efac,stroke-width:7px,color:#ffffff,font-size:32px,font-weight:bold;
+
+
+    %% =====================================================
+    %% APPLY COLORS
+    %% =====================================================
+    class A preflight;
+    class B resolver;
+    class C execute;
+    class D receipt;
+
+    class E exit;
+    class F preserve;
+    class G hidden;
+    class H reveal;
+
+
+    %% =====================================================
+    %% GLOSSY ROW PANELS
+    %% =====================================================
+    style ROW1 fill:#06121f,stroke:#38bdf8,stroke-width:3px
+
+    style ROW2 fill:#0b130d,stroke:#4ade80,stroke-width:3px
+
+
+    %% =====================================================
+    %% THICK BRIGHT CONNECTORS
+    %% =====================================================
+    linkStyle default stroke:#f8fafc,stroke-width:6px;
 ```
 
 ## 🖼️ Operator Evidence Highlights
