@@ -1,0 +1,3 @@
+index=dns_soc_dns host=dns-soc-resolver01 sourcetype=unbound:dns
+| stats count by event_type
+| sort - count

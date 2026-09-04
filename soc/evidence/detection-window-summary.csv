@@ -1,0 +1,2 @@
+record,minute_utc,client_ip,parent_domain,query_count,unique_qnames,unique_child_labels,long_label_count,max_first_label_length,qtypes
+suspicious_window,2026-09-02 16:37:00 UTC,10.50.30.20,tunnel.soclab.abdul4rehman215.tech,7,7,7,7,27,A

@@ -1,0 +1,10 @@
+index=dns_soc_dns host=dns-soc-resolver01 sourcetype=unbound:dns event_type=query client_ip=10.50.30.20
+| eval qname_normalized=lower(rtrim(qname,"."))
+| where NOT like(qname_normalized, "%.tunnel.soclab.abdul4rehman215.tech")
+| eval labels=split(qname_normalized,".")
+| eval first_label=mvindex(labels,0)
+| eval first_label_length=len(first_label)
+| where first_label_length>16
+| eval parent_domain=mvjoin(mvindex(labels,1,-1),".")
+| stats count as query_count dc(qname_normalized) as unique_qnames dc(first_label) as unique_child_labels min(first_label_length) as min_first_label_length max(first_label_length) as max_first_label_length values(qtype) as qtypes values(qname_normalized) as qname_samples by parent_domain
+| sort - unique_child_labels - query_count

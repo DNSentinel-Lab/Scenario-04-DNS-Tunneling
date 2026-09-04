@@ -1,0 +1,2 @@
+client_ip,normal_queries,normal_unique_qnames,avg_first_label_length,p95_first_label_length,max_first_label_length,normal_long_label_count
+10.50.30.20,3236,56,10.316537867078825,16,38,16

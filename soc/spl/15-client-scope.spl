@@ -1,0 +1,6 @@
+index=dns_soc_dns host=dns-soc-resolver01 sourcetype=unbound:dns event_type=query
+| eval qname_normalized=lower(rtrim(qname,"."))
+| where like(qname_normalized, "%.tunnel.soclab.abdul4rehman215.tech")
+| stats count as query_count dc(qname_normalized) as unique_qnames earliest(_time) as first_seen latest(_time) as last_seen values(qtype) as qtypes by client_ip
+| convert ctime(first_seen) ctime(last_seen)
+| sort - query_count

@@ -1,0 +1,4 @@
+index=dns_soc_dns host=dns-soc-resolver01 sourcetype=unbound:dns event_type=query
+| where like(lower(qname), "%.tunnel.soclab.abdul4rehman215.tech")
+| table _time client_ip qname qtype
+| sort 0 _time

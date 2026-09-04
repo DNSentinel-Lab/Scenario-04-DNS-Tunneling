@@ -1,0 +1,10 @@
+time_utc,client_ip,qname,first_label,first_label_length,qtype
+2026-09-02 16:37:19.215,10.50.30.20,s04-01-irhfgrkokreu4rkmebju.tunnel.soclab.abdul4rehman215.tech,s04-01-irhfgrkokreu4rkmebju,27,A
+2026-09-02 16:37:21.243,10.50.30.20,s04-02-grkoifjestzaga2cascb.tunnel.soclab.abdul4rehman215.tech,s04-02-grkoifjestzaga2cascb,27,A
+2026-09-02 16:37:23.278,10.50.30.20,s04-03-kjguyrktkmqfgwkokree.tunnel.soclab.abdul4rehman215.tech,s04-03-kjguyrktkmqfgwkokree,27,A
+2026-09-02 16:37:25.310,10.50.30.20,s04-04-kvcjimeqiquieqemt2s.tunnel.soclab.abdul4rehman215.tech,s04-04-kvcjimeqiquieqemt2s,27,A
+2026-09-02 16:37:27.326,10.50.30.20,s04-05-ebavkvcij5jeswsfiqqe.tunnel.soclab.abdul4rehman215.tech,s04-05-ebavkvcij5jeswsfiqqe,27,A
+2026-09-02 16:37:29.343,10.50.30.20,s04-06-6ucfkjavit2sebkfeqkj.tunnel.soclab.abdul4rehman215.tech,s04-06-6ucfkjavit2sebkfeqkj,27,A
+2026-09-02 16:37:31.370,10.50.30.20,s04-07-jzeu4rzaj5heywi.tunnel.soclab.abdul4rehman215.tech,s04-07-jzeu4rzaj5heywi,22,A
+2026-09-02 16:49:50.201,10.50.30.20,ns1.tunnel.soclab.abdul4rehman215.tech,ns1,3,A
+2026-09-02 16:49:50.201,10.50.30.20,ns1.tunnel.soclab.abdul4rehman215.tech,ns1,3,AAAA

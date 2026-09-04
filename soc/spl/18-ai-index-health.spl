@@ -1,0 +1,3 @@
+index=dns_soc_ai
+| stats count as total_ai_events earliest(_time) as earliest_ai_event latest(_time) as latest_ai_event
+| convert ctime(earliest_ai_event) ctime(latest_ai_event)

@@ -1,0 +1,6 @@
+time_utc,event,evidence_type
+2026-09-02 16:37:19.215675,First suspicious DNS A query,raw Unbound query
+2026-09-02 16:37:31.370200,Last query in suspicious 7-query burst,raw Unbound query
+2026-09-02 16:39:01,Official alert triggered,Splunk Triggered Alerts
+2026-09-02 16:39:21.727239,Scenario 04 AI event processed,dns_soc_ai
+2026-09-02 16:49:50.201643,Later ns1 namespace A/AAAA activity / last namespace query in reviewed period,raw Unbound query

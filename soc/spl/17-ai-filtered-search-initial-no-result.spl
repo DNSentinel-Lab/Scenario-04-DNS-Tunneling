@@ -1,0 +1,5 @@
+index=dns_soc_ai
+scenario_id="scenario-04-dns-tunneling"
+ai_profile="dns_tunneling_v1"
+| sort - _time
+| head 5

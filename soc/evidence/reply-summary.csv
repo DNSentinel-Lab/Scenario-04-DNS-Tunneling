@@ -1,0 +1,2 @@
+client_ip,reply_count,unique_reply_qnames,rcode,qtypes,min_response_time,avg_response_time,max_response_time,cache_flag,min_response_size,max_response_size
+10.50.30.20,7,7,NOERROR,A,0.002073,0.004731142857142857,0.008256,0,91,96

@@ -1,0 +1,3 @@
+index=dns_soc_dns host=dns-soc-resolver01 sourcetype=unbound:dns
+| stats count as total_events earliest(_time) as earliest_event latest(_time) as latest_event
+| convert ctime(earliest_event) ctime(latest_event)
