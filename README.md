@@ -74,25 +74,116 @@ Scenario 04 asks a practical defender question:
 ## 🌐 End-to-End Case Flow
 
 ```mermaid
-flowchart LR
-    V["🖥️ dns-soc-victim01<br/>10.50.30.20"] -->|A queries| R["🛡️ dns-soc-resolver01<br/>10.50.30.10 / Unbound"]
-    R -->|recursive DNS| P["🌍 Public DNS / delegation"]
-    P --> A["🛰️ dns-tunnel-auth01<br/>BIND authoritative"]
-    R --> S["📊 Splunk / dns_soc_dns"]
-    S --> D["🎯 Detection v1.0"]
-    D --> AI["🤖 dns_tunneling_v1"]
-    D --> SOC["🔎 Lubaba / SOC"]
-    SOC --> IR["🛡️ Musfira / IR"]
-    IR -->|approved RPZ| H["🕳️ 10.50.30.30 sinkhole"]
+%%{init: {
+  "theme": "base",
+  "themeVariables": {
+    "background": "#030712",
+    "primaryTextColor": "#ffffff",
+    "lineColor": "#f8fafc",
+    "fontSize": "28px",
+    "edgeLabelBackground": "#111827"
+  },
+  "flowchart": {
+    "nodeSpacing": 40,
+    "rankSpacing": 48,
+    "curve": "basis",
+    "padding": 18
+  }
+}}%%
 
-    classDef dns fill:#083344,stroke:#22d3ee,stroke-width:2px,color:#fff;
-    classDef detect fill:#052e16,stroke:#4ade80,stroke-width:2px,color:#fff;
-    classDef human fill:#172554,stroke:#60a5fa,stroke-width:2px,color:#fff;
-    classDef response fill:#422006,stroke:#f59e0b,stroke-width:2px,color:#fff;
-    class V,R,P,A dns;
-    class S,D,AI detect;
-    class SOC,IR human;
+flowchart LR
+
+    %% =====================================================
+    %% SAME ORIGINAL STRUCTURE
+    %% =====================================================
+    V["🖥️ dns-soc-victim01<br/>10.50.30.20"] -->|"A QUERIES"| R["🛡️ dns-soc-resolver01<br/>10.50.30.10 / Unbound"]
+
+    R -->|"RECURSIVE DNS"| P["🌍 Public DNS / Delegation"]
+
+    P --> A["🛰️ dns-tunnel-auth01<br/>BIND Authoritative"]
+
+    R --> S["📊 Splunk<br/>dns_soc_dns"]
+
+    S --> D["🎯 Detection<br/>v1.0"]
+
+    D --> AI["🤖 dns_tunneling_v1"]
+
+    D --> SOC["🔎 Lubaba<br/>SOC"]
+
+    SOC --> IR["🛡️ Musfira<br/>IR"]
+
+    IR -->|"APPROVED RPZ"| H["🕳️ 10.50.30.30<br/>Sinkhole"]
+
+
+    %% =====================================================
+    %% DNS PATH
+    %% =====================================================
+    classDef victim fill:#172554,stroke:#60a5fa,stroke-width:6px,color:#ffffff,font-size:29px;
+
+    classDef resolver fill:#064e5f,stroke:#22d3ee,stroke-width:7px,color:#ffffff,font-size:29px;
+
+    classDef publicdns fill:#075985,stroke:#38bdf8,stroke-width:6px,color:#ffffff,font-size:29px;
+
+    classDef authoritative fill:#312e81,stroke:#a78bfa,stroke-width:6px,color:#ffffff,font-size:29px;
+
+
+    %% =====================================================
+    %% SPLUNK + DETECTION
+    %% =====================================================
+    classDef splunk fill:#14532d,stroke:#4ade80,stroke-width:7px,color:#ffffff,font-size:29px;
+
+    classDef detection fill:#065f46,stroke:#86efac,stroke-width:7px,color:#ffffff,font-size:30px;
+
+    classDef ai fill:#581c87,stroke:#e879f9,stroke-width:7px,color:#ffffff,font-size:29px;
+
+
+    %% =====================================================
+    %% HUMAN VALIDATION
+    %% =====================================================
+    classDef soc fill:#075985,stroke:#38bdf8,stroke-width:7px,color:#ffffff,font-size:29px;
+
+    classDef ir fill:#312e81,stroke:#818cf8,stroke-width:7px,color:#ffffff,font-size:29px;
+
+
+    %% =====================================================
+    %% RESPONSE
+    %% =====================================================
+    classDef response fill:#78350f,stroke:#fbbf24,stroke-width:8px,color:#ffffff,font-size:30px;
+
+
+    %% =====================================================
+    %% APPLY STYLES
+    %% =====================================================
+    class V victim;
+    class R resolver;
+    class P publicdns;
+    class A authoritative;
+
+    class S splunk;
+    class D detection;
+    class AI ai;
+
+    class SOC soc;
+    class IR ir;
+
     class H response;
+
+
+    %% =====================================================
+    %% COLORED CONNECTORS
+    %% =====================================================
+    linkStyle 0 stroke:#60a5fa,stroke-width:5px;
+    linkStyle 1 stroke:#22d3ee,stroke-width:5px;
+    linkStyle 2 stroke:#a78bfa,stroke-width:5px;
+
+    linkStyle 3 stroke:#4ade80,stroke-width:5px;
+    linkStyle 4 stroke:#86efac,stroke-width:5px;
+
+    linkStyle 5 stroke:#e879f9,stroke-width:5px;
+    linkStyle 6 stroke:#38bdf8,stroke-width:5px;
+    linkStyle 7 stroke:#818cf8,stroke-width:5px;
+
+    linkStyle 8 stroke:#fbbf24,stroke-width:6px;
 ```
 
 The exercise kept private operator ground truth separate from the defender investigation until SOC and IR decisions were locked. That separation is what makes the final comparison meaningful.
