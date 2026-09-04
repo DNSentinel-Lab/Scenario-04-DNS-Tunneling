@@ -1,9 +1,24 @@
 <a id="top"></a>
-# Scenario 04 — Troubleshooting and Engineering Lessons
+
+<img src="https://capsule-render.vercel.app/api?type=soft&color=gradient&customColorList=2,7,12,18,24&height=128&section=header&text=%F0%9F%A7%A0%20Scenario%2004%20%E2%80%94%20Troubleshooting%20and%20Engineering%20Lessons&fontSize=25&fontColor=ffffff&animation=fadeIn&fontAlignY=38&desc=DNSentinel%20Lab%20%C2%B7%20Scenario%2004%20%C2%B7%20DNS%20Tunneling%20%C2%B7%20Detection%20Engineering&descSize=13&descAlignY=68&descColor=14B8A6" width="100%" alt="Scenario 04 — Troubleshooting and Engineering Lessons" />
+
+<div align="center">
+
+![Scenario](https://img.shields.io/badge/Scenario_04-COMPLETE-2EA44F?style=flat-square)
+![Workspace](https://img.shields.io/badge/Workspace-Detection_Engineering-14B8A6?style=flat-square)
+![MITRE](https://img.shields.io/badge/MITRE-T1071.004-E34F26?style=flat-square)
+
+[🏠 Scenario Home](../README.md) · [🧠 Workspace](README.md) · [🧾 Evidence](../evidence/README.md)
+
+</div>
+
+<img src="https://user-images.githubusercontent.com/73097560/115834477-dbab4500-a447-11eb-908a-139a6edaec5c.gif" width="100%" alt="section divider" />
+
+# 🧩 Scenario 04 — Troubleshooting and Engineering Lessons
 
 This page preserves the issues that changed the engineering method or produced a reusable lesson. Minor navigation mistakes, copy/paste problems and the later alert-throttle adjustment are intentionally omitted.
 
-## 1. Aggregate latency looked unhealthy; current events were not
+## 📌 1. Aggregate latency looked unhealthy; current events were not
 
 **Observation:** a 60-minute summary showed median ingestion near 117 seconds and P95 near 500 seconds.
 
@@ -15,7 +30,7 @@ This page preserves the issues that changed the engineering method or produced a
 
 ---
 
-## 2. Unbound query/reply pairs could double the apparent DNS volume
+## 🤖 2. Unbound query/reply pairs could double the apparent DNS volume
 
 **Observation:** the same DNS transaction appeared as separate `query` and `reply` events.
 
@@ -25,7 +40,7 @@ This page preserves the issues that changed the engineering method or produced a
 
 ---
 
-## 3. Pre-flight traffic contaminated the first baseline maximum
+## 📊 3. Pre-flight traffic contaminated the first baseline maximum
 
 **Observation:** Scenario 04 smoke/pre-flight qnames were among the longest names in the 24-hour view and pushed the apparent maximum to 48.
 
@@ -37,7 +52,7 @@ This page preserves the issues that changed the engineering method or produced a
 
 ---
 
-## 4. Whole-qname length was weaker than first-label structure
+## 📌 4. Whole-qname length was weaker than first-label structure
 
 **Observation:** a legitimate Ubuntu service-style qname reached 43 characters even though its first label was short.
 
@@ -47,7 +62,7 @@ This page preserves the issues that changed the engineering method or produced a
 
 ---
 
-## 5. Character/digit ratio looked strong mathematically but weak operationally
+## 📌 5. Character/digit ratio looked strong mathematically but weak operationally
 
 **Observation:** a tiny single-digit label could produce `digit_ratio=1.0` without being suspicious.
 
@@ -57,7 +72,7 @@ This page preserves the issues that changed the engineering method or produced a
 
 ---
 
-## 6. Dashboard labels and datasource bindings needed separate QA
+## 📌 6. Dashboard labels and datasource bindings needed separate QA
 
 **Observation:** the first exported Dashboard Studio JSON connected Query Type Mix and Response Code Mix to each other's data sources even though the searches themselves were valid.
 
@@ -67,7 +82,7 @@ This page preserves the issues that changed the engineering method or produced a
 
 ---
 
-## 7. Analyst-ready output was not automatically AI-schema-ready
+## 🤖 7. Analyst-ready output was not automatically AI-schema-ready
 
 **Observation:** Detection v1.0 already returned good human evidence, but the shared AI bridge expected wrapper fields such as `alert_id`, `scenario` and `evidence_json`.
 
@@ -77,7 +92,7 @@ This page preserves the issues that changed the engineering method or produced a
 
 ---
 
-## The engineering habit behind all seven lessons
+## 💡 The engineering habit behind all seven lessons
 
 The repeated pattern was:
 
@@ -94,3 +109,15 @@ That approach prevented healthy resolver, Splunk and detection components from b
 ---
 
 [🏠 Scenario Home](../README.md) · [🛠️ Engineering Story](DETECTION-ENGINEERING.md) · [⬆ Back to top](#top)
+
+<img src="https://user-images.githubusercontent.com/73097560/115834477-dbab4500-a447-11eb-908a-139a6edaec5c.gif" width="100%" alt="section divider" />
+
+<div align="center">
+
+[🏠 Scenario Home](../README.md) · [🧠 Workspace](README.md) · 
+
+**Structure before suspicion. Evidence before attribution. Human approval before containment.**
+
+</div>
+
+<img src="https://capsule-render.vercel.app/api?type=waving&color=gradient&customColorList=24,20,14,7,2&height=82&section=footer" width="100%" alt="DNSentinel Scenario 04 footer" />

@@ -1,14 +1,20 @@
 <a id="top"></a>
 
-> 🧭 [Scenario 04](../README.md) › **Detection Engineering — From Resolver Telemetry to a Frozen DNS Tunneling Detection**
+<img src="https://capsule-render.vercel.app/api?type=soft&color=gradient&customColorList=2,7,12,18,24&height=154&section=header&text=%F0%9F%A7%A0%20Scenario%2004%20Detection%20Engineering%20%E2%80%94%20From%20Resolver%20Telemetry%20to%20a%20Frozen%20DNS%20Tunneling%20Detection&fontSize=30&fontColor=ffffff&animation=fadeIn&fontAlignY=38&desc=DNSentinel%20Lab%20%C2%B7%20Scenario%2004%20%C2%B7%20DNS%20Tunneling%20%C2%B7%20Detection%20Engineering&descSize=13&descAlignY=68&descColor=14B8A6" width="100%" alt="Scenario 04 Detection Engineering — From Resolver Telemetry to a Frozen DNS Tunneling Detection" />
 
-![Scenario](https://img.shields.io/badge/Scenario_04-Detection_Engineering_Complete-14B8A6?style=flat-square)
-![Engineer](https://img.shields.io/badge/Engineer-Abdul--Rehman-0EA5E9?style=flat-square)
-![Detection](https://img.shields.io/badge/Detection-v1.0-2EA44F?style=flat-square)
+<div align="center">
 
----
+![Scenario](https://img.shields.io/badge/Scenario_04-COMPLETE-2EA44F?style=flat-square)
+![Workspace](https://img.shields.io/badge/Workspace-Detection_Engineering-14B8A6?style=flat-square)
+![MITRE](https://img.shields.io/badge/MITRE-T1071.004-E34F26?style=flat-square)
 
-# Scenario 04 Detection Engineering — From Resolver Telemetry to a Frozen DNS Tunneling Detection
+[🏠 Scenario Home](../README.md) · [🧠 Workspace](README.md) · [🧾 Evidence](../evidence/README.md)
+
+</div>
+
+<img src="https://user-images.githubusercontent.com/73097560/115834477-dbab4500-a447-11eb-908a-139a6edaec5c.gif" width="100%" alt="section divider" />
+
+# 🧠 Scenario 04 Detection Engineering — From Resolver Telemetry to a Frozen DNS Tunneling Detection
 
 **Detection Engineer / AI Integrator:** [Abdul-Rehman](https://github.com/abdul4rehman215)  
 **Scenario:** DNS Tunneling  
@@ -25,7 +31,7 @@ The work is presented as an engineering story rather than a chat transcript: **q
 
 ---
 
-## 1. Engineering finish line
+## 📌 1. Engineering finish line
 
 Abdul-Rehman's task was not complete when one SPL search returned a row. The phase was accepted only after this chain worked:
 
@@ -54,13 +60,13 @@ This finish line matters because a detection that cannot be explained, validated
 
 ---
 
-## 2. Start with the resolver, not assumptions
+## 🌐 2. Start with the resolver, not assumptions
 
-### Question
+### 📌 Question
 
 What does the defender actually see when the victim makes DNS requests through the Scenario 04 path?
 
-### What Abdul-Rehman validated
+### 📌 What Abdul-Rehman validated
 
 The live path remained:
 
@@ -101,7 +107,7 @@ response_size
 
 *Live Unbound telemetry confirmed the real victim identity, resolver source and extracted DNS fields before detection logic was written.*
 
-### The event-model detail that changed the counting logic
+### 🤖 The event-model detail that changed the counting logic
 
 Unbound records separate `query` and `reply` events. A careless count would make one DNS transaction look like two requests.
 
@@ -113,15 +119,15 @@ event_type="query"
 
 for baseline, hunting and production behavior counting. Reply rows remained valuable for response context such as `rcode`, response time and response size.
 
-### Lesson
+### 💡 Lesson
 
 **Understand the telemetry model before you trust a count.** SIEM records can be accurate and still require semantic interpretation.
 
 ---
 
-## 3. Measure ingestion before choosing alert timing
+## 🚨 3. Measure ingestion before choosing alert timing
 
-### Question
+### 📌 Question
 
 How late can resolver events arrive in Splunk, and what search window should a scheduled rule use?
 
@@ -140,7 +146,7 @@ A 60-minute sample initially produced:
 
 *The first aggregate view looked slow enough to question the pipeline, so the distribution was investigated instead of immediately changing the architecture.*
 
-### What changed after event-level inspection
+### 📌 What changed after event-level inspection
 
 The newest DNS events were arriving in approximately **0.03–0.8 seconds**. The much larger median/P95/max values came from older delayed/backlogged events inside the same time range.
 
@@ -151,19 +157,19 @@ current pipeline → healthy / near real-time
 historical sample → contains delayed backlog/outliers
 ```
 
-### Engineering decision
+### 📌 Engineering decision
 
 Do not rewrite the working resolver or detection. Use a conservative scheduled lookback that can tolerate delayed delivery while still avoiding a still-forming minute.
 
-### Lesson
+### 💡 Lesson
 
 **A summary metric can hide a healthy current system.** Inspect the underlying events before turning a historical outlier into an infrastructure change.
 
 ---
 
-## 4. Build a baseline — then clean the baseline
+## 📊 4. Build a baseline — then clean the baseline
 
-### First baseline
+### 📊 First baseline
 
 The initial 24-hour victim view showed:
 
@@ -177,13 +183,13 @@ The initial 24-hour victim view showed:
 
 At first, a maximum of 48 looked important.
 
-### The baseline problem
+### 📊 The baseline problem
 
 When the longest names were inspected, the top results included Scenario 04 pre-flight and smoke-test names. Engineering traffic had contaminated the normal baseline.
 
 Abdul-Rehman separated the controlled tunnel namespace from clean normal DNS instead of quietly accepting those test names as normal behavior.
 
-### Clean normal profile
+### 📌 Clean normal profile
 
 | Measurement | Clean result |
 |---|---:|
@@ -206,7 +212,7 @@ Normal short-window analysis also showed:
 
 *The baseline was treated as an engineering dataset rather than a magic number: known validation traffic was separated before thresholds were chosen.*
 
-### What the baseline ruled out
+### 📊 What the baseline ruled out
 
 ```text
 whole qname > 40     → too weak
@@ -216,13 +222,13 @@ A/AAAA/SRV presence  → context only
 
 A legitimate service-style qname could reach 43 characters simply because it contained several normal labels.
 
-### Lesson
+### 💡 Lesson
 
 **Your own test traffic can corrupt your baseline.** Clean known engineering activity before using baseline maxima to define suspicious behavior.
 
 ---
 
-## 5. Engineer features that match DNS tunneling-like structure
+## 📌 5. Engineer features that match DNS tunneling-like structure
 
 The baseline moved the analysis away from whole-FQDN length and toward the child label where synthetic tunnel-like content would appear.
 
@@ -246,7 +252,7 @@ Character/digit mix was explored but stayed supporting context. A single-digit N
 
 *Threshold-free hunting compared first-label length, parent concentration and child uniqueness before the production rule had any fixed threshold.*
 
-### Stronger hypothesis
+### 📌 Stronger hypothesis
 
 ```text
 same client
@@ -262,13 +268,13 @@ child labels longer than the measured clean-normal first-label maximum
 possible DNS tunneling-like behavior
 ```
 
-### Lesson
+### 💡 Lesson
 
 **Feature engineering should match the protocol behavior you are trying to explain.** In this environment, first-label structure was more useful than whole-qname length alone.
 
 ---
 
-## 6. Build the analyst surface before freezing the alert
+## 🚨 6. Build the analyst surface before freezing the alert
 
 Abdul-Rehman built **Scenario 04 — DNS Tunneling Investigation** in Splunk Dashboard Studio.
 
@@ -290,19 +296,19 @@ The dashboard contains 11 purposeful views:
 
 The exact export is preserved in [`../dashboard/scenario-04-dns-tunneling-investigation-dashboard.json`](../dashboard/scenario-04-dns-tunneling-investigation-dashboard.json).
 
-### A dashboard QA issue that was worth keeping
+### 📌 A dashboard QA issue that was worth keeping
 
 The first exported JSON connected **Query Type Mix** and **Response Code Mix** to each other's data sources. The searches themselves were correct; the visualization bindings were not.
 
 Abdul-Rehman corrected the mappings and re-exported the final dashboard.
 
-### Lesson
+### 💡 Lesson
 
 **A dashboard can show valid data under the wrong label.** Audit datasource bindings as well as the visual appearance before freezing an analyst surface.
 
 ---
 
-## 7. Positive validation — make the rule see the intended behavior
+## ✅ 7. Positive validation — make the rule see the intended behavior
 
 A small Detection Engineering sample generated 12 synthetic/non-sensitive child labels using random 32-hex-character first labels under the controlled Scenario 04 zone.
 
@@ -325,7 +331,7 @@ Crossing the boundary was useful because the candidate still had to recognize th
 
 ---
 
-## 8. Benign challenge — prove that “long” is not enough
+## 📌 8. Benign challenge — prove that “long” is not enough
 
 A second validation repeatedly queried one fixed long child label 12 times.
 
@@ -351,7 +357,7 @@ fresh long children + parent concentration = stronger signal
 
 ---
 
-## 9. Freeze Detection v1.0 from measured evidence
+## 🧾 9. Freeze Detection v1.0 from measured evidence
 
 The final conditions became:
 
@@ -363,7 +369,7 @@ AND max_first_label_length > 16
 
 where `long_label_count` counts first labels with `first_label_length > 16`.
 
-### Why these values exist
+### 📌 Why these values exist
 
 - normal parent/window unique-child behavior reached **4**;
 - clean normal first-label maximum was **16**;
@@ -391,7 +397,7 @@ Human validation required: true
 
 ---
 
-## 10. Turn the rule into analyst-ready evidence
+## 🧾 10. Turn the rule into analyst-ready evidence
 
 The production result returns one concise row per client/parent/window rather than flooding the analyst with raw events.
 
@@ -432,7 +438,7 @@ evidence_json
 
 *The scheduled result compresses the behavior into a usable case lead without removing the evidence needed for verification.*
 
-### Raw evidence stays one pivot away
+### 🧾 Raw evidence stays one pivot away
 
 ![Raw event drilldown](../screenshots/detection-engineering/12-raw-event-drilldown.png)
 
@@ -447,7 +453,7 @@ raw DNS → which exact events prove it?
 
 ---
 
-## 11. Productionize it as a scheduled alert
+## 🚨 11. Productionize it as a scheduled alert
 
 Final configuration:
 
@@ -470,7 +476,7 @@ Actions:
 
 *Splunk's scheduler independently executed the frozen search and produced the operational alert rather than relying on a manual Search & Reporting run.*
 
-### Why the window is wider than the current sub-second ingest
+### 📌 Why the window is wider than the current sub-second ingest
 
 The timing sample contained historical delayed/backlogged events reaching roughly 8–9 minutes. The 10-minute lookback tolerates that risk, while `latest=-1m@m` avoids evaluating a minute that is still being formed.
 
@@ -478,7 +484,7 @@ The 10-minute suppression was also validated so the same evidence would not be p
 
 ---
 
-## 12. Extend the evidence contract to the shared AI bridge
+## 🧾 12. Extend the evidence contract to the shared AI bridge
 
 The detection was already useful to a human, but the shared bridge needed wrapper fields such as `alert_id`, `scenario` and `evidence_json`.
 
@@ -506,7 +512,7 @@ scheduled alert
 
 *The Scenario 04 AI event returned to Splunk through the shared bridge and HEC path.*
 
-### AI vs evidence validation
+### 🧾 AI vs evidence validation
 
 The returned AI event was compared with the scheduled detection evidence.
 
@@ -525,13 +531,13 @@ For the evaluated alert, the source evidence showed:
 
 `human_validation_required=true` remained preserved.
 
-### Lesson
+### 💡 Lesson
 
 **Transport success and schema success are different layers.** Fix a payload-contract problem at the contract boundary; do not change known-good detection logic to compensate for it.
 
 ---
 
-## 13. What Abdul-Rehman deliberately did not put into v1.0
+## 📌 13. What Abdul-Rehman deliberately did not put into v1.0
 
 Several tempting signals were kept out of the final decision because the measured data did not justify them as mandatory conditions:
 
@@ -547,7 +553,7 @@ That keeps the rule behavior-based rather than test-specific.
 
 ---
 
-## 14. Known limitation
+## 📌 14. Known limitation
 
 Detection v1.0 is intentionally explainable and narrow. A deliberately low-and-slow tunneling-like channel that stays inside normal child-label length, unique-child count and short-window behavior may evade this version.
 
@@ -563,7 +569,7 @@ Those are investigation questions, not detection fields.
 
 ---
 
-## 15. Engineering reflection
+## 📌 15. Engineering reflection
 
 The most useful parts of this assignment were the moments where an apparently obvious answer turned out to be incomplete.
 
@@ -575,7 +581,7 @@ By the end of the phase, the work was no longer just SPL. It connected DNS seman
 
 ---
 
-## 16. Final state and freeze boundary
+## 🏁 16. Final state and freeze boundary
 
 **SCENARIO 04 DETECTION ENGINEERING = COMPLETE / SOC-READY**
 
@@ -588,7 +594,7 @@ Frozen artifacts include:
 - [`FREEZE-RECORD.md`](FREEZE-RECORD.md) — operational/change-control record;
 - [`detection-engineering-validation.md`](detection-engineering-validation.md) — acceptance matrix.
 
-### What happened next
+### 📌 What happened next
 
 The frozen engineering artifacts were carried unchanged into the official exercise. Sonia generated one finite DNS session; Detection v1.0 fired; Lubaba independently reproduced the behavior, challenged it against baseline and escalated with attribution limits; Musfira independently validated the handoff, proved a scoped RPZ response and restored the resolver safely.
 
@@ -597,3 +603,15 @@ The engineering record remains frozen; official execution evidence is documented
 ---
 
 [🏠 Scenario Home](../README.md) · [✅ Validation](detection-engineering-validation.md) · [🔒 Freeze Record](FREEZE-RECORD.md) · [🧠 Lessons](TROUBLESHOOTING-AND-LESSONS.md) · [⬆ Back to top](#top)
+
+<img src="https://user-images.githubusercontent.com/73097560/115834477-dbab4500-a447-11eb-908a-139a6edaec5c.gif" width="100%" alt="section divider" />
+
+<div align="center">
+
+[🏠 Scenario Home](../README.md) · [🧠 Workspace](README.md) · 
+
+**Structure before suspicion. Evidence before attribution. Human approval before containment.**
+
+</div>
+
+<img src="https://capsule-render.vercel.app/api?type=waving&color=gradient&customColorList=24,20,14,7,2&height=82&section=footer" width="100%" alt="DNSentinel Scenario 04 footer" />
