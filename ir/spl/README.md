@@ -19,15 +19,112 @@
 These searches support **independent validation** of the SOC handoff, network/change context, recurrence and containment proof.
 
 ```mermaid
-flowchart LR
-    A["🖥️ Endpoint Check"] --> B["🗂️ Data Sources"]
-    B --> C["📡 DNS Validation"]
-    C --> D["🌐 VPC Flow"]
-    D --> E["🔗 Post-Burst HTTPS"]
-    E --> F["📊 Pre-Burst Baseline"]
-    F --> G["☁️ CloudTrail"]
-    G --> H["🔁 Recurrence"]
-    H --> I["✅ Containment Proof"]
+%%{init: {
+  "theme": "base",
+  "themeVariables": {
+    "background": "#030712",
+    "primaryTextColor": "#ffffff",
+    "lineColor": "#f8fafc",
+    "fontSize": "32px"
+  },
+  "flowchart": {
+    "nodeSpacing": 50,
+    "rankSpacing": 60,
+    "curve": "basis",
+    "padding": 20
+  }
+}}%%
+
+flowchart TB
+
+    %% =====================================================
+    %% ROW 1 · EVIDENCE COLLECTION
+    %% =====================================================
+    subgraph ROW1[" "]
+        direction LR
+
+        A["🖥️ 01 · ENDPOINT<br/>CHECK"]
+
+        B["🗂️ 02 · DATA<br/>SOURCES"]
+
+        C["📡 03 · DNS<br/>VALIDATION"]
+
+        D["🌐 04 · VPC<br/>FLOW"]
+
+        A ==> B ==> C ==> D
+    end
+
+
+    %% =====================================================
+    %% ROW 2 · CORRELATION + PROOF
+    %% =====================================================
+    subgraph ROW2[" "]
+        direction LR
+
+        E["🔗 05 · POST-BURST<br/>HTTPS"]
+
+        F["📊 06 · PRE-BURST<br/>BASELINE"]
+
+        G["☁️ 07–08 · CLOUD CONTEXT<br/>CloudTrail<br/>+ Recurrence"]
+
+        H["✅ 09 · CONTAINMENT<br/>PROOF"]
+
+        E ==> F ==> G ==> H
+    end
+
+
+    %% =====================================================
+    %% ROW HANDOFF
+    %% =====================================================
+    ROW1 ==> ROW2
+
+
+    %% =====================================================
+    %% PREMIUM GLOSSY COLORS
+    %% =====================================================
+    classDef endpoint fill:#172554,stroke:#60a5fa,stroke-width:6px,color:#ffffff,font-size:32px,font-weight:bold;
+
+    classDef sources fill:#4c1d95,stroke:#c084fc,stroke-width:6px,color:#ffffff,font-size:32px,font-weight:bold;
+
+    classDef dns fill:#075985,stroke:#22d3ee,stroke-width:6px,color:#ffffff,font-size:32px,font-weight:bold;
+
+    classDef flow fill:#0f766e,stroke:#5eead4,stroke-width:6px,color:#ffffff,font-size:32px,font-weight:bold;
+
+    classDef https fill:#7c2d12,stroke:#fb923c,stroke-width:6px,color:#ffffff,font-size:32px,font-weight:bold;
+
+    classDef baseline fill:#713f12,stroke:#fbbf24,stroke-width:6px,color:#ffffff,font-size:32px,font-weight:bold;
+
+    classDef cloud fill:#312e81,stroke:#a78bfa,stroke-width:6px,color:#ffffff,font-size:31px,font-weight:bold;
+
+    classDef proof fill:#14532d,stroke:#86efac,stroke-width:7px,color:#ffffff,font-size:34px,font-weight:bold;
+
+
+    %% =====================================================
+    %% APPLY COLORS
+    %% =====================================================
+    class A endpoint;
+    class B sources;
+    class C dns;
+    class D flow;
+
+    class E https;
+    class F baseline;
+    class G cloud;
+    class H proof;
+
+
+    %% =====================================================
+    %% GLOSSY PANELS
+    %% =====================================================
+    style ROW1 fill:#06131d,stroke:#22d3ee,stroke-width:3px
+
+    style ROW2 fill:#0b100d,stroke:#4ade80,stroke-width:3px
+
+
+    %% =====================================================
+    %% BRIGHT CONNECTORS
+    %% =====================================================
+    linkStyle default stroke:#f8fafc,stroke-width:6px;
 ```
 
 | Search | Purpose |
