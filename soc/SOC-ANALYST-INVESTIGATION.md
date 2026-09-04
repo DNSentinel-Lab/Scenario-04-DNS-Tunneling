@@ -1,18 +1,24 @@
 <a id="top"></a>
 
-> 🧭 [Scenario 04](../README.md) › [SOC](README.md) › **SOC Analyst Investigation — Lubaba**
+<img src="https://capsule-render.vercel.app/api?type=soft&color=gradient&customColorList=7,12,18,24,28&height=154&section=header&text=%F0%9F%94%8E%20SOC%20Analyst%20Investigation%20%E2%80%94%20Lubaba&fontSize=30&fontColor=ffffff&animation=fadeIn&fontAlignY=38&desc=DNSentinel%20Lab%20%C2%B7%20Scenario%2004%20%C2%B7%20DNS%20Tunneling%20%C2%B7%20SOC%20%2F%20Threat%20Hunting&descSize=13&descAlignY=68&descColor=22D3EE" width="100%" alt="SOC Analyst Investigation — Lubaba" />
 
 <div align="center">
 
-![Scenario](https://img.shields.io/badge/Scenario_04-COMPLETE-2EA44F?style=flat-square) ![Analyst](https://img.shields.io/badge/SOC_Analyst-Lubaba-22D3EE?style=flat-square) ![Decision](https://img.shields.io/badge/Decision-Escalate-F59E0B?style=flat-square)
+![Scenario](https://img.shields.io/badge/Scenario_04-COMPLETE-2EA44F?style=flat-square)
+![Workspace](https://img.shields.io/badge/Workspace-SOC_%2F_Threat_Hunting-22D3EE?style=flat-square)
+![MITRE](https://img.shields.io/badge/MITRE-T1071.004-E34F26?style=flat-square)
+
+[🏠 Scenario Home](../README.md) · [🔎 Workspace](README.md) · [🧾 Evidence](../evidence/README.md)
 
 </div>
+
+<img src="https://user-images.githubusercontent.com/73097560/115834477-dbab4500-a447-11eb-908a-139a6edaec5c.gif" width="100%" alt="section divider" />
 
 # 🔎 SOC Analyst Investigation — Lubaba
 
 Lubaba's task was not to prove the exercise was malicious. Her task was to determine what the defender-visible evidence actually proved, challenge the alert against normal DNS behavior, use AI only as a second opinion, and escalate with explicit attribution limits.
 
-## 1. Start by proving the telemetry is trustworthy
+## 📡 1. Start by proving the telemetry is trustworthy
 
 The reviewed 24-hour period contained **6,433 Unbound events** and current query/reply rows.
 
@@ -28,7 +34,7 @@ host=dns-soc-resolver01
 sourcetype=unbound:dns
 ```
 
-## 2. Normalize DNS before deciding the data is missing
+## 📌 2. Normalize DNS before deciding the data is missing
 
 The first namespace search returned zero results even though telemetry was healthy. Raw qnames used fully-qualified trailing dots, so Lubaba normalized them before filtering.
 
@@ -40,7 +46,7 @@ The first namespace search returned zero results even though telemetry was healt
 
 **Lesson:** protocol formatting can look like telemetry failure if fields are filtered too literally.
 
-## 3. Inspect the exact DNS structure
+## 📌 3. Inspect the exact DNS structure
 
 The raw qname table exposed the distinctive sequence:
 
@@ -57,7 +63,7 @@ The first six labels measured 27 characters and the seventh measured 22.
 
 Lubaba did **not** decode the labels or infer payload contents. The structural pattern was enough to justify further investigation.
 
-## 4. Reproduce Detection v1.0 at the production time scale
+## 🧠 4. Reproduce Detection v1.0 at the production time scale
 
 The 24-hour namespace aggregate was not used as proof of a one-minute detection. Lubaba binned the data into one-minute windows and reapplied the frozen logic exactly.
 
@@ -82,7 +88,7 @@ max_first_label_length > 16 → 27 PASS
 
 **FACT:** raw query telemetry independently reproduced the frozen detection behavior.
 
-## 5. Validate the production alert instead of trusting it blindly
+## 🚨 5. Validate the production alert instead of trusting it blindly
 
 The official scheduled alert triggered at:
 
@@ -96,7 +102,7 @@ The saved alert result contained the same client, parent and core metrics as the
 
 **FACT:** the production alert represented the actual defender-visible behavior accurately.
 
-## 6. Separate query and reply semantics
+## 🔎 6. Separate query and reply semantics
 
 Unbound records query and reply events separately. Counting both would have turned seven DNS requests into fourteen apparent events.
 
@@ -117,7 +123,7 @@ response size ≈ 91–96 bytes
 
 NXDOMAIN was **not** part of this official suspicious burst.
 
-## 7. Build the UTC case timeline
+## 🕒 7. Build the UTC case timeline
 
 ![Resolver-visible timeline](evidence/S04-SOC-E10-Resolver-Timeline.png)
 
@@ -131,7 +137,7 @@ NXDOMAIN was **not** part of this official suspicious burst.
 
 No second one-minute window in the reviewed period reproduced the same frozen pattern.
 
-## 8. Challenge the obvious false-positive hypothesis
+## 📌 8. Challenge the obvious false-positive hypothesis
 
 Long labels existed in normal traffic. Excluding Scenario 04 namespace activity, the same client produced:
 
@@ -162,7 +168,7 @@ long DNS label alone ≠ tunneling
 
 The useful signal was the combination of fresh-child diversity, multiple long labels, same-parent concentration and short-window timing.
 
-## 9. Scope the behavior before escalating
+## 🎯 9. Scope the behavior before escalating
 
 ![Client scope](evidence/S04-SOC-E15-Client-Scope.png)
 
@@ -176,7 +182,7 @@ Environment-wide application of the same rule found no second client/parent matc
 
 ![Environment-wide pattern scope](evidence/S04-SOC-E16-Environment-Scope.png)
 
-## 10. Form the human hypothesis before AI
+## 🤖 10. Form the human hypothesis before AI
 
 Before opening the AI result, Lubaba documented:
 
@@ -188,7 +194,7 @@ Pre-AI disposition:
 
 That order prevented AI from becoming the source of the analyst's conclusion.
 
-## 11. Validate AI claim by claim
+## 🤖 11. Validate AI claim by claim
 
 The official AI event preserved:
 
@@ -210,7 +216,7 @@ The AI noted that response context was not present in the alert evidence supplie
 
 **AI validation result: CORRECT**
 
-## 12. Lock 5W1H and disposition
+## 🧭 12. Lock 5W1H and disposition
 
 The completed 5W1H is preserved in [`5W1H.md`](5W1H.md).
 
@@ -233,16 +239,28 @@ The behavior was real, reproducible, isolated and materially different from base
 
 This is why escalation was the correct SOC decision rather than a forced malicious/benign verdict.
 
-## 13. Handoff to IR
+## 📨 13. Handoff to IR
 
 Lubaba handed Musfira a defender-only case record containing the alert, timeline, DNS metrics, baseline comparison, scope, AI validation, MITRE mapping, 5W1H, disposition and unanswered questions—without operator ground truth.
 
 **[Read the SOC → IR handoff →](SOC-TO-IR-HANDOFF.md)**
 
-## Analyst reflection
+## 📌 Analyst reflection
 
 The strongest part of this investigation was not finding seven suspicious names. It was preserving the boundary between **what DNS proved** and **what DNS could not prove**. Lubaba normalized protocol data, reconstructed the detector, challenged false positives, scoped the case, checked AI against evidence and escalated only the questions that remained genuinely unanswered.
 
 ---
 
 [🏠 Scenario Home](../README.md) · [📋 Playbook](SOC-ANALYST-PLAYBOOK.md) · [🕒 Timeline](INVESTIGATION-TIMELINE.md) · [🛡️ IR Handoff](SOC-TO-IR-HANDOFF.md) · [⬆ Back to top](#top)
+
+<img src="https://user-images.githubusercontent.com/73097560/115834477-dbab4500-a447-11eb-908a-139a6edaec5c.gif" width="100%" alt="section divider" />
+
+<div align="center">
+
+[🏠 Scenario Home](../README.md) · [🔎 Workspace](README.md) · 
+
+**Structure before suspicion. Evidence before attribution. Human approval before containment.**
+
+</div>
+
+<img src="https://capsule-render.vercel.app/api?type=waving&color=gradient&customColorList=24,20,14,7,2&height=82&section=footer" width="100%" alt="DNSentinel Scenario 04 footer" />
