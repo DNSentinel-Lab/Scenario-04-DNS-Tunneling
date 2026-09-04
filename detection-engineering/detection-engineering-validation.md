@@ -1,12 +1,27 @@
 <a id="top"></a>
-# Scenario 04 — Detection Engineering Validation
+
+<img src="https://capsule-render.vercel.app/api?type=soft&color=gradient&customColorList=2,7,12,18,24&height=128&section=header&text=%F0%9F%A7%A0%20Scenario%2004%20%E2%80%94%20Detection%20Engineering%20Validation&fontSize=25&fontColor=ffffff&animation=fadeIn&fontAlignY=38&desc=DNSentinel%20Lab%20%C2%B7%20Scenario%2004%20%C2%B7%20DNS%20Tunneling%20%C2%B7%20Detection%20Engineering&descSize=13&descAlignY=68&descColor=14B8A6" width="100%" alt="Scenario 04 — Detection Engineering Validation" />
+
+<div align="center">
+
+![Scenario](https://img.shields.io/badge/Scenario_04-COMPLETE-2EA44F?style=flat-square)
+![Workspace](https://img.shields.io/badge/Workspace-Detection_Engineering-14B8A6?style=flat-square)
+![MITRE](https://img.shields.io/badge/MITRE-T1071.004-E34F26?style=flat-square)
+
+[🏠 Scenario Home](../README.md) · [🧠 Workspace](README.md) · [🧾 Evidence](../evidence/README.md)
+
+</div>
+
+<img src="https://user-images.githubusercontent.com/73097560/115834477-dbab4500-a447-11eb-908a-139a6edaec5c.gif" width="100%" alt="section divider" />
+
+# 🧠 Scenario 04 — Detection Engineering Validation
 
 **Detection Engineer:** [Abdul-Rehman](https://github.com/abdul4rehman215)  
 **Result:** ✅ **PASS — Detection Engineering complete / SOC-ready**
 
 The acceptance goal was broader than “the search fired.” The same frozen behavior had to survive baseline review, a controlled positive, a benign challenge, automatic scheduling, raw-event recovery and the shared AI evidence contract.
 
-## Acceptance matrix
+## 📌 Acceptance matrix
 
 | Gate | Expected | Actual | Evidence | Result |
 |---|---|---|---|---|
@@ -26,7 +41,7 @@ The acceptance goal was broader than “the search fired.” The same frozen beh
 | Human decision boundary | AI remains advisory | `human_validation_required=true` preserved | AI mapping + indexed event | ✅ PASS |
 | Official exercise boundary | Detection frozen before live exercise | At freeze time, official operator/SOC/IR had not started | [`FREEZE-RECORD.md`](FREEZE-RECORD.md) | ✅ PASS |
 
-## Positive validation
+## ✅ Positive validation
 
 Twelve synthetic 32-hex-character child labels were generated under the controlled tunnel zone. They crossed two one-minute buckets:
 
@@ -37,7 +52,7 @@ window 2 → 7 queries / 7 unique children / first-label length 32
 
 Both windows satisfied Detection v1.0.
 
-## Benign validation
+## ✅ Benign validation
 
 One long fixed label was queried 12 times. It had long-label and repeated-query characteristics but only one unique child, so it did not satisfy the final uniqueness condition.
 
@@ -48,7 +63,7 @@ fresh long children concentrated under one parent → detection lead
 one long child repeated many times                → below final rule
 ```
 
-## Scheduled / AI validation
+## 🤖 Scheduled / AI validation
 
 The final alert uses:
 
@@ -61,10 +76,22 @@ suppression: 10 minutes
 
 The alert produced an analyst evidence row, sent bridge-compatible JSON through the shared webhook, returned AI context through HEC into `dns_soc_ai`, and preserved the requirement for human validation.
 
-## Final acceptance
+## 🏁 Final acceptance
 
 **PASS — Detection v1.0, dashboard, scheduled alert, raw-event drilldown and Scenario 04 AI evidence mapping were ready before the independent SOC exercise. The official run later used the frozen artifacts unchanged.**
 
 ---
 
 [🏠 Scenario Home](../README.md) · [🛠️ Engineering Story](DETECTION-ENGINEERING.md) · [🔒 Freeze](FREEZE-RECORD.md) · [⬆ Back to top](#top)
+
+<img src="https://user-images.githubusercontent.com/73097560/115834477-dbab4500-a447-11eb-908a-139a6edaec5c.gif" width="100%" alt="section divider" />
+
+<div align="center">
+
+[🏠 Scenario Home](../README.md) · [🧠 Workspace](README.md) · 
+
+**Structure before suspicion. Evidence before attribution. Human approval before containment.**
+
+</div>
+
+<img src="https://capsule-render.vercel.app/api?type=waving&color=gradient&customColorList=24,20,14,7,2&height=82&section=footer" width="100%" alt="DNSentinel Scenario 04 footer" />

@@ -1,8 +1,20 @@
 <a id="top"></a>
 
-> 🧭 [Scenario 04](../README.md) › [AI Profile](README.md) › **Scenario 04 AI Evidence Mapping**
+<img src="https://capsule-render.vercel.app/api?type=soft&color=gradient&customColorList=6,12,18,24,30&height=128&section=header&text=%F0%9F%A4%96%20Scenario%2004%20AI%20Evidence%20Mapping&fontSize=25&fontColor=ffffff&animation=fadeIn&fontAlignY=38&desc=DNSentinel%20Lab%20%C2%B7%20Scenario%2004%20%C2%B7%20DNS%20Tunneling%20%C2%B7%20AI%20Assistance&descSize=13&descAlignY=68&descColor=A855F7" width="100%" alt="Scenario 04 AI Evidence Mapping" />
 
-# Scenario 04 AI Evidence Mapping
+<div align="center">
+
+![Scenario](https://img.shields.io/badge/Scenario_04-COMPLETE-2EA44F?style=flat-square)
+![Workspace](https://img.shields.io/badge/Workspace-AI_Assistance-A855F7?style=flat-square)
+![MITRE](https://img.shields.io/badge/MITRE-T1071.004-E34F26?style=flat-square)
+
+[🏠 Scenario Home](../README.md) · [🤖 Workspace](README.md) · [🧾 Evidence](../evidence/README.md)
+
+</div>
+
+<img src="https://user-images.githubusercontent.com/73097560/115834477-dbab4500-a447-11eb-908a-139a6edaec5c.gif" width="100%" alt="section divider" />
+
+# 🧾 Scenario 04 AI Evidence Mapping
 
 **Detection Engineer / AI Integrator:** [Abdul-Rehman](https://github.com/abdul4rehman215)  
 **Status:** ✅ Implemented and validated  
@@ -10,7 +22,7 @@
 
 The shared AI infrastructure was reused. Scenario 04 added only the evidence contract required to carry the frozen detection result through the existing webhook → OpenAI → HEC path.
 
-## Identifiers
+## 📌 Identifiers
 
 ```text
 scenario_id = scenario-04-dns-tunneling
@@ -18,7 +30,7 @@ scenario    = scenario-04-dns-tunneling
 ai_profile  = dns_tunneling_v1
 ```
 
-## Transport path
+## 📌 Transport path
 
 ```text
 Splunk scheduled Detection v1.0
@@ -29,7 +41,7 @@ Splunk scheduled Detection v1.0
   → human validation
 ```
 
-## Bridge-required top-level fields
+## 📌 Bridge-required top-level fields
 
 Detection v1.0 returns:
 
@@ -43,7 +55,7 @@ Detection v1.0 returns:
 
 The human analyst fields remain in the result as well.
 
-## `evidence_json` contents
+## 🧾 `evidence_json` contents
 
 The JSON evidence includes:
 
@@ -66,7 +78,7 @@ The JSON evidence includes:
 - scenario ID;
 - `human_validation_required`.
 
-## Information-separation boundary
+## ⚖️ Information-separation boundary
 
 The AI does **not** receive:
 
@@ -76,7 +88,7 @@ The AI does **not** receive:
 - expected official timing;
 - a predetermined SOC disposition.
 
-## Returned event validation
+## ✅ Returned event validation
 
 A Scenario 04 AI event returned to:
 
@@ -109,7 +121,7 @@ human analyst        = security decision
 ```
 
 
-## Official exercise validation
+## ✅ Official exercise validation
 
 The frozen profile was then exercised by the **official production alert**, not only by Detection Engineering test traffic.
 
@@ -138,3 +150,15 @@ The human analyst later enriched the case with DNS reply/RCODE evidence that was
 ---
 
 [🏠 Scenario Home](../README.md) · [🤖 AI Profile](README.md) · [🛠️ Detection Engineering](../detection-engineering/DETECTION-ENGINEERING.md) · [⬆ Back to top](#top)
+
+<img src="https://user-images.githubusercontent.com/73097560/115834477-dbab4500-a447-11eb-908a-139a6edaec5c.gif" width="100%" alt="section divider" />
+
+<div align="center">
+
+[🏠 Scenario Home](../README.md) · [🤖 Workspace](README.md) · 
+
+**Structure before suspicion. Evidence before attribution. Human approval before containment.**
+
+</div>
+
+<img src="https://capsule-render.vercel.app/api?type=waving&color=gradient&customColorList=24,20,14,7,2&height=82&section=footer" width="100%" alt="DNSentinel Scenario 04 footer" />

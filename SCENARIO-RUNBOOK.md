@@ -1,5 +1,20 @@
 <a id="top"></a>
-# Scenario 04 — DNS Tunneling Runbook
+
+<img src="https://capsule-render.vercel.app/api?type=soft&color=gradient&customColorList=2,7,12,18,24&height=154&section=header&text=%F0%9F%9B%B0%EF%B8%8F%20Scenario%2004%20%E2%80%94%20DNS%20Tunneling%20Runbook&fontSize=30&fontColor=ffffff&animation=fadeIn&fontAlignY=38&desc=DNSentinel%20Lab%20%C2%B7%20Scenario%2004%20%C2%B7%20DNS%20Tunneling%20%C2%B7%20Core%20Case%20File&descSize=13&descAlignY=68&descColor=20E3B2" width="100%" alt="Scenario 04 — DNS Tunneling Runbook" />
+
+<div align="center">
+
+![Scenario](https://img.shields.io/badge/Scenario_04-COMPLETE-2EA44F?style=flat-square)
+![Workspace](https://img.shields.io/badge/Workspace-Core_Case_File-20E3B2?style=flat-square)
+![MITRE](https://img.shields.io/badge/MITRE-T1071.004-E34F26?style=flat-square)
+
+[🏠 Scenario Home](README.md) · [🧾 Evidence](evidence/README.md)
+
+</div>
+
+<img src="https://user-images.githubusercontent.com/73097560/115834477-dbab4500-a447-11eb-908a-139a6edaec5c.gif" width="100%" alt="section divider" />
+
+# 📘 Scenario 04 — DNS Tunneling Runbook
 
 **Scenario status:** 🟢 **Complete / evidence-backed closeout**  
 **Detection Engineer / AI Integrator:** [Abdul-Rehman](https://github.com/abdul4rehman215)  
@@ -9,11 +24,11 @@
 
 This runbook records the final state after engineering, official execution, SOC investigation, Incident Response, containment verification, safe reset and ground-truth comparison.
 
-## 1. Objective — ✅ Complete
+## 🎯 1. Objective — ✅ Complete
 
 Generate one controlled DNS tunneling-like session and determine whether the frozen detection, AI assistance, human SOC investigation and IR response can explain and change the observed behavior without overstating attribution.
 
-## 2. Architecture — ✅ Validated end to end
+## 🏗️ 2. Architecture — ✅ Validated end to end
 
 ```text
 dns-soc-victim01 10.50.30.20
@@ -33,7 +48,7 @@ Approved response path:
 Victim → Unbound RPZ → 10.50.30.30 sinkhole
 ```
 
-## 3. Prerequisites — ✅ Complete
+## 📌 3. Prerequisites — ✅ Complete
 
 - Scenario 04 BIND/Route 53 infrastructure complete.
 - Victim resolver path validated.
@@ -44,7 +59,7 @@ Victim → Unbound RPZ → 10.50.30.30 sinkhole
 - `dns_tunneling_v1` AI path validated.
 - RPZ/sinkhole started from a safe/non-enforcing state.
 
-## 4. Official Operator Activity — ✅ Complete
+## 📌 4. Official Operator Activity — ✅ Complete
 
 Owner: **Sonia**.
 
@@ -60,7 +75,7 @@ seven distinct qnames
 
 See [`attacker/`](attacker/).
 
-## 5. Telemetry — ✅ Validated
+## 📡 5. Telemetry — ✅ Validated
 
 Primary defender source:
 
@@ -83,7 +98,7 @@ A
 ~12 seconds
 ```
 
-## 6. Detection — ✅ Complete / v1.0 Frozen
+## 🧠 6. Detection — ✅ Complete / v1.0 Frozen
 
 ```text
 unique_child_labels >= 5
@@ -99,7 +114,7 @@ Official result:
 
 No live tuning was performed during the official exercise.
 
-## 7. SPL / Detection Logic — ✅ Complete
+## 🧠 7. SPL / Detection Logic — ✅ Complete
 
 - [`spl/baseline.spl`](spl/baseline.spl)
 - [`spl/hunting.spl`](spl/hunting.spl)
@@ -109,7 +124,7 @@ No live tuning was performed during the official exercise.
 - official SOC searches under [`soc/spl/`](soc/spl/)
 - official IR searches under [`ir/spl/`](ir/spl/)
 
-## 8. Alert — ✅ Fired / validated
+## 🚨 8. Alert — ✅ Fired / validated
 
 ```text
 Scenario 04 - Possible DNS Tunneling Behavior
@@ -124,7 +139,7 @@ Actions: Triggered Alerts + shared AI webhook
 
 Official trigger: `2026-09-02 16:39:01 UTC`.
 
-## 9. AI Triage — ✅ Official use validated
+## 🤖 9. AI Triage — ✅ Official use validated
 
 ```text
 scenario_id = scenario-04-dns-tunneling
@@ -135,7 +150,7 @@ Official AI event processed at `2026-09-02 16:39:21.727239 UTC`.
 
 Lubaba formed her human hypothesis first, then validated the AI claims against raw evidence and rated the result **CORRECT**. `human_validation_required=true` remained preserved.
 
-## 10. SOC Analysis — ✅ Complete
+## 🔎 10. SOC Analysis — ✅ Complete
 
 Owner: **Lubaba**.
 
@@ -156,7 +171,7 @@ Final disposition:
 
 See [`soc/SOC-ANALYST-INVESTIGATION.md`](soc/SOC-ANALYST-INVESTIGATION.md).
 
-## 11. Incident Response — ✅ Complete
+## 🛡️ 11. Incident Response — ✅ Complete
 
 Owner: **Musfira**.
 
@@ -168,7 +183,7 @@ Final IR context after authorization was established:
 
 See [`ir/INCIDENT-RESPONSE.md`](ir/INCIDENT-RESPONSE.md).
 
-## 12. Evidence — ✅ Complete
+## 🧾 12. Evidence — ✅ Complete
 
 Cross-role evidence is indexed in [`evidence/README.md`](evidence/README.md).
 
@@ -179,7 +194,7 @@ Role-owned proof remains with the role that produced it:
 - SOC — [`soc/evidence/`](soc/evidence/)
 - IR — [`ir/evidence/`](ir/evidence/)
 
-## 13. Containment — ✅ Human-approved / validated
+## 🤖 13. Containment — ✅ Human-approved / validated
 
 Temporary Scenario 04 RPZ scope:
 
@@ -189,7 +204,7 @@ Temporary Scenario 04 RPZ scope:
 
 The victim returned `10.50.30.30`, and Splunk recorded `rpz: applied [dns-soc-rpz]`.
 
-## 14. Verification — ✅ Complete
+## 📌 14. Verification — ✅ Complete
 
 IR proved:
 
@@ -199,30 +214,30 @@ IR proved:
 - safe restoration of the pre-change RPZ state;
 - normal authoritative resolution after reset.
 
-## 15. Results — ✅ Complete
+## ✅ 15. Results — ✅ Complete
 
 > **SCENARIO 04 — COMPLETE / EVIDENCE-BACKED CLOSEOUT**
 
 The final cross-role story is in [`SCENARIO-04-EXECUTION.md`](SCENARIO-04-EXECUTION.md) and [`exercise/final-comparison.md`](exercise/final-comparison.md).
 
-## 16. MITRE ATT&CK — ✅ Final mapping
+## 🏁 16. MITRE ATT&CK — ✅ Final mapping
 
 Primary: `T1071.004 — Application Layer Protocol: DNS`.
 
 `T1572` is not claimed because the implemented case did not establish a separate encapsulated protocol channel.
 
-## 17. False Positives — ✅ Engineering + live investigation validated
+## 🔎 17. False Positives — ✅ Engineering + live investigation validated
 
 Engineering already proved that a repeated long label alone did not satisfy the rule. During the official SOC case, legitimate AWS traffic also demonstrated that long labels can be normal. No non-Scenario-04 parent reproduced the full combined one-minute rule in the reviewed dataset.
 
-## 18. Lessons Learned — ✅ Complete
+## 💡 18. Lessons Learned — ✅ Complete
 
 - Detection Engineering: [`detection-engineering/TROUBLESHOOTING-AND-LESSONS.md`](detection-engineering/TROUBLESHOOTING-AND-LESSONS.md)
 - Operator: [`attacker/LEARNING-JOURNEY.md`](attacker/LEARNING-JOURNEY.md)
 - SOC: [`soc/TROUBLESHOOTING-NOTES.md`](soc/TROUBLESHOOTING-NOTES.md)
 - IR: [`ir/LESSONS-LEARNED.md`](ir/LESSONS-LEARNED.md)
 
-## 19. Reproduction — ✅ Documented
+## 📌 19. Reproduction — ✅ Documented
 
 ```text
 infrastructure
@@ -238,14 +253,26 @@ infrastructure
 → ground-truth comparison
 ```
 
-## 20. Screenshots — ✅ Curated
+## 🖼️ 20. Screenshots — ✅ Curated
 
 Visual evidence is organized by role and indexed in [`screenshots/README.md`](screenshots/README.md) and [`evidence/README.md`](evidence/README.md).
 
-## Final change-control note
+## 🏁 Final change-control note
 
 Detection v1.0, its scheduled timing, Dashboard Studio semantics and AI evidence contract were frozen before the official run and were not rewritten to fit the result. The temporary IR RPZ change was separately applied, verified and reset.
 
 ---
 
 [🏠 Scenario Home](README.md) · [🎬 Execution](SCENARIO-04-EXECUTION.md) · [🧾 Evidence](evidence/README.md) · [⬆ Back to top](#top)
+
+<img src="https://user-images.githubusercontent.com/73097560/115834477-dbab4500-a447-11eb-908a-139a6edaec5c.gif" width="100%" alt="section divider" />
+
+<div align="center">
+
+[🏠 Scenario Home](README.md) · 
+
+**Structure before suspicion. Evidence before attribution. Human approval before containment.**
+
+</div>
+
+<img src="https://capsule-render.vercel.app/api?type=waving&color=gradient&customColorList=24,20,14,7,2&height=82&section=footer" width="100%" alt="DNSentinel Scenario 04 footer" />
