@@ -600,15 +600,11 @@ The frozen engineering artifacts were carried unchanged into the official exerci
 
 The engineering record remains frozen; official execution evidence is documented in [`../SCENARIO-04-EXECUTION.md`](../SCENARIO-04-EXECUTION.md), [`../soc/`](../soc/) and [`../ir/`](../ir/).
 
----
-
-[🏠 Scenario Home](../README.md) · [✅ Validation](detection-engineering-validation.md) · [🔒 Freeze Record](FREEZE-RECORD.md) · [🧠 Lessons](TROUBLESHOOTING-AND-LESSONS.md) · [⬆ Back to top](#top)
-
 <img src="https://user-images.githubusercontent.com/73097560/115834477-dbab4500-a447-11eb-908a-139a6edaec5c.gif" width="100%" alt="section divider" />
 
 <div align="center">
 
-[🏠 Scenario Home](../README.md) · [🧠 Workspace](README.md) · 
+[🏠 Scenario Home](../README.md) · [🧠 Workspace](README.md) · [✅ Validation](detection-engineering-validation.md) · [🔒 Freeze Record](FREEZE-RECORD.md) · [🧠 Lessons](TROUBLESHOOTING-AND-LESSONS.md) · [⬆ Back to top](#top) · 
 
 **Structure before suspicion. Evidence before attribution. Human approval before containment.**
 
