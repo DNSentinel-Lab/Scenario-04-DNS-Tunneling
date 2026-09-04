@@ -17,13 +17,96 @@
 # 🔎 Scenario 04 — Production SPL Lifecycle
 
 ```mermaid
+%%{init: {
+  "theme": "base",
+  "themeVariables": {
+    "background": "#030712",
+    "primaryTextColor": "#ffffff",
+    "lineColor": "#f8fafc",
+    "fontSize": "31px"
+  },
+  "flowchart": {
+    "nodeSpacing": 54,
+    "rankSpacing": 66,
+    "curve": "basis",
+    "padding": 22
+  }
+}}%%
+
 flowchart LR
-    A["📊 baseline.spl"] --> B["🔎 hunting.spl"]
-    B --> C["🧠 detection.spl<br/>v1.0"]
-    C --> D["✅ validation.spl"]
-    D --> E["🚨 scheduled-alert.md"]
-    B -. provenance .-> F["🧪 history/<br/>candidate-0.1.spl"]
-    B -. supporting analysis .-> G["🗂️ supporting/"]
+
+    %% =====================================================
+    %% MAIN DETECTION ENGINEERING PIPELINE
+    %% =====================================================
+    A["📊 BASELINE<br/>baseline.spl"]
+
+    B["🔎 HUNTING<br/>hunting.spl"]
+
+    C["🧠 DETECTION<br/>detection.spl<br/>v1.0"]
+
+    D["✅ VALIDATION<br/>validation.spl"]
+
+    E["🚨 SCHEDULED ALERT<br/>scheduled-alert.md"]
+
+    A ==> B ==> C ==> D ==> E
+
+
+    %% =====================================================
+    %% SUPPORTING ENGINEERING ARTIFACTS
+    %% =====================================================
+    F["🧪 PROVENANCE ARCHIVE<br/>history/<br/>candidate-0.1.spl"]
+
+    G["🗂️ SUPPORTING ANALYSIS<br/>supporting/"]
+
+    B -.-> F
+    B -.-> G
+
+
+    %% =====================================================
+    %% PREMIUM GLOSSY NODE STYLES
+    %% =====================================================
+
+    classDef baseline fill:#172554,stroke:#60a5fa,stroke-width:6px,color:#ffffff,font-size:31px,font-weight:bold;
+
+    classDef hunt fill:#075985,stroke:#22d3ee,stroke-width:6px,color:#ffffff,font-size:31px,font-weight:bold;
+
+    classDef detect fill:#4c1d95,stroke:#e879f9,stroke-width:7px,color:#ffffff,font-size:33px,font-weight:bold;
+
+    classDef validate fill:#14532d,stroke:#4ade80,stroke-width:6px,color:#ffffff,font-size:31px,font-weight:bold;
+
+    classDef alert fill:#7f1d1d,stroke:#fb7185,stroke-width:7px,color:#ffffff,font-size:31px,font-weight:bold;
+
+    classDef history fill:#713f12,stroke:#fbbf24,stroke-width:6px,color:#ffffff,font-size:29px,font-weight:bold;
+
+    classDef support fill:#134e4a,stroke:#5eead4,stroke-width:6px,color:#ffffff,font-size:29px,font-weight:bold;
+
+
+    %% =====================================================
+    %% APPLY STYLES
+    %% =====================================================
+    class A baseline;
+    class B hunt;
+    class C detect;
+    class D validate;
+    class E alert;
+    class F history;
+    class G support;
+
+
+    %% =====================================================
+    %% BRIGHT MAIN PIPELINE
+    %% =====================================================
+    linkStyle 0 stroke:#60a5fa,stroke-width:6px;
+    linkStyle 1 stroke:#c084fc,stroke-width:6px;
+    linkStyle 2 stroke:#4ade80,stroke-width:6px;
+    linkStyle 3 stroke:#fb7185,stroke-width:6px;
+
+
+    %% =====================================================
+    %% DASHED SUPPORTING PATHS
+    %% =====================================================
+    linkStyle 4 stroke:#fbbf24,stroke-width:5px,stroke-dasharray:10 7;
+    linkStyle 5 stroke:#5eead4,stroke-width:5px,stroke-dasharray:10 7;
 ```
 
 | Artifact | Purpose |
