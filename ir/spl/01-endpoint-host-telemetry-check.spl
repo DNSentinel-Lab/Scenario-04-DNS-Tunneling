@@ -1,0 +1,2 @@
+index=* host=dns-soc-victim01 earliest="09/02/2026:16:35:00" latest="09/02/2026:16:40:00"
+| stats count by index sourcetype

@@ -1,0 +1,5 @@
+index=dns_soc_aws sourcetype=aws:cloudwatchlogs:vpcflow
+earliest="09/02/2026:16:37:00" latest="09/02/2026:16:40:00"
+"10.50.30.20"
+| table _time _raw
+| sort _time

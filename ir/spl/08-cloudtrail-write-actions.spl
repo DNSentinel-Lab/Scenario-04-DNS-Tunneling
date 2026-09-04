@@ -1,0 +1,7 @@
+index=dns_soc_aws sourcetype=aws:cloudtrail
+earliest="09/02/2026:16:30:00" latest="09/02/2026:16:45:00"
+(eventSource="route53.amazonaws.com" OR eventSource="ec2.amazonaws.com")
+| spath path=readOnly output=readOnly
+| where readOnly="false"
+| table _time eventSource eventName sourceIPAddress userIdentity.arn
+| sort _time

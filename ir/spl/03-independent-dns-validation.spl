@@ -1,0 +1,5 @@
+index=dns_soc_dns host=dns-soc-resolver01 sourcetype=unbound:dns
+earliest="09/02/2026:16:37:00" latest="09/02/2026:16:38:00"
+"10.50.30.20" "tunnel.soclab.abdul4rehman215.tech"
+| table _time _raw
+| sort _time
