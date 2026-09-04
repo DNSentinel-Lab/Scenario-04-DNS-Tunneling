@@ -1,57 +1,36 @@
 <a id="top"></a>
-<img src="https://capsule-render.vercel.app/api?type=soft&color=gradient&customColorList=2,7,12,18,24&height=135&section=header&text=%F0%9F%93%B8%20Curated%20Evidence&fontSize=28&fontColor=ffffff&animation=fadeIn&desc=Scenario%2004%20%E2%80%94%20Detection%20Engineering&descSize=14&descAlignY=68&descColor=20E3B2" width="100%" alt="Scenario 04 Curated Evidence" />
+<img src="https://capsule-render.vercel.app/api?type=soft&color=gradient&customColorList=2,7,12,18,24&height=150&section=header&text=%F0%9F%93%B8%20Screenshot%20%26%20Visual%20Evidence%20Portal&fontSize=30&fontColor=ffffff&animation=fadeIn&fontAlignY=38&desc=Scenario%2004%20%7C%20Role-Owned%20Proof%20Curated%20for%20Technical%20Review&descSize=14&descAlignY=68&descColor=20E3B2" width="100%" alt="Scenario 04 visual evidence portal" />
 
 <div align="center">
 
-![Screenshots](https://img.shields.io/badge/Curated_Set-14_Images-14B8A6?style=flat-square)
-![Secrets](https://img.shields.io/badge/Secret_Redaction-Not_Required-2EA44F?style=flat-square)
+![Evidence](https://img.shields.io/badge/Visual_Evidence-Curated-2EA44F?style=flat-square) ![Rule](https://img.shields.io/badge/Rule-Prove_a_Claim-A855F7?style=flat-square)
 
-[🏠 Scenario Home](../README.md) · [🧾 Evidence](../evidence/README.md) · [🛠️ Detection Engineering](../detection-engineering/DETECTION-ENGINEERING.md)
+[🏠 Scenario Home](../README.md) · [🧾 Evidence Center](../evidence/README.md) · [🔎 SOC Evidence](../soc/evidence/README.md) · [🛡️ IR Evidence](../ir/evidence/README.md)
 
 </div>
 
-## Curation policy
+# 🖼️ Scenario 04 Visual Evidence
 
-The final set keeps evidence that proves an engineering decision or acceptance gate. Construction-only screens, minor navigation mistakes, copy/paste errors, repeated empty results and the later throttle adjustment are not part of the public story.
+Evidence is organized by role rather than mixed into one unstructured folder.
 
-No event values were altered. The preserved files were checked for API keys, HEC tokens, passwords, private keys and AWS/OpenAI secrets; none were found in the selected evidence.
+| Role / workspace | Location | What it preserves |
+|---|---|---|
+| 🚦 Detection Engineering | [`detection-engineering/`](detection-engineering/) | Baseline, feature hunt, dashboard, validation, alert, AI integration |
+| 🧬 Operator / Project Lead | [`attacker/`](attacker/) | One-time client execution, resolver path, authoritative receipt, closeout ground truth |
+| 🔎 SOC Analyst | [`../soc/evidence/`](../soc/evidence/) | Alert, raw qnames, baseline, scope, AI human validation |
+| 🛡️ Incident Response | [`../ir/evidence/`](../ir/evidence/) | Independent validation, correlation, RPZ, recovery, containment and reset |
 
-## Detection Engineering evidence set
+## Operator evidence set
 
 | File | What it proves |
 |---|---|
-| [`01-resolver-field-validation.png`](detection-engineering/01-resolver-field-validation.png) | Live Unbound source, victim attribution and extracted DNS fields |
-| [`02-dns-ingestion-latency.png`](detection-engineering/02-dns-ingestion-latency.png) | Measured ingest-delay distribution used for alert engineering |
-| [`03-normal-dns-baseline.png`](detection-engineering/03-normal-dns-baseline.png) | Real normal DNS behavior before tunneling-like validation |
-| [`04-tunneling-feature-hunt.png`](detection-engineering/04-tunneling-feature-hunt.png) | First-label/qname behavior used to select explainable features |
-| [`05-dns-tunneling-investigation-dashboard.png`](detection-engineering/05-dns-tunneling-investigation-dashboard.png) | Final Dashboard Studio analyst surface |
-| [`06-controlled-positive-test-traffic.png`](detection-engineering/06-controlled-positive-test-traffic.png) | Authorized synthetic positive traffic from the victim path |
-| [`07-controlled-positive-detection.png`](detection-engineering/07-controlled-positive-detection.png) | Positive behavior separated from normal parent activity |
-| [`08-benign-lookalike-no-detection.png`](detection-engineering/08-benign-lookalike-no-detection.png) | Repeated-long-label challenge did not create a new result |
-| [`09-final-detection-v1-validation.png`](detection-engineering/09-final-detection-v1-validation.png) | Frozen Detection v1.0 output/metadata |
-| [`10-scheduled-alert-triggered.png`](detection-engineering/10-scheduled-alert-triggered.png) | Automatic scheduled execution |
-| [`11-analyst-evidence-row.png`](detection-engineering/11-analyst-evidence-row.png) | Analyst-ready scheduled result and Scenario/AI identifiers |
-| [`12-raw-event-drilldown.png`](detection-engineering/12-raw-event-drilldown.png) | Raw Unbound query/reply evidence behind one summary window |
-| [`13-ai-triage-indexed.png`](detection-engineering/13-ai-triage-indexed.png) | Scenario 04 AI event returned through HEC |
-| [`13b-ai-vs-raw-evidence-validation.png`](detection-engineering/13b-ai-vs-raw-evidence-validation.png) | AI numerical/context claims compared with source evidence |
+| `attacker/01-official-tunnel-client-execution.png` | Seven-query finite client actually executed from victim |
+| `attacker/02-victim-resolver-path.png` | Victim remained on defender resolver |
+| `attacker/03-authoritative-host-confirmation.png` | Correct BIND EC2 identified before authoritative checks |
+| `attacker/04-rpz-preflight-safe.png` | Scenario 04 containment was not active before the run |
+| `attacker/05-authoritative-receipt.png` | Seven generated qnames reached BIND |
+| `attacker/06-ground-truth-closeout.png` | One-run deviation and authoritative timeline preserved |
 
-## What is intentionally absent
+## Public evidence rule
 
-- every Dashboard Studio construction step;
-- Save As dialogs;
-- minor SPL syntax corrections;
-- repeated zero-result screens without a new root cause;
-- small navigation issues;
-- a fabricated “readiness screenshot.”
-
-Readiness is documented in the validation and freeze records instead of inventing an image merely to complete a numbering template.
-
-## Later official evidence
-
-Future official simulation/SOC/IR screenshots should be added as a separate exercise evidence sequence. Do not rename these Detection Engineering images to make them look like official incident evidence.
-
-<div align="center">
-
-[🏠 Scenario Home](../README.md) · [⬆ Back to top](#top)
-
-</div>
+Keep images that answer a technical question or prove a transition. Troubleshooting images remain useful when they show a reusable root cause, but screenshots do not replace the reasoning around them.
