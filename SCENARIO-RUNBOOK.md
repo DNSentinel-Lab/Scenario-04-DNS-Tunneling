@@ -261,15 +261,11 @@ Visual evidence is organized by role and indexed in [`screenshots/README.md`](sc
 
 Detection v1.0, its scheduled timing, Dashboard Studio semantics and AI evidence contract were frozen before the official run and were not rewritten to fit the result. The temporary IR RPZ change was separately applied, verified and reset.
 
----
-
-[🏠 Scenario Home](README.md) · [🎬 Execution](SCENARIO-04-EXECUTION.md) · [🧾 Evidence](evidence/README.md) · [⬆ Back to top](#top)
-
 <img src="https://user-images.githubusercontent.com/73097560/115834477-dbab4500-a447-11eb-908a-139a6edaec5c.gif" width="100%" alt="section divider" />
 
 <div align="center">
 
-[🏠 Scenario Home](README.md) · 
+[🏠 Scenario Home](README.md) · [🎬 Execution](SCENARIO-04-EXECUTION.md) · [🧾 Evidence](evidence/README.md) · [⬆ Back to top](#top) · 
 
 **Structure before suspicion. Evidence before attribution. Human approval before containment.**
 
