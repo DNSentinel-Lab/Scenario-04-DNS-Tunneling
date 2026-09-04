@@ -1,27 +1,36 @@
 <a id="top"></a>
-<img src="https://capsule-render.vercel.app/api?type=waving&color=gradient&customColorList=2,7,12,18,24&height=225&section=header&text=Scenario%2004%20%E2%80%94%20DNS%20Tunneling&fontSize=38&fontColor=ffffff&animation=fadeIn&fontAlignY=36&desc=DNSentinel%20Lab%20%7C%20Detection%20%E2%86%92%20Operator%20%E2%86%92%20SOC%20%E2%86%92%20IR%20%E2%86%92%20Containment%20%E2%86%92%20Closeout&descSize=16&descAlignY=58&descColor=20E3B2" width="100%" alt="Scenario 04 — DNS Tunneling" />
+
+<img src="https://capsule-render.vercel.app/api?type=waving&color=gradient&customColorList=2,7,12,18,24&height=250&section=header&text=Scenario%2004%20%E2%80%94%20DNS%20Tunneling&fontSize=42&fontColor=ffffff&animation=fadeIn&fontAlignY=34&desc=DNSentinel%20Lab%20%7C%20Structured%20DNS%20Evidence%20%E2%86%92%20Human-Validated%20Response&descSize=16&descAlignY=57&descColor=20E3B2" width="100%" alt="Scenario 04 — DNS Tunneling" />
 
 <div align="center">
 
-<img src="https://readme-typing-svg.demolab.com?font=Fira+Code&weight=700&size=20&duration=2900&pause=900&color=20E3B2&center=true&vCenter=true&repeat=true&width=1120&height=72&lines=Real+DNS+Traffic+%E2%86%92+Frozen+Detection+%E2%86%92+Independent+SOC+%E2%86%92+IR;Evidence+Before+Verdict+%E2%86%92+Human-Approved+RPZ+%E2%86%92+Verified+Safe+Reset" alt="Scenario 04 closeout workflow" />
+<img src="https://readme-typing-svg.demolab.com?font=Fira+Code&weight=700&size=20&duration=2800&pause=850&color=20E3B2&center=true&vCenter=true&repeat=true&width=1140&height=92&lines=Encode+%E2%86%92+Query+%E2%86%92+Resolve+%E2%86%92+Detect+%E2%86%92+Investigate+%E2%86%92+Contain+%E2%86%92+Verify+%E2%86%92+Reset;Seven+Queries+%E2%86%92+Seven+Unique+Child+Labels+%E2%86%92+Seven+NOERROR+Replies+%E2%86%92+One+Evidence+Chain;Structure+Before+Suspicion+%E2%80%A2+Evidence+Before+Attribution+%E2%80%A2+Human+Approval+Before+Containment" alt="Scenario 04 operating model" />
 
 ![Scenario](https://img.shields.io/badge/Scenario_04-COMPLETE-2EA44F?style=for-the-badge)
-![Detection](https://img.shields.io/badge/Detection-v1.0_Frozen-2EA44F?style=for-the-badge)
+![DNS](https://img.shields.io/badge/DNS-Tunneling-20E3B2?style=for-the-badge)
+![Detection](https://img.shields.io/badge/Detection-v1.0_Frozen-14B8A6?style=for-the-badge)
 ![Splunk](https://img.shields.io/badge/Splunk-Enterprise-000000?style=for-the-badge&logo=splunk&logoColor=white)
+![Unbound](https://img.shields.io/badge/Unbound-Resolver-22D3EE?style=for-the-badge)
+![BIND](https://img.shields.io/badge/BIND-Authoritative-2563EB?style=for-the-badge)
+![RPZ](https://img.shields.io/badge/RPZ-Sinkhole_%2B_Reset-F59E0B?style=for-the-badge)
 ![MITRE](https://img.shields.io/badge/MITRE-T1071.004-E34F26?style=for-the-badge)
-![AI](https://img.shields.io/badge/AI-dns__tunneling__v1-7B2CBF?style=for-the-badge)
-![Response](https://img.shields.io/badge/RPZ-Validated_%2B_Reset-F59E0B?style=for-the-badge)
+![AI](https://img.shields.io/badge/AI-dns__tunneling__v1-A855F7?style=for-the-badge)
 
 <br/>
 
-![Stars](https://img.shields.io/github/stars/DNSentinel-Lab/Scenario-04-DNS-Tunneling?style=flat-square)
-![Forks](https://img.shields.io/github/forks/DNSentinel-Lab/Scenario-04-DNS-Tunneling?style=flat-square)
-![Last Commit](https://img.shields.io/github/last-commit/DNSentinel-Lab/Scenario-04-DNS-Tunneling?style=flat-square)
+![Stars](https://img.shields.io/github/stars/DNSentinel-Lab/Scenario-04-DNS-Tunneling?style=flat-square&logo=github)
+![Forks](https://img.shields.io/github/forks/DNSentinel-Lab/Scenario-04-DNS-Tunneling?style=flat-square&logo=github)
+![Last Commit](https://img.shields.io/github/last-commit/DNSentinel-Lab/Scenario-04-DNS-Tunneling?style=flat-square&logo=git)
 ![Repo Size](https://img.shields.io/github/repo-size/DNSentinel-Lab/Scenario-04-DNS-Tunneling?style=flat-square)
+![Issues](https://img.shields.io/github/issues/DNSentinel-Lab/Scenario-04-DNS-Tunneling?style=flat-square)
 
-**A completed, evidence-backed DNS tunneling adversary-emulation case: real DNS transport, a frozen Splunk detection, information-separated SOC investigation, human-validated AI assistance, independent Incident Response, scoped RPZ containment, and verified safe reset.**
+<br/>
+
+[🎬 Execution](SCENARIO-04-EXECUTION.md) · [📘 Runbook](SCENARIO-RUNBOOK.md) · [🧠 Detection](detection-engineering/README.md) · [📊 Dashboard](dashboard/README.md) · [🤖 AI](ai/README.md) · [🎯 Operator](attacker/README.md) · [🔎 SOC](soc/README.md) · [🛡️ IR](ir/README.md) · [🧾 Evidence](evidence/README.md)
 
 [🏗️ Infrastructure](https://github.com/DNSentinel-Lab/DNS-Lab-Infrastructure) · [🔎 Scenario 01](https://github.com/DNSentinel-Lab/Scenario-01-DNS-Recon) · [🧬 Scenario 02](https://github.com/DNSentinel-Lab/Scenario-02-DGA) · [🔄 Scenario 03](https://github.com/DNSentinel-Lab/Scenario-03-Fast-Flux) · [**🛰️ Scenario 04**](https://github.com/DNSentinel-Lab/Scenario-04-DNS-Tunneling)
+
+**A completed, evidence-backed DNS tunneling case: real DNS transport, frozen detection, independent SOC investigation, human-validated AI assistance, independently validated IR, scoped RPZ containment, troubleshooting, verification and safe reset.**
 
 </div>
 
@@ -46,15 +55,16 @@ Scenario 04 asks a practical defender question:
 | **Reusable sinkhole** | `dns-soc-sinkhole01 / 10.50.30.30` |
 | **Final scenario state** | ✅ **Complete / evidence-backed closeout** |
 
-### Role ownership
+### 👥 Four Roles · One Connected Case
 
-| Workstream | Owner | Final state |
+| Role | Owner | Final outcome |
 |---|---|---|
-| Scenario 04 infrastructure preparation | **Lubaba** | ✅ Complete |
-| Detection Engineering / Dashboard / Alert / AI | **Abdul-Rehman** | ✅ Complete / v1.0 frozen |
-| Project Lead / Private Exercise Operator | **Sonia** | ✅ Official execution complete |
-| SOC Analyst / Threat Hunter | **Lubaba** | ✅ Investigation + IR handoff complete |
-| Incident Responder / Defender | **Musfira** | ✅ Independent validation + response + reset complete |
+| 🎯 Project Lead / Private Exercise Operator | **Sonia** | ✅ Official finite execution complete |
+| 🧠 Detection Engineer / AI Integrator | **Abdul-Rehman** | ✅ Detection v1.0 + Dashboard + Alert + AI frozen |
+| 🔎 SOC Analyst / Threat Hunter | **Lubaba** | ✅ `INCONCLUSIVE — ESCALATION WARRANTED` |
+| 🛡️ Incident Responder / Defender | **Musfira** | ✅ Independent validation + RPZ containment + safe reset |
+
+> **Scenario infrastructure preparation support:** **Lubaba** — complete.
 
 > [!NOTE]
 > The exercise used real project-owned DNS infrastructure and real defender telemetry, but it did **not** claim a real-world compromise, malware infection, confidential-data exfiltration, or attacker attribution. The realism comes from real protocol behavior, information separation, frozen controls, independent decisions, and verified response.
@@ -91,7 +101,26 @@ The exercise kept private operator ground truth separate from the defender inves
 
 <img src="https://user-images.githubusercontent.com/73097560/115834477-dbab4500-a447-11eb-908a-139a6edaec5c.gif" width="100%" alt="section divider" />
 
-## 🚦 Scenario 04 Closeout Snapshot
+## 🏁 Scenario 04 Closeout Snapshot
+
+<table>
+<tr>
+<td align="center" width="17%"><strong>🛰️ DNS Behavior</strong><br/><sub>7 structured queries</sub></td>
+<td align="center" width="17%"><strong>🧠 Detection</strong><br/><sub>v1.0 fired</sub></td>
+<td align="center" width="16%"><strong>🤖 AI</strong><br/><sub>Correct · advisory</sub></td>
+<td align="center" width="17%"><strong>🔎 SOC</strong><br/><sub>Inconclusive → IR</sub></td>
+<td align="center" width="17%"><strong>🛡️ IR</strong><br/><sub>Independently validated</sub></td>
+<td align="center" width="16%"><strong>🎯 Response</strong><br/><sub>RPZ → verify → reset</sub></td>
+</tr>
+</table>
+
+<div align="center">
+
+**7 queries · 7 unique qnames · 7 unique child labels · 7 long labels · max first label 27 · 7/7 NOERROR**
+
+**Encode → Query → Resolve → Detect → Investigate → Contain → Verify → Reset**
+
+</div>
 
 The official resolver-visible burst occurred between **16:37:19.215675 and 16:37:31.370200 UTC** on `2026-09-02`.
 
@@ -105,21 +134,24 @@ The official resolver-visible burst occurred between **16:37:19.215675 and 16:37
 | Query type | **A** |
 | Resolver replies | **7 / 7 NOERROR** |
 | Official alert | **16:39:01 UTC** |
-| AI processed | **16:39:21 UTC** |
+| AI processed | **16:39:21.727239 UTC** |
 | SOC disposition | **INCONCLUSIVE — ESCALATION WARRANTED** |
 | SOC confidence | **High** |
+| IR exercise result | **AUTHORIZED CONTROLLED EXERCISE ACTIVITY — CONTROLLED CONTAINMENT VALIDATED** |
 | RPZ validation | `*.tunnel... → 10.50.30.30` |
 | Safe reset | Normal authoritative resolution restored |
 
 The authoritative BIND log independently received the same seven generated names from public recursive resolvers. Its first and last receipt timestamps aligned with the Unbound defender timeline to within milliseconds.
 
 ```text
-BIND first:   16:37:19.219 UTC
-Unbound first:16:37:19.215675 UTC
+BIND first:    16:37:19.219 UTC
+Unbound first: 16:37:19.215675 UTC
 
-BIND last:    16:37:31.375 UTC
-Unbound last: 16:37:31.370200 UTC
+BIND last:     16:37:31.375 UTC
+Unbound last:  16:37:31.370200 UTC
 ```
+
+> **The alert was only the midpoint. Scenario 04 closed when the defenders proved the behavior, preserved attribution limits, validated a human-approved DNS-layer response, recovered from a real configuration failure, and restored the resolver to a verified safe state.**
 
 <img src="https://user-images.githubusercontent.com/73097560/115834477-dbab4500-a447-11eb-908a-139a6edaec5c.gif" width="100%" alt="section divider" />
 
@@ -135,10 +167,6 @@ AND long_label_count >= 5
 AND max_first_label_length > 16
 ```
 
-![Scenario 04 DNS Tunneling Investigation dashboard](screenshots/detection-engineering/05-dns-tunneling-investigation-dashboard.png)
-
-*The frozen Dashboard Studio investigation surface gave the SOC analyst client, child-label, length, parent-domain, qtype/rcode, timeline and raw-event pivots without deciding the verdict for her.*
-
 **[Read Abdul-Rehman's Detection Engineering story →](detection-engineering/DETECTION-ENGINEERING.md)**
 
 <img src="https://user-images.githubusercontent.com/73097560/115834477-dbab4500-a447-11eb-908a-139a6edaec5c.gif" width="100%" alt="section divider" />
@@ -153,10 +181,6 @@ Sonia used a finite lab-only client on `dns-soc-victim01`. It Base32-encoded a h
 
 The client was executed once during review before the formal execution gate. Instead of rerunning it for a cleaner timeline, Sonia preserved that real one-time session, verified the client had exited, and continued with evidence preservation. That deviation is documented as an operational lesson rather than hidden.
 
-![Authoritative BIND receipt](screenshots/attacker/05-authoritative-receipt.png)
-
-*What this proves: all seven generated qnames reached the project-controlled authoritative BIND endpoint. Fourteen BIND log rows reflected duplicate arrivals through public recursive resolvers, not fourteen victim requests.*
-
 **[Read Sonia's Project Lead / Adversary story →](attacker/PROJECT-LEAD-ADVERSARY.md)**
 
 <img src="https://user-images.githubusercontent.com/73097560/115834477-dbab4500-a447-11eb-908a-139a6edaec5c.gif" width="100%" alt="section divider" />
@@ -165,13 +189,7 @@ The client was executed once during review before the formal execution gate. Ins
 
 Lubaba worked from defender-visible evidence without private operator timing, payload, generated qname list, or BIND ground truth. She independently reconstructed the one-minute behavior and reproduced every frozen Detection v1.0 condition.
 
-![Detection v1.0 independent reproduction](soc/evidence/S04-SOC-E06-Detection-v1-Reproduction.png)
-
-*What this proves: the suspicious one-minute window contained 7 queries, 7 unique child labels, 7 long labels and a maximum first-label length of 27.*
-
 She then challenged the result against measured normal behavior. Legitimate AWS DNS traffic also contained long labels, but no non-Scenario-04 parent reproduced the same **combined** short-window pattern.
-
-![Baseline and long-label comparison](soc/evidence/S04-SOC-E13-Benign-Long-Label-Comparison.png)
 
 The human hypothesis was written **before** AI review. The AI result was then checked claim by claim against raw DNS evidence and rated **CORRECT**, while `human_validation_required=true` remained preserved.
 
@@ -190,11 +208,7 @@ She had strong evidence of DNS tunneling-like structure, but not enough endpoint
 
 Musfira treated the SOC handoff as claims to validate, not as a verdict to repeat. IR independently reproduced the DNS evidence, checked available telemetry, reviewed VPC flows, narrowed CloudTrail context, and tested recurrence.
 
-![Independent DNS validation](ir/evidence/S04-IR-03-independent-dns-query-reply-validation.png)
-
 A particularly important IR decision came from network correlation. HTTPS flows existed after the DNS burst, but the same destinations were already active **before** it. Musfira therefore rejected a causal claim that the DNS activity produced those HTTPS connections.
-
-![Pre-burst destination baseline](ir/evidence/S04-IR-06-preburst-destination-baseline.png)
 
 After authorization context was established, IR performed a controlled, temporary response validation using the existing Unbound RPZ framework.
 
@@ -206,15 +220,114 @@ After authorization context was established, IR performed a controlled, temporar
 
 ![Victim-side RPZ containment proof](ir/evidence/S04-IR-20-containment-victim-sinkhole-answer.png)
 
-![Splunk RPZ applied proof](ir/evidence/S04-IR-21-splunk-rpz-applied-proof.png)
-
-*What this proves: the victim received the sinkhole address and Unbound telemetry independently recorded `rpz: applied [dns-soc-rpz]`.*
-
 After evidence capture, Musfira restored the pre-change RPZ state and verified normal authoritative resolution returned.
 
 ![Safe reset validation](ir/evidence/S04-IR-23-safe-reset-victim-normal-answer.png)
 
 **[Read Musfira's Incident Response story →](ir/INCIDENT-RESPONSE.md)**
+
+<img src="https://user-images.githubusercontent.com/73097560/115834477-dbab4500-a447-11eb-908a-139a6edaec5c.gif" width="100%" alt="section divider" />
+
+
+## 📸 Scenario 04 Evidence Highlights
+
+> **Build → Encode → Resolve → Detect → Investigate → Validate → Contain → Verify → Reset**
+
+The strongest visual artifacts are curated here as a **proof layer**. The complete engineering, operator, SOC and IR evidence sets remain in their role-owned folders for technical audit.
+
+### 🧠 Detection Engineering Evidence
+
+<table>
+<tr>
+<td width="33%" valign="top"><img src="screenshots/detection-engineering/04-tunneling-feature-hunt.png" width="100%" alt="DNS tunneling feature hunt" /><br/><br/><strong>Behavioral feature engineering:</strong> parent/child structure and first-label length were investigated before thresholds were frozen.</td>
+<td width="33%" valign="top"><img src="screenshots/detection-engineering/05-dns-tunneling-investigation-dashboard.png" width="100%" alt="DNS tunneling investigation dashboard" /><br/><br/><strong>Investigation surface:</strong> Dashboard Studio exposed DNS volume, labels, qtype/rcode, parent domains, timeline and raw-event pivots.</td>
+<td width="33%" valign="top"><img src="screenshots/detection-engineering/09-final-detection-v1-validation.png" width="100%" alt="Detection v1.0 validation" /><br/><br/><strong>Frozen rule:</strong> Detection v1.0 passed final validation with the measured Scenario 04 feature contract.</td>
+</tr>
+</table>
+
+<div align="center">
+
+**Explore:** [🧠 Detection Engineering](detection-engineering/README.md) · [📊 Dashboard](dashboard/README.md) · [🔎 SPL](spl/README.md)
+
+</div>
+
+<img src="https://user-images.githubusercontent.com/73097560/115834477-dbab4500-a447-11eb-908a-139a6edaec5c.gif" width="100%" alt="section divider" />
+
+### 🎯 Official Operator Ground Truth
+
+<table>
+<tr>
+<td width="33%" valign="top"><img src="screenshots/attacker/01-official-tunnel-client-execution.png" width="100%" alt="Official tunnel client execution" /><br/><br/><strong>Official execution:</strong> one finite lab-only client generated a controlled seven-query DNS session from the victim.</td>
+<td width="33%" valign="top"><img src="screenshots/attacker/02-victim-resolver-path.png" width="100%" alt="Victim resolver path" /><br/><br/><strong>Resolver boundary:</strong> the victim remained on the defender-controlled Unbound path during the exercise.</td>
+<td width="33%" valign="top"><img src="screenshots/attacker/05-authoritative-receipt.png" width="100%" alt="Authoritative receipt" /><br/><br/><strong>End-to-end DNS proof:</strong> all seven generated qnames reached the project-controlled authoritative BIND endpoint.</td>
+</tr>
+</table>
+
+<div align="center">
+
+**Explore:** [🎯 Operator Workspace](attacker/README.md) · [💻 Operator Commands](attacker/commands/README.md) · [🎭 Exercise Control](exercise/README.md)
+
+</div>
+
+<img src="https://user-images.githubusercontent.com/73097560/115834477-dbab4500-a447-11eb-908a-139a6edaec5c.gif" width="100%" alt="section divider" />
+
+### 🔎 SOC Investigation Evidence
+
+<table>
+<tr>
+<td width="33%" valign="top"><img src="soc/evidence/S04-SOC-E05-Raw-Qname-Label-Table.png" width="100%" alt="SOC raw qname label table" /><br/><br/><strong>Structure quantified:</strong> the analyst inspected exact child-label values and first-label lengths rather than relying on the alert summary.</td>
+<td width="33%" valign="top"><img src="soc/evidence/S04-SOC-E14-Same-Rule-Baseline-Zero.png" width="100%" alt="SOC same rule baseline zero" /><br/><br/><strong>Baseline challenged:</strong> the same frozen rule produced zero matches outside Scenario 04 traffic.</td>
+<td width="33%" valign="top"><img src="soc/evidence/S04-SOC-E15-Client-Scope.png" width="100%" alt="SOC client scope" /><br/><br/><strong>Scope preserved:</strong> the behavior remained tied to the resolver-visible client without inventing process, user, malware or attacker attribution.</td>
+</tr>
+</table>
+
+<div align="center">
+
+**Explore:** [🔎 SOC Workspace](soc/README.md) · [🧾 SOC Evidence](soc/evidence/README.md) · [📘 Full Investigation](soc/SOC-ANALYST-INVESTIGATION.md)
+
+</div>
+
+<img src="https://user-images.githubusercontent.com/73097560/115834477-dbab4500-a447-11eb-908a-139a6edaec5c.gif" width="100%" alt="section divider" />
+
+### 🤖 AI & Human Validation Evidence
+
+<table>
+<tr>
+<td width="33%" valign="top"><img src="screenshots/detection-engineering/13-ai-triage-indexed.png" width="100%" alt="AI triage indexed in Splunk" /><br/><br/><strong>AI path operational:</strong> Scenario 04 alert evidence returned to Splunk through the shared AI bridge.</td>
+<td width="33%" valign="top"><img src="soc/evidence/S04-SOC-E18-AI-Human-Validation.png" width="100%" alt="AI human validation" /><br/><br/><strong>Human validation:</strong> the SOC compared the AI result with defender evidence before accepting its claims.</td>
+<td width="33%" valign="top"><img src="soc/evidence/S04-SOC-E19b-AI-Limitations.png" width="100%" alt="AI evidence limitations" /><br/><br/><strong>Limitations preserved:</strong> the AI record kept important missing-evidence boundaries visible instead of manufacturing malware, compromise or exfiltration attribution.</td>
+</tr>
+</table>
+
+<div align="center">
+
+**Explore:** [🤖 AI Workspace](ai/README.md) · [🔎 Human AI Validation](soc/AI-VALIDATION.md) · [🧾 AI Mapping](ai/scenario-04-ai-mapping.md)
+
+</div>
+
+<img src="https://user-images.githubusercontent.com/73097560/115834477-dbab4500-a447-11eb-908a-139a6edaec5c.gif" width="100%" alt="section divider" />### 🛡️ IR, Containment & Safe-Reset Evidence
+
+<table>
+<tr>
+<td width="33%" valign="top"><img src="ir/evidence/S04-IR-03-independent-dns-query-reply-validation.png" width="100%" alt="IR independent DNS query reply validation" /><br/><br/><strong>Independent validation:</strong> IR reproduced the seven-query / seven-NOERROR behavior rather than inheriting the SOC conclusion.</td>
+<td width="33%" valign="top"><img src="ir/evidence/S04-IR-06-preburst-destination-baseline.png" width="100%" alt="IR preburst destination baseline" /><br/><br/><strong>Causality challenged:</strong> the same outbound destinations existed before the DNS burst, limiting what could safely be attributed to it.</td>
+<td width="33%" valign="top"><img src="ir/evidence/S04-IR-20-containment-victim-sinkhole-answer.png" width="100%" alt="Victim sinkhole answer" /><br/><br/><strong>Containment outcome:</strong> the victim received the approved RPZ sinkhole address <code>10.50.30.30</code>.</td>
+</tr>
+<tr>
+<td width="50%" valign="top"><img src="ir/evidence/S04-IR-21-splunk-rpz-applied-proof.png" width="100%" alt="Splunk RPZ applied proof" /><br/><br/><strong>Telemetry verification:</strong> Splunk preserved <code>rpz: applied [dns-soc-rpz]</code> rather than relying only on configuration state.</td>
+<td width="50%" colspan="2" valign="top"><img src="ir/evidence/S04-IR-23-safe-reset-victim-normal-answer.png" width="100%" alt="Safe reset victim normal answer" /><br/><br/><strong>Safe reset proven:</strong> normal authoritative DNS behavior returned after the response exercise was closed.</td>
+</tr>
+</table>
+
+<div align="center">
+
+**Explore:** [🛡️ IR Workspace](ir/README.md) · [🧾 IR Evidence](ir/evidence/README.md) · [📋 Final IR Report](ir/IR-FINAL-REPORT.md)
+
+<br/>
+
+<strong>Containment was not complete until the victim, resolver and Splunk all proved the intended state — and the environment was then restored safely.</strong>
+
+</div>
 
 <img src="https://user-images.githubusercontent.com/73097560/115834477-dbab4500-a447-11eb-908a-139a6edaec5c.gif" width="100%" alt="section divider" />
 
@@ -266,7 +379,7 @@ The strongest result is not simply that an alert fired. It is that the defenders
 
 <img src="https://user-images.githubusercontent.com/73097560/115834477-dbab4500-a447-11eb-908a-139a6edaec5c.gif" width="100%" alt="section divider" />
 
-## 📁 Repository Guide
+## 🗂️ Repository Guide
 
 | Workspace | Purpose |
 |---|---|
@@ -306,10 +419,14 @@ Scenario 04 closeout                   ✅ Complete
 
 <div align="center">
 
-**DNSentinel Scenario 04 · Evidence before verdict · Humans before automation**
+[📘 Runbook](SCENARIO-RUNBOOK.md) · [🎬 Execution](SCENARIO-04-EXECUTION.md) · [🧾 Evidence](evidence/README.md)
 
-[📋 Runbook](SCENARIO-RUNBOOK.md) · [🎬 Execution](SCENARIO-04-EXECUTION.md) · [🧾 Evidence](evidence/README.md) · [⬆ Back to top](#top)
+<br/>
+
+**Structure before suspicion. Evidence before attribution. Human approval before containment.**
+
+[⬆ Back to top](#top)
 
 </div>
 
-<img src="https://capsule-render.vercel.app/api?type=waving&color=gradient&customColorList=24,18,12,7,2&height=75&section=footer" width="100%" alt="DNSentinel Scenario 04 footer" />
+<img src="https://capsule-render.vercel.app/api?type=waving&color=gradient&customColorList=24,20,14,7,2&height=82&section=footer" width="100%" alt="DNSentinel Scenario 04 footer" />
