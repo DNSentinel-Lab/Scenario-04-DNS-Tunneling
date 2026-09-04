@@ -1,6 +1,6 @@
 <a id="top"></a>
 
-<img src="https://capsule-render.vercel.app/api?type=waving&color=gradient&customColorList=24,20,14,7,2&height=190&section=header&text=%F0%9F%9B%A1%EF%B8%8F%20Incident%20Response%20%26%20Defender%20Workspace&fontSize=34&fontColor=ffffff&animation=fadeIn&fontAlignY=38&desc=Scenario%2004%20%C2%B7%20Musfira%20%C2%B7%20Independent%20Validation%20%E2%86%92%20RPZ%20%E2%86%92%20Verification%20%E2%86%92%20Safe%20Reset&descSize=15&descAlignY=61&descColor=14B8A6" width="100%" alt="🛡️ Incident Response & Defender Workspace" />
+<img src="https://capsule-render.vercel.app/api?type=waving&color=gradient&customColorList=24,20,14,7,2&height=190&section=header&text=Incident%20Response%20and%20Defender%20Workspace&fontSize=34&fontColor=ffffff&animation=fadeIn&fontAlignY=38&desc=Scenario%2004%20-%20Musfira%20-%20Independent%20Validation%20to%20RPZ%20to%20Verification%20to%20Safe%20Reset&descSize=15&descAlignY=61" width="100%" alt="🛡️ Incident Response & Defender Workspace" />
 
 <div align="center">
 
@@ -40,18 +40,112 @@ Musfira treated the SOC handoff as **claims to validate**, not a verdict to repe
 ## 🔁 Response Lifecycle
 
 ```mermaid
-flowchart LR
-    A["📨 SOC Handoff"] --> B["🔎 Independent DNS Validation"]
-    B --> C["🌐 Network Causality Challenge"]
-    C --> D["☁️ AWS Change Context"]
-    D --> E["🔁 Recurrence Check"]
-    E --> F["🛡️ RPZ Precheck"]
-    F --> G["👤 Human Approval"]
-    G --> H["⚙️ First Activation"]
-    H --> I["🧩 Troubleshoot / Recover"]
-    I --> J["🎯 Correct RPZ"]
-    J --> K["✅ Victim + Splunk Proof"]
-    K --> L["♻️ Safe Reset"]
+%%{init: {
+  "theme": "base",
+  "themeVariables": {
+    "background": "#030712",
+    "primaryTextColor": "#ffffff",
+    "lineColor": "#f8fafc",
+    "fontSize": "31px"
+  },
+  "flowchart": {
+    "nodeSpacing": 48,
+    "rankSpacing": 58,
+    "curve": "basis",
+    "padding": 20
+  }
+}}%%
+
+flowchart TB
+
+    %% =====================================================
+    %% ROW 1 · VALIDATE + PREPARE
+    %% =====================================================
+    subgraph ROW1[" "]
+        direction LR
+
+        A["📨 01 · SOC<br/>HANDOFF"]
+
+        B["🔎 02 · INDEPENDENT<br/>DNS VALIDATION"]
+
+        C["🌐 03–04 · CAUSALITY<br/>Network Challenge<br/>+ AWS Context"]
+
+        D["🔁 05–06 · PRECHECK<br/>Recurrence Check<br/>+ RPZ Precheck"]
+
+        A ==> B ==> C ==> D
+    end
+
+
+    %% =====================================================
+    %% ROW 2 · APPROVE + RESPOND + VERIFY
+    %% =====================================================
+    subgraph ROW2[" "]
+        direction LR
+
+        E["👤 07 · HUMAN<br/>APPROVAL"]
+
+        F["⚙️ 08 · FIRST<br/>ACTIVATION"]
+
+        G["🧩 09–10 · RECOVER<br/>Troubleshoot<br/>+ Correct RPZ"]
+
+        H["✅ 11–12 · PROVE + RESET<br/>Victim + Splunk Proof<br/>+ Safe Reset"]
+
+        E ==> F ==> G ==> H
+    end
+
+
+    %% =====================================================
+    %% KEEP BOTH ROWS COMPACT
+    %% =====================================================
+    ROW1 ==> ROW2
+
+
+    %% =====================================================
+    %% PREMIUM GLOSSY COLORS
+    %% =====================================================
+    classDef handoff fill:#172554,stroke:#60a5fa,stroke-width:6px,color:#ffffff,font-size:31px,font-weight:bold;
+
+    classDef dns fill:#075985,stroke:#22d3ee,stroke-width:6px,color:#ffffff,font-size:31px,font-weight:bold;
+
+    classDef context fill:#312e81,stroke:#a78bfa,stroke-width:6px,color:#ffffff,font-size:31px,font-weight:bold;
+
+    classDef precheck fill:#713f12,stroke:#fbbf24,stroke-width:6px,color:#ffffff,font-size:31px,font-weight:bold;
+
+    classDef approval fill:#14532d,stroke:#4ade80,stroke-width:6px,color:#ffffff,font-size:31px,font-weight:bold;
+
+    classDef activation fill:#4c1d95,stroke:#e879f9,stroke-width:6px,color:#ffffff,font-size:31px,font-weight:bold;
+
+    classDef recover fill:#9a3412,stroke:#fb923c,stroke-width:6px,color:#ffffff,font-size:31px,font-weight:bold;
+
+    classDef proof fill:#065f46,stroke:#86efac,stroke-width:7px,color:#ffffff,font-size:32px,font-weight:bold;
+
+
+    %% =====================================================
+    %% APPLY STYLES
+    %% =====================================================
+    class A handoff;
+    class B dns;
+    class C context;
+    class D precheck;
+
+    class E approval;
+    class F activation;
+    class G recover;
+    class H proof;
+
+
+    %% =====================================================
+    %% GLOSSY ROW PANELS
+    %% =====================================================
+    style ROW1 fill:#06131d,stroke:#38bdf8,stroke-width:3px
+
+    style ROW2 fill:#0b130d,stroke:#4ade80,stroke-width:3px
+
+
+    %% =====================================================
+    %% BRIGHT CONNECTORS
+    %% =====================================================
+    linkStyle default stroke:#f8fafc,stroke-width:6px;
 ```
 
 ## 🖼️ IR Evidence Highlights
