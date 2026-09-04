@@ -40,27 +40,151 @@ Abdul-Rehman's engineering record starts with **live Unbound telemetry** and end
 ## 🔁 Engineering Lifecycle
 
 ```mermaid
-flowchart LR
-    A["📡 Validate<br/>Resolver Fields"] --> B["⏱️ Measure<br/>Ingestion"]
-    B --> C["📊 Clean<br/>Baseline"]
-    C --> D["🧬 Engineer<br/>Label Features"]
-    D --> E["🔎 Threshold-Free<br/>Hunting"]
-    E --> F["📊 Dashboard<br/>Studio"]
-    F --> G["✅ Positive<br/>Validation"]
-    G --> H["🧪 Benign<br/>Challenge"]
-    H --> I["🧊 Freeze<br/>v1.0"]
-    I --> J["🚨 Scheduled<br/>Alert"]
-    J --> K["🤖 AI<br/>Evidence Contract"]
-    K --> L["🔎 SOC<br/>Investigation"]
+%%{init: {
+  "theme": "base",
+  "themeVariables": {
+    "background": "#030712",
+    "primaryTextColor": "#ffffff",
+    "lineColor": "#f8fafc",
+    "fontSize": "30px"
+  },
+  "flowchart": {
+    "nodeSpacing": 46,
+    "rankSpacing": 58,
+    "curve": "basis",
+    "padding": 20
+  }
+}}%%
 
-    classDef data fill:#082f49,stroke:#22d3ee,color:#fff,stroke-width:2px;
-    classDef eng fill:#0f3d3e,stroke:#14b8a6,color:#fff,stroke-width:2px;
-    classDef ai fill:#3b0764,stroke:#a855f7,color:#fff,stroke-width:2px;
-    classDef soc fill:#172554,stroke:#60a5fa,color:#fff,stroke-width:2px;
+flowchart LR
+
+    %% =====================================================
+    %% 1 · DATA FOUNDATION
+    %% =====================================================
+    subgraph P1[" "]
+        direction TB
+
+        H1["📡 1 · DATA FOUNDATION"]
+
+        A["📡 Validate<br/>Resolver Fields"]
+
+        B["⏱️ Measure<br/>Ingestion"]
+
+        C["📊 Clean<br/>Baseline"]
+
+        H1 ==> A ==> B ==> C
+    end
+
+
+    %% =====================================================
+    %% 2 · DETECTION DESIGN
+    %% =====================================================
+    subgraph P2[" "]
+        direction TB
+
+        H2["🧬 2 · DETECTION DESIGN"]
+
+        D["🧬 Engineer<br/>Label Features"]
+
+        E["🔎 Threshold-Free<br/>Hunting"]
+
+        F["📊 Dashboard<br/>Studio"]
+
+        H2 ==> D ==> E ==> F
+    end
+
+
+    %% =====================================================
+    %% 3 · VALIDATION
+    %% =====================================================
+    subgraph P3[" "]
+        direction TB
+
+        H3["✅ 3 · VALIDATION"]
+
+        G["✅ Positive<br/>Validation"]
+
+        H["🧪 Benign<br/>Challenge"]
+
+        I["🧊 Freeze<br/>Detection v1.0"]
+
+        H3 ==> G ==> H ==> I
+    end
+
+
+    %% =====================================================
+    %% 4 · SOC DELIVERY
+    %% =====================================================
+    subgraph P4[" "]
+        direction TB
+
+        H4["🛡️ 4 · SOC DELIVERY"]
+
+        J["🚨 Scheduled<br/>Alert"]
+
+        K["🤖 AI<br/>Evidence Contract"]
+
+        L["🔎 SOC<br/>Investigation"]
+
+        H4 ==> J ==> K ==> L
+    end
+
+
+    %% =====================================================
+    %% KEEP COLUMNS PARALLEL
+    %% =====================================================
+    P1 ==> P2
+    P2 ==> P3
+    P3 ==> P4
+
+
+    %% =====================================================
+    %% HEADERS
+    %% =====================================================
+    classDef h1 fill:#075985,stroke:#67e8f9,stroke-width:7px,color:#ffffff,font-size:34px,font-weight:bold;
+    classDef h2 fill:#0f766e,stroke:#5eead4,stroke-width:7px,color:#ffffff,font-size:34px,font-weight:bold;
+    classDef h3 fill:#713f12,stroke:#fde047,stroke-width:7px,color:#ffffff,font-size:34px,font-weight:bold;
+    classDef h4 fill:#4c1d95,stroke:#e879f9,stroke-width:7px,color:#ffffff,font-size:34px,font-weight:bold;
+
+    class H1 h1;
+    class H2 h2;
+    class H3 h3;
+    class H4 h4;
+
+
+    %% =====================================================
+    %% NODE COLORS
+    %% =====================================================
+    classDef data fill:#172554,stroke:#60a5fa,stroke-width:6px,color:#ffffff,font-size:30px,font-weight:bold;
+    classDef design fill:#083344,stroke:#22d3ee,stroke-width:6px,color:#ffffff,font-size:30px,font-weight:bold;
+    classDef validate fill:#14532d,stroke:#4ade80,stroke-width:6px,color:#ffffff,font-size:30px,font-weight:bold;
+    classDef freeze fill:#7c2d12,stroke:#fb923c,stroke-width:6px,color:#ffffff,font-size:30px,font-weight:bold;
+    classDef alert fill:#7f1d1d,stroke:#fb7185,stroke-width:6px,color:#ffffff,font-size:30px,font-weight:bold;
+    classDef ai fill:#581c87,stroke:#f0abfc,stroke-width:6px,color:#ffffff,font-size:30px,font-weight:bold;
+    classDef soc fill:#065f46,stroke:#86efac,stroke-width:7px,color:#ffffff,font-size:31px,font-weight:bold;
+
     class A,B,C data;
-    class D,E,F,G,H,I,J eng;
+    class D,E,F design;
+    class G,H validate;
+    class I freeze;
+    class J alert;
     class K ai;
     class L soc;
+
+
+    %% =====================================================
+    %% PREMIUM PANELS
+    %% =====================================================
+    style P1 fill:#06131d,stroke:#22d3ee,stroke-width:4px
+    style P2 fill:#071611,stroke:#2dd4bf,stroke-width:4px
+    style P3 fill:#181007,stroke:#fbbf24,stroke-width:4px
+    style P4 fill:#150821,stroke:#d946ef,stroke-width:4px
+
+
+    %% =====================================================
+    %% CONNECTORS
+    %% =====================================================
+    linkStyle default stroke:#f8fafc,stroke-width:6px;
 ```
 
 ## 🖼️ Engineering Evidence Highlights
