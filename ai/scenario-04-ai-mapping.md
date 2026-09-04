@@ -146,16 +146,11 @@ The AI correctly preserved:
 
 The human analyst later enriched the case with DNS reply/RCODE evidence that was not part of the AI input. See [`../soc/AI-VALIDATION.md`](../soc/AI-VALIDATION.md).
 
-
----
-
-[🏠 Scenario Home](../README.md) · [🤖 AI Profile](README.md) · [🛠️ Detection Engineering](../detection-engineering/DETECTION-ENGINEERING.md) · [⬆ Back to top](#top)
-
 <img src="https://user-images.githubusercontent.com/73097560/115834477-dbab4500-a447-11eb-908a-139a6edaec5c.gif" width="100%" alt="section divider" />
 
 <div align="center">
 
-[🏠 Scenario Home](../README.md) · [🤖 Workspace](README.md) · 
+[🏠 Scenario Home](../README.md) · [🤖 AI Profile](README.md) · [🛠️ Detection Engineering](../detection-engineering/DETECTION-ENGINEERING.md) · [⬆ Back to top](#top) 
 
 **Structure before suspicion. Evidence before attribution. Human approval before containment.**
 
