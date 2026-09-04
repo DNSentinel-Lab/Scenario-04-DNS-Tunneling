@@ -1,18 +1,24 @@
 <a id="top"></a>
 
-> 🧭 [Scenario 04](../README.md) › [Operator / Adversary](README.md) › **Project Lead / Private Exercise Operator**
+<img src="https://capsule-render.vercel.app/api?type=soft&color=gradient&customColorList=6,12,18,24,30&height=154&section=header&text=%F0%9F%8E%AF%20Project%20Lead%20%2F%20Private%20Exercise%20Operator%20%E2%80%94%20Sonia&fontSize=30&fontColor=ffffff&animation=fadeIn&fontAlignY=38&desc=DNSentinel%20Lab%20%C2%B7%20Scenario%2004%20%C2%B7%20DNS%20Tunneling%20%C2%B7%20Project%20Lead%20%2F%20Operator&descSize=13&descAlignY=68&descColor=8B5CF6" width="100%" alt="Project Lead / Private Exercise Operator — Sonia" />
 
 <div align="center">
 
-![Scenario](https://img.shields.io/badge/Scenario_04-COMPLETE-2EA44F?style=flat-square) ![Role](https://img.shields.io/badge/Role-Private_Exercise_Operator-A855F7?style=flat-square) ![Owner](https://img.shields.io/badge/Owner-Sonia-22D3EE?style=flat-square)
+![Scenario](https://img.shields.io/badge/Scenario_04-COMPLETE-2EA44F?style=flat-square)
+![Workspace](https://img.shields.io/badge/Workspace-Project_Lead_%2F_Operator-8B5CF6?style=flat-square)
+![MITRE](https://img.shields.io/badge/MITRE-T1071.004-E34F26?style=flat-square)
+
+[🏠 Scenario Home](../README.md) · [🎯 Workspace](README.md) · [🧾 Evidence](../evidence/README.md)
 
 </div>
+
+<img src="https://user-images.githubusercontent.com/73097560/115834477-dbab4500-a447-11eb-908a-139a6edaec5c.gif" width="100%" alt="section divider" />
 
 # 🧬 Project Lead / Private Exercise Operator — Sonia
 
 Scenario 04 began conceptually after compromise. Sonia's role was not to add phishing, exploitation or malware; it was to generate one controlled DNS data-carriage pattern from the victim and preserve the private facts that defenders were intentionally not allowed to know.
 
-## 1. Define the operator boundary
+## ⚖️ 1. Define the operator boundary
 
 The observable DNS had to originate from:
 
@@ -34,7 +40,7 @@ The target was permanently restricted to:
 tunnel.soclab.abdul4rehman215.tech
 ```
 
-## 2. Build a finite lab-only client
+## 📌 2. Build a finite lab-only client
 
 The exact client is preserved in [`scripts/scenario04-tunnel-client.py`](scripts/scenario04-tunnel-client.py).
 
@@ -58,7 +64,7 @@ finite exit
 
 It had no interactive shell, persistence, credential access, discovery, scanning, lateral movement, malware installation or third-party target capability.
 
-## 3. Preserve the real one-time execution
+## 📌 3. Preserve the real one-time execution
 
 During client review, the utility was run once before the formal operator execution gate.
 
@@ -70,13 +76,13 @@ That was an execution-control deviation, but the right response was **not** to r
 
 > **Operational lesson:** evidence integrity is more important than making a timeline look perfect.
 
-## 4. Validate the defender DNS path
+## 📌 4. Validate the defender DNS path
 
 ![Victim resolver path](../screenshots/attacker/02-victim-resolver-path.png)
 
 The victim remained configured to use `10.50.30.10`, preserving the same defender path that Detection Engineering had validated.
 
-## 5. Verify the correct authoritative host
+## ✅ 5. Verify the correct authoritative host
 
 A BIND health command was initially run on the victim host. The output correctly showed no `named.service` there. Instead of treating that as an infrastructure failure, Sonia confirmed the host identity and moved to `dns-tunnel-auth01 / 10.60.10.30`.
 
@@ -86,13 +92,13 @@ A BIND health command was initially run on the victim host. The output correctly
 
 The public authoritative endpoint was also revalidated because its public IPv4 was auto-assigned rather than an Elastic IP. The address observed during this exercise remained `98.93.89.38`.
 
-## 6. Prove response controls were not already interfering
+## 🛡️ 6. Prove response controls were not already interfering
 
 ![RPZ pre-flight](../screenshots/attacker/04-rpz-preflight-safe.png)
 
 The reusable RPZ existed, but Scenario 04 containment was not enforcing before the official case. That distinction mattered: the presence of a security control does not prove a scenario-specific rule is active.
 
-## 7. Recover authoritative ground truth
+## 🎯 7. Recover authoritative ground truth
 
 BIND logged all seven generated qnames.
 
@@ -114,7 +120,7 @@ Unbound = client attribution / victim request count
 BIND    = authoritative receipt / ground truth
 ```
 
-## 8. Keep ground truth private until reveal
+## 🎯 8. Keep ground truth private until reveal
 
 Sonia did not give Lubaba or Musfira:
 
@@ -129,10 +135,22 @@ The complete revealed record is now preserved in [`ground-truth.md`](ground-trut
 
 ![Ground-truth closeout record](../screenshots/attacker/06-ground-truth-closeout.png)
 
-## 9. What Sonia proved
+## 📌 9. What Sonia proved
 
 Sonia demonstrated the operator side of a realistic DNS tunneling case without turning the lab client into a general-purpose offensive tool. She **constrained** the namespace, **generated** the finite pattern, **preserved** a real deviation instead of rewriting it, **validated** the resolver path, **verified** authoritative receipt, and **maintained** information separation until the defender record was complete.
 
 ---
 
 [🏠 Scenario Home](../README.md) · [📄 Ground Truth](ground-truth.md) · [🧠 Learning Journey](LEARNING-JOURNEY.md) · [⬆ Back to top](#top)
+
+<img src="https://user-images.githubusercontent.com/73097560/115834477-dbab4500-a447-11eb-908a-139a6edaec5c.gif" width="100%" alt="section divider" />
+
+<div align="center">
+
+[🏠 Scenario Home](../README.md) · [🎯 Workspace](README.md) · 
+
+**Structure before suspicion. Evidence before attribution. Human approval before containment.**
+
+</div>
+
+<img src="https://capsule-render.vercel.app/api?type=waving&color=gradient&customColorList=24,20,14,7,2&height=82&section=footer" width="100%" alt="DNSentinel Scenario 04 footer" />
