@@ -80,15 +80,11 @@ The alert produced an analyst evidence row, sent bridge-compatible JSON through 
 
 **PASS — Detection v1.0, dashboard, scheduled alert, raw-event drilldown and Scenario 04 AI evidence mapping were ready before the independent SOC exercise. The official run later used the frozen artifacts unchanged.**
 
----
-
-[🏠 Scenario Home](../README.md) · [🛠️ Engineering Story](DETECTION-ENGINEERING.md) · [🔒 Freeze](FREEZE-RECORD.md) · [⬆ Back to top](#top)
-
 <img src="https://user-images.githubusercontent.com/73097560/115834477-dbab4500-a447-11eb-908a-139a6edaec5c.gif" width="100%" alt="section divider" />
 
 <div align="center">
 
-[🏠 Scenario Home](../README.md) · [🧠 Workspace](README.md) · 
+[🏠 Scenario Home](../README.md) · [🧠 Workspace](README.md) · [🛠️ Engineering Story](DETECTION-ENGINEERING.md) · [🔒 Freeze](FREEZE-RECORD.md) · [⬆ Back to top](#top) · 
 
 **Structure before suspicion. Evidence before attribution. Human approval before containment.**
 
