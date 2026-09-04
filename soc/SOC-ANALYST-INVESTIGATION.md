@@ -249,15 +249,11 @@ Lubaba handed Musfira a defender-only case record containing the alert, timeline
 
 The strongest part of this investigation was not finding seven suspicious names. It was preserving the boundary between **what DNS proved** and **what DNS could not prove**. Lubaba normalized protocol data, reconstructed the detector, challenged false positives, scoped the case, checked AI against evidence and escalated only the questions that remained genuinely unanswered.
 
----
-
-[🏠 Scenario Home](../README.md) · [📋 Playbook](SOC-ANALYST-PLAYBOOK.md) · [🕒 Timeline](INVESTIGATION-TIMELINE.md) · [🛡️ IR Handoff](SOC-TO-IR-HANDOFF.md) · [⬆ Back to top](#top)
-
 <img src="https://user-images.githubusercontent.com/73097560/115834477-dbab4500-a447-11eb-908a-139a6edaec5c.gif" width="100%" alt="section divider" />
 
 <div align="center">
 
-[🏠 Scenario Home](../README.md) · [🔎 Workspace](README.md) · 
+[🏠 Scenario Home](../README.md) · [🔎 Workspace](README.md) · [📋 Playbook](SOC-ANALYST-PLAYBOOK.md) · [🕒 Timeline](INVESTIGATION-TIMELINE.md) · [🛡️ IR Handoff](SOC-TO-IR-HANDOFF.md) · [⬆ Back to top](#top) · 
 
 **Structure before suspicion. Evidence before attribution. Human approval before containment.**
 
