@@ -30,7 +30,3 @@ Evidence is organized by role rather than mixed into one unstructured folder.
 | `attacker/04-rpz-preflight-safe.png` | Scenario 04 containment was not active before the run |
 | `attacker/05-authoritative-receipt.png` | Seven generated qnames reached BIND |
 | `attacker/06-ground-truth-closeout.png` | One-run deviation and authoritative timeline preserved |
-
-## Public evidence rule
-
-Keep images that answer a technical question or prove a transition. Troubleshooting images remain useful when they show a reusable root cause, but screenshots do not replace the reasoning around them.
