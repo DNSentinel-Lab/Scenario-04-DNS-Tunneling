@@ -1,6 +1,6 @@
 <a id="top"></a>
 
-<img src="https://capsule-render.vercel.app/api?type=waving&color=gradient&customColorList=7,12,18,24,28&height=190&section=header&text=%F0%9F%96%BC%EF%B8%8F%20Screenshot%20%26%20Visual%20Evidence%20Portal&fontSize=34&fontColor=ffffff&animation=fadeIn&fontAlignY=38&desc=Scenario%2004%20%C2%B7%20Role-Owned%20Proof%20Curated%20for%20Technical%20Review&descSize=15&descAlignY=61&descColor=22D3EE" width="100%" alt="🖼️ Screenshot & Visual Evidence Portal" />
+<img src="https://capsule-render.vercel.app/api?type=waving&color=gradient&customColorList=7,12,18,24,28&height=190&section=header&text=Screenshot%20and%20Visual%20Evidence%20Portal&fontSize=34&fontColor=ffffff&animation=fadeIn&fontAlignY=38&desc=Scenario%2004%20-%20Role-Owned%20Proof%20Curated%20for%20Technical%20Review&descSize=15&descAlignY=61" width="100%" alt="🖼️ Screenshot & Visual Evidence Portal" />
 
 <div align="center">
 
