@@ -1,6 +1,6 @@
 <a id="top"></a>
 
-<img src="https://capsule-render.vercel.app/api?type=waving&color=gradient&customColorList=7,12,18,24,28&height=190&section=header&text=%F0%9F%94%8E%20SOC%20Analyst%20%26%20Threat%20Hunting%20Workspace&fontSize=34&fontColor=ffffff&animation=fadeIn&fontAlignY=38&desc=Scenario%2004%20%C2%B7%20DNS%20Tunneling%20%C2%B7%20Lubaba&descSize=15&descAlignY=61&descColor=22D3EE" width="100%" alt="🔎 SOC Analyst & Threat Hunting Workspace" />
+<img src="https://capsule-render.vercel.app/api?type=waving&color=gradient&customColorList=7,12,18,24,28&height=190&section=header&text=SOC%20Analyst%20and%20Threat%20Hunting%20Workspace&fontSize=34&fontColor=ffffff&animation=fadeIn&fontAlignY=38&desc=Scenario%2004%20-%20DNS%20Tunneling%20-%20Lubaba&descSize=15&descAlignY=61" width="100%" alt="🔎 SOC Analyst & Threat Hunting Workspace" />
 
 <div align="center">
 
@@ -41,17 +41,112 @@ Lubaba investigated the official alert from **defender-visible evidence only**. 
 ## 🔁 Investigation Path
 
 ```mermaid
-flowchart LR
-    A["📡 Telemetry Readiness"] --> B["🔍 Namespace Normalization"]
-    B --> C["🧬 Raw Label Structure"]
-    C --> D["🧠 Reproduce v1.0"]
-    D --> E["📨 Query / Reply Context"]
-    E --> F["📊 Baseline"]
-    F --> G["🎯 Scope"]
-    G --> H["🧠 Human Hypothesis"]
-    H --> I["🤖 AI Validation"]
-    I --> J["🧭 5W1H"]
-    J --> K["📨 IR Handoff"]
+%%{init: {
+  "theme": "base",
+  "themeVariables": {
+    "background": "#030712",
+    "primaryTextColor": "#ffffff",
+    "lineColor": "#f8fafc",
+    "fontSize": "31px"
+  },
+  "flowchart": {
+    "nodeSpacing": 48,
+    "rankSpacing": 58,
+    "curve": "basis",
+    "padding": 20
+  }
+}}%%
+
+flowchart TB
+
+    %% =====================================================
+    %% ROW 1 · EVIDENCE FOUNDATION
+    %% =====================================================
+    subgraph ROW1[" "]
+        direction LR
+
+        A["📡 01 · TELEMETRY<br/>READINESS"]
+
+        B["🔍 02 · NAMESPACE<br/>NORMALIZATION"]
+
+        C["🧬 03 · RAW LABEL<br/>STRUCTURE"]
+
+        D["🧠 04 · REPRODUCE<br/>DETECTION v1.0"]
+
+        A ==> B ==> C ==> D
+    end
+
+
+    %% =====================================================
+    %% ROW 2 · ANALYSIS + DECISION
+    %% =====================================================
+    subgraph ROW2[" "]
+        direction LR
+
+        E["📨 05–06 · CONTEXT<br/>Query / Reply<br/>+ Baseline"]
+
+        F["🎯 07–08 · SCOPE<br/>+ Human Hypothesis"]
+
+        G["🤖 09–10 · VALIDATE<br/>AI Challenge + 5W1H"]
+
+        H["📨 11 · IR<br/>HANDOFF"]
+
+        E ==> F ==> G ==> H
+    end
+
+
+    %% =====================================================
+    %% ROW HANDOFF
+    %% =====================================================
+    ROW1 ==> ROW2
+
+
+    %% =====================================================
+    %% PREMIUM GLOSSY COLORS
+    %% =====================================================
+    classDef telemetry fill:#082f49,stroke:#22d3ee,stroke-width:6px,color:#ffffff,font-size:31px,font-weight:bold;
+
+    classDef namespace fill:#075985,stroke:#38bdf8,stroke-width:6px,color:#ffffff,font-size:31px,font-weight:bold;
+
+    classDef structure fill:#312e81,stroke:#818cf8,stroke-width:6px,color:#ffffff,font-size:31px,font-weight:bold;
+
+    classDef detection fill:#4c1d95,stroke:#e879f9,stroke-width:7px,color:#ffffff,font-size:31px,font-weight:bold;
+
+    classDef context fill:#0f766e,stroke:#5eead4,stroke-width:6px,color:#ffffff,font-size:31px,font-weight:bold;
+
+    classDef scope fill:#713f12,stroke:#fbbf24,stroke-width:6px,color:#ffffff,font-size:31px,font-weight:bold;
+
+    classDef validate fill:#7c2d12,stroke:#fb923c,stroke-width:6px,color:#ffffff,font-size:31px,font-weight:bold;
+
+    classDef handoff fill:#14532d,stroke:#86efac,stroke-width:7px,color:#ffffff,font-size:33px,font-weight:bold;
+
+
+    %% =====================================================
+    %% APPLY STYLES
+    %% =====================================================
+    class A telemetry;
+    class B namespace;
+    class C structure;
+    class D detection;
+
+    class E context;
+    class F scope;
+    class G validate;
+    class H handoff;
+
+
+    %% =====================================================
+    %% GLOSSY ROW PANELS
+    %% =====================================================
+    style ROW1 fill:#06131d,stroke:#38bdf8,stroke-width:3px
+
+    style ROW2 fill:#0d1117,stroke:#4ade80,stroke-width:3px
+
+
+    %% =====================================================
+    %% BRIGHT CONNECTORS
+    %% =====================================================
+    linkStyle default stroke:#f8fafc,stroke-width:6px;
 ```
 
 ## 🖼️ SOC Evidence Highlights
