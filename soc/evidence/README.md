@@ -30,5 +30,3 @@ This folder preserves the curated defender-side proof used to support Lubaba's f
 - `raw-observed-qnames.csv`
 - `reply-summary.csv`
 - `timeline.csv`
-
-Additional E02/E04/E08/E11/E17 views are preserved here for audit but do not need to dominate the reader-facing story.
