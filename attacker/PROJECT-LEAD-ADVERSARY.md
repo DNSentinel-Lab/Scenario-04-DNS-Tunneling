@@ -139,15 +139,11 @@ The complete revealed record is now preserved in [`ground-truth.md`](ground-trut
 
 Sonia demonstrated the operator side of a realistic DNS tunneling case without turning the lab client into a general-purpose offensive tool. She **constrained** the namespace, **generated** the finite pattern, **preserved** a real deviation instead of rewriting it, **validated** the resolver path, **verified** authoritative receipt, and **maintained** information separation until the defender record was complete.
 
----
-
-[🏠 Scenario Home](../README.md) · [📄 Ground Truth](ground-truth.md) · [🧠 Learning Journey](LEARNING-JOURNEY.md) · [⬆ Back to top](#top)
-
 <img src="https://user-images.githubusercontent.com/73097560/115834477-dbab4500-a447-11eb-908a-139a6edaec5c.gif" width="100%" alt="section divider" />
 
 <div align="center">
 
-[🏠 Scenario Home](../README.md) · [🎯 Workspace](README.md) · 
+[🏠 Scenario Home](../README.md) · [🎯 Workspace](README.md) · [📄 Ground Truth](ground-truth.md) · [🧠 Learning Journey](LEARNING-JOURNEY.md) · [⬆ Back to top](#top)
 
 **Structure before suspicion. Evidence before attribution. Human approval before containment.**
 
