@@ -19,16 +19,112 @@
 This folder preserves the **actual response lifecycle**, including the first activation path, recovery, corrected RPZ activation and safe reset.
 
 ```mermaid
-flowchart LR
-    A["🔐 Precheck / Backups"] --> B["🛡️ Stage Wildcard"]
-    B --> C["⚙️ First Reload"]
-    C --> D["🧪 Victim Test"]
-    D --> E["🧩 Recover"]
-    E --> F["✅ Victim Recovery Check"]
-    F --> G["🎯 Correct RPZ Activation"]
-    G --> H["🕳️ Victim Sinkhole Proof"]
-    H --> I["♻️ Safe Reset"]
-    I --> J["✅ Post-Reset Check"]
+%%{init: {
+  "theme": "base",
+  "themeVariables": {
+    "background": "#030712",
+    "primaryTextColor": "#ffffff",
+    "lineColor": "#f8fafc",
+    "fontSize": "32px"
+  },
+  "flowchart": {
+    "nodeSpacing": 50,
+    "rankSpacing": 60,
+    "curve": "basis",
+    "padding": 20
+  }
+}}%%
+
+flowchart TB
+
+    %% =====================================================
+    %% ROW 1 · PREPARE + TEST + RECOVER
+    %% =====================================================
+    subgraph ROW1[" "]
+        direction LR
+
+        A["🔐 01 · PRECHECK<br/>+ BACKUPS"]
+
+        B["🛡️ 02 · STAGE<br/>WILDCARD"]
+
+        C["⚙️ 03–04 · FIRST RELOAD<br/>+ Victim Test"]
+
+        D["🧩 05–06 · RECOVER<br/>+ Recovery Check"]
+
+        A ==> B ==> C ==> D
+    end
+
+
+    %% =====================================================
+    %% ROW 2 · CORRECT RESPONSE + VERIFY + RESET
+    %% =====================================================
+    subgraph ROW2[" "]
+        direction LR
+
+        E["🎯 07 · CORRECT<br/>RPZ ACTIVATION"]
+
+        F["🕳️ 08 · VICTIM<br/>SINKHOLE PROOF"]
+
+        G["♻️ 09 · SAFE<br/>RESET"]
+
+        H["✅ 10 · POST-RESET<br/>CHECK"]
+
+        E ==> F ==> G ==> H
+    end
+
+
+    %% =====================================================
+    %% ROW-TO-ROW HANDOFF
+    %% =====================================================
+    ROW1 ==> ROW2
+
+
+    %% =====================================================
+    %% PREMIUM GLOSSY COLORS
+    %% =====================================================
+    classDef precheck fill:#172554,stroke:#60a5fa,stroke-width:6px,color:#ffffff,font-size:32px,font-weight:bold;
+
+    classDef stage fill:#4c1d95,stroke:#c084fc,stroke-width:6px,color:#ffffff,font-size:32px,font-weight:bold;
+
+    classDef test fill:#713f12,stroke:#fbbf24,stroke-width:6px,color:#ffffff,font-size:32px,font-weight:bold;
+
+    classDef recover fill:#9a3412,stroke:#fb923c,stroke-width:6px,color:#ffffff,font-size:32px,font-weight:bold;
+
+    classDef rpz fill:#7f1d1d,stroke:#fb7185,stroke-width:7px,color:#ffffff,font-size:32px,font-weight:bold;
+
+    classDef sinkhole fill:#075985,stroke:#22d3ee,stroke-width:7px,color:#ffffff,font-size:32px,font-weight:bold;
+
+    classDef reset fill:#0f766e,stroke:#5eead4,stroke-width:6px,color:#ffffff,font-size:32px,font-weight:bold;
+
+    classDef proof fill:#14532d,stroke:#86efac,stroke-width:7px,color:#ffffff,font-size:34px,font-weight:bold;
+
+
+    %% =====================================================
+    %% APPLY STYLES
+    %% =====================================================
+    class A precheck;
+    class B stage;
+    class C test;
+    class D recover;
+
+    class E rpz;
+    class F sinkhole;
+    class G reset;
+    class H proof;
+
+
+    %% =====================================================
+    %% GLOSSY PANELS
+    %% =====================================================
+    style ROW1 fill:#0b0d19,stroke:#a78bfa,stroke-width:3px
+
+    style ROW2 fill:#06140f,stroke:#4ade80,stroke-width:3px
+
+
+    %% =====================================================
+    %% BRIGHT CONNECTORS
+    %% =====================================================
+    linkStyle default stroke:#f8fafc,stroke-width:6px;
 ```
 
 | Script | Purpose |
