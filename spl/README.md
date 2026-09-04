@@ -55,11 +55,6 @@ These values came from the current Scenario 04 baseline and controlled testing. 
 - raw-event drilldown;
 - AI return validation.
 
-These searches document method without turning every intermediate SPL version into a production artifact.
-
-> [!IMPORTANT]
-> `detection.spl` and `validation.spl` must retain the same frozen behavior during the official exercise.
-
 <div align="center">
 
 [🏠 Scenario Home](../README.md) · [⬆ Back to top](#top)
