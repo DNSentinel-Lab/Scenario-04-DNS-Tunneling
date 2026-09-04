@@ -69,15 +69,11 @@ A genuine operational failure may justify an emergency correction only if the ch
 
 > The available source material proves that the freeze occurred before the official Scenario 04 exercise. It does not provide an authoritative UTC freeze timestamp, so this record deliberately does not invent one.
 
----
-
-[🏠 Scenario Home](../README.md) · [🛠️ Engineering Story](DETECTION-ENGINEERING.md) · [✅ Validation](detection-engineering-validation.md) · [⬆ Back to top](#top)
-
 <img src="https://user-images.githubusercontent.com/73097560/115834477-dbab4500-a447-11eb-908a-139a6edaec5c.gif" width="100%" alt="section divider" />
 
 <div align="center">
 
-[🏠 Scenario Home](../README.md) · [🧠 Workspace](README.md) · 
+[🏠 Scenario Home](../README.md) · [🧠 Workspace](README.md) · [🛠️ Engineering Story](DETECTION-ENGINEERING.md) · [✅ Validation](detection-engineering-validation.md) · [⬆ Back to top](#top) · 
 
 **Structure before suspicion. Evidence before attribution. Human approval before containment.**
 
