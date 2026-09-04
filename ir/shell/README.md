@@ -1,6 +1,6 @@
 <a id="top"></a>
 
-<img src="https://capsule-render.vercel.app/api?type=waving&color=gradient&customColorList=24,20,14,7,2&height=190&section=header&text=%F0%9F%92%BB%20IR%20RPZ%2C%20Recovery%20%26%20Safe-Reset%20Path&fontSize=34&fontColor=ffffff&animation=fadeIn&fontAlignY=38&desc=Scenario%2004%20%C2%B7%20Musfira%20%C2%B7%20Actual%20Response%20Command%20Lifecycle&descSize=15&descAlignY=61&descColor=14B8A6" width="100%" alt="💻 IR RPZ, Recovery & Safe-Reset Path" />
+<img src="https://capsule-render.vercel.app/api?type=waving&color=gradient&customColorList=24,20,14,7,2&height=190&section=header&text=IR%20RPZ%20Recovery%20and%20Safe%20Reset%20Path&fontSize=34&fontColor=ffffff&animation=fadeIn&fontAlignY=38&desc=Scenario%2004%20-%20Musfira%20-%20Actual%20Response%20Command%20Lifecycle&descSize=15&descAlignY=61" width="100%" alt="💻 IR RPZ, Recovery & Safe-Reset Path" />
 
 <div align="center">
 
