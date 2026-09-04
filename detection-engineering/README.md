@@ -44,7 +44,7 @@ trusted resolver telemetry
 → freeze
 ```
 
-> **Boundary:** this workspace does not contain Sonia's official simulation ground truth, Lubaba's official SOC disposition or Musfira's IR decision. Those phases begin after the frozen rule is handed off.
+> **Boundary:** this workspace remains the frozen pre-exercise engineering record. Official operator, SOC and IR evidence is intentionally kept in the separate [`attacker/`](../attacker/), [`soc/`](../soc/) and [`ir/`](../ir/) workspaces so the engineering history is not rewritten after execution.
 
 <div align="center">
 

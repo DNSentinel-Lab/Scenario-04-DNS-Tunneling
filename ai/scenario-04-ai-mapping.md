@@ -108,6 +108,33 @@ AI                  = supporting context
 human analyst        = security decision
 ```
 
+
+## Official exercise validation
+
+The frozen profile was then exercised by the **official production alert**, not only by Detection Engineering test traffic.
+
+Official case sequence:
+
+```text
+2026-09-02 16:39:01 UTC   production alert
+2026-09-02 16:39:21 UTC   AI event processed
+```
+
+Lubaba formed the human hypothesis before opening AI. She then compared the AI event with raw Unbound evidence and rated the result **CORRECT**.
+
+The AI correctly preserved:
+
+- resolver-visible client `10.50.30.20`;
+- parent `tunnel.soclab.abdul4rehman215.tech`;
+- seven A queries / seven unique child labels;
+- the short burst and long-label evidence;
+- `T1071.004` context;
+- the limitation that alert evidence did not prove malware, compromise, payload transfer or malicious intent;
+- `human_validation_required=true`.
+
+The human analyst later enriched the case with DNS reply/RCODE evidence that was not part of the AI input. See [`../soc/AI-VALIDATION.md`](../soc/AI-VALIDATION.md).
+
+
 ---
 
 [🏠 Scenario Home](../README.md) · [🤖 AI Profile](README.md) · [🛠️ Detection Engineering](../detection-engineering/DETECTION-ENGINEERING.md) · [⬆ Back to top](#top)
