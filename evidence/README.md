@@ -21,12 +21,111 @@ Detailed evidence stays with the role that produced it. This page connects the l
 ## 🔁 Evidence Architecture
 
 ```mermaid
+%%{init: {
+  "theme": "base",
+  "themeVariables": {
+    "background": "#030712",
+    "primaryTextColor": "#ffffff",
+    "lineColor": "#f8fafc",
+    "fontSize": "31px"
+  },
+  "flowchart": {
+    "nodeSpacing": 58,
+    "rankSpacing": 68,
+    "curve": "basis",
+    "padding": 22
+  }
+}}%%
+
 flowchart LR
-    A["🧠 Detection Engineering"] --> C["🔎 SOC Evidence"]
-    B["🎯 Operator Ground Truth"] -. "reveal after decisions" .-> E["🎭 Final Comparison"]
-    C --> D["🛡️ IR Evidence"]
-    A --> E
-    D --> E
+
+    %% =====================================================
+    %% DEFENDER EVIDENCE PATH
+    %% =====================================================
+    A["🧠 DETECTION<br/>ENGINEERING"]
+
+    C["🔎 SOC<br/>EVIDENCE"]
+
+    D["🛡️ IR<br/>EVIDENCE"]
+
+
+    %% =====================================================
+    %% PROTECTED GROUND-TRUTH PATH
+    %% =====================================================
+    B["🎯 OPERATOR<br/>GROUND TRUTH"]
+
+    X["🔒 REVEAL GATE<br/>After Decisions"]
+
+
+    %% =====================================================
+    %% FINAL COMPARISON
+    %% =====================================================
+    E["🎭 FINAL<br/>COMPARISON"]
+
+
+    %% =====================================================
+    %% MAIN DEFENDER FLOW
+    %% =====================================================
+    A ==> C ==> D ==> E
+
+
+    %% Detection engineering also contributes
+    %% to final comparison.
+    A ==> E
+
+
+    %% =====================================================
+    %% GROUND TRUTH REMAINS SEPARATE
+    %% =====================================================
+    B -.-> X
+    X -.-> E
+
+
+    %% =====================================================
+    %% PREMIUM GLOSSY COLORS
+    %% =====================================================
+
+    classDef detection fill:#4c1d95,stroke:#e879f9,stroke-width:7px,color:#ffffff,font-size:32px,font-weight:bold;
+
+    classDef soc fill:#075985,stroke:#22d3ee,stroke-width:7px,color:#ffffff,font-size:32px,font-weight:bold;
+
+    classDef ir fill:#172554,stroke:#60a5fa,stroke-width:7px,color:#ffffff,font-size:32px,font-weight:bold;
+
+    classDef truth fill:#713f12,stroke:#fbbf24,stroke-width:7px,color:#ffffff,font-size:32px,font-weight:bold;
+
+    classDef gate fill:#450a0a,stroke:#fb7185,stroke-width:7px,color:#ffffff,font-size:30px,font-weight:bold;
+
+    classDef final fill:#14532d,stroke:#86efac,stroke-width:8px,color:#ffffff,font-size:35px,font-weight:bold;
+
+
+    %% =====================================================
+    %% APPLY STYLES
+    %% =====================================================
+    class A detection;
+    class C soc;
+    class D ir;
+
+    class B truth;
+    class X gate;
+
+    class E final;
+
+
+    %% =====================================================
+    %% BRIGHT CONNECTORS
+    %% =====================================================
+
+    %% Defender path
+    linkStyle 0 stroke:#22d3ee,stroke-width:6px;
+    linkStyle 1 stroke:#60a5fa,stroke-width:6px;
+    linkStyle 2 stroke:#86efac,stroke-width:6px;
+
+    %% Detection → Final
+    linkStyle 3 stroke:#e879f9,stroke-width:5px;
+
+    %% Protected ground-truth path
+    linkStyle 4 stroke:#fbbf24,stroke-width:5px,stroke-dasharray:10 7;
+    linkStyle 5 stroke:#fb7185,stroke-width:5px,stroke-dasharray:10 7;
 ```
 
 ## 🖼️ Cross-Role Highlights
